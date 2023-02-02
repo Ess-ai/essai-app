@@ -9,6 +9,6 @@ class SplashController extends GetxController {
     await Future.delayed(
       const Duration(milliseconds: 2000),
     );
-    Get.to(const Signin());
+    Get.to(Signin());
   }
 }
