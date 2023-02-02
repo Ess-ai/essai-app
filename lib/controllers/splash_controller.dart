@@ -1,3 +1,4 @@
+import 'package:essai/pages/auth/signin.dart';
 import 'package:essai/pages/essai.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +9,6 @@ class SplashController extends GetxController {
     await Future.delayed(
       const Duration(milliseconds: 2000),
     );
-    Get.to(const Essai());
+    Get.to(const Signin());
   }
 }

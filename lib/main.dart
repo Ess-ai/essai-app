@@ -1,12 +1,18 @@
 import 'package:essai/pages/auth/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
 Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Window.initialize();
+  await Window.setEffect(effect: WindowEffect.transparent);
+
   await dotenv.load(fileName: ".env.local", mergeWith: {
     'TEST_VAR': '5',
   });
+
   runApp(const MyApp());
 }
 
