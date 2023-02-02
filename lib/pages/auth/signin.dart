@@ -1,6 +1,8 @@
+import 'package:essai/pages/auth/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_acrylic/window.dart';
 import 'package:flutter_acrylic/window_effect.dart';
+import 'package:get/get.dart';
 import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -202,7 +204,9 @@ class Signin extends StatelessWidget {
                         Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(Signup());
+                              },
                               child: Text.rich(
                                 TextSpan(
                                     text: 'Dont Have An Account',
