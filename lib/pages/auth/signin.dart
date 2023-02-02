@@ -8,6 +8,8 @@ class Signin extends StatelessWidget {
   Signin({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
+  final Color primary = const Color.fromARGB(255, 0, 0, 77);
+  final Color dark = const Color.fromARGB(156, 0, 0, 17);
 
   @override
   Widget build(BuildContext context) {
@@ -96,73 +98,93 @@ class Signin extends StatelessWidget {
             ]))),
         Expanded(
           child: Container(
-            color: const Color.fromARGB(122, 0, 0, 0),
+            padding: const EdgeInsets.all(36),
+            color: const Color.fromARGB(255, 255, 255, 255),
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Welcome Back',
-                    style: GoogleFonts.lora(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700),
+                    'Sign in',
+                    style: GoogleFonts.roboto(color: primary, fontSize: 24),
+                  ),
+                  const SizedBox(height: 40),
+                  Text(
+                    'Login to your account',
+                    style: GoogleFonts.roboto(color: primary, fontSize: 18),
+                  ),
+                  Text(
+                    'Welcome back to essai, Let as make you deadly by teaching you to write | speak | think',
+                    style: GoogleFonts.roboto(color: dark, fontSize: 14),
                   ),
                   Form(
                     key: _formKey,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const SizedBox(height: 20),
+                        Text(
+                          'Email',
+                          style: GoogleFonts.roboto(color: dark, fontSize: 14),
+                        ),
                         Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10, left: 36, right: 36),
+                            padding: const EdgeInsets.only(top: 5, bottom: 10),
                             child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8)),
                                 child: TextField(
-                                    style:
-                                        GoogleFonts.lora(color: Colors.white),
-                                    decoration: const InputDecoration(
+                                    maxLines: 1,
+                                    style: GoogleFonts.lora(
+                                        color: dark, fontSize: 14),
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.zero,
                                       prefixIcon: Icon(
                                         Icons.person_outline_sharp,
-                                        color: Colors.white,
+                                        color: dark,
                                       ),
                                       labelText: 'Email',
                                       hintText: 'email@email.com',
-                                      hintStyle: TextStyle(color: Colors.white),
+                                      hintStyle:
+                                          TextStyle(color: dark, fontSize: 14),
                                       labelStyle:
-                                          TextStyle(color: Colors.white),
+                                          TextStyle(color: dark, fontSize: 14),
                                       filled: true,
-                                      fillColor:
-                                          Color.fromARGB(128, 255, 255, 255),
-                                      border: OutlineInputBorder(),
+                                      fillColor: const Color.fromARGB(
+                                          128, 255, 255, 255),
+                                      border: const OutlineInputBorder(
+                                          gapPadding: 0),
                                     )))),
+                        const SizedBox(height: 10),
+                        Text(
+                          'Password',
+                          style: GoogleFonts.roboto(color: dark, fontSize: 14),
+                        ),
                         Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10, left: 36, right: 36),
+                            padding: const EdgeInsets.only(top: 5, bottom: 10),
                             child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8)),
                                 child: TextField(
-                                    style:
-                                        GoogleFonts.lora(color: Colors.white),
-                                    decoration: const InputDecoration(
+                                    style: GoogleFonts.lora(color: dark),
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.zero,
                                       prefixIcon: Icon(
                                         Icons.fingerprint_outlined,
-                                        color: Colors.white,
+                                        color: dark,
                                       ),
                                       labelText: 'Password',
-                                      labelStyle:
-                                          TextStyle(color: Colors.white),
+                                      labelStyle: TextStyle(color: dark),
                                       hintText: '********',
-                                      hintStyle: TextStyle(color: Colors.white),
+                                      hintStyle: TextStyle(color: dark),
                                       filled: true,
-                                      fillColor:
-                                          Color.fromARGB(128, 255, 255, 255),
-                                      border: OutlineInputBorder(),
+                                      fillColor: const Color.fromARGB(
+                                          128, 255, 255, 255),
+                                      border: const OutlineInputBorder(
+                                          gapPadding: 0),
                                     )))),
                         Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10, left: 36, right: 36),
+                            padding: const EdgeInsets.only(top: 10),
                             child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8)),
@@ -178,16 +200,18 @@ class Signin extends StatelessWidget {
                                           textAlign: TextAlign.center,
                                         ))))),
                         Padding(
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.only(top: 10),
                             child: TextButton(
                               onPressed: () {},
-                              child: const Text.rich(
+                              child: Text.rich(
                                 TextSpan(
                                     text: 'Dont Have An Account',
-                                    children: [
+                                    style: TextStyle(color: dark),
+                                    children: const [
                                       TextSpan(
                                           text: ' SIGN UP',
-                                          style: TextStyle(color: Colors.white))
+                                          style: TextStyle(
+                                              color: Colors.blueAccent))
                                     ]),
                               ),
                             )),
