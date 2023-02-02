@@ -1,6 +1,7 @@
-import 'package:essai/pages/essai.dart';
+import 'package:essai/pages/auth/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env.local", mergeWith: {
@@ -15,9 +16,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Essai(),
+      home: Splash(),
     );
   }
 }

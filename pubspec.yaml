@@ -39,6 +39,9 @@ dependencies:
   chat_gpt_sdk: ^1.0.2+3
   http: ^0.13.5
   flutter_dotenv: ^5.0.2
+  get: ^4.6.5
+  flutter_acrylic: ^1.1.0+1
+  window_manager: ^0.3.0
 
 dev_dependencies:
   flutter_test:
