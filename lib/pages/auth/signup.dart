@@ -12,6 +12,9 @@ class Signup extends StatelessWidget {
   final Color primary = const Color.fromARGB(255, 0, 0, 77);
   final Color dark = const Color.fromARGB(156, 0, 0, 17);
 
+  bool valuefirst = false;
+  bool valuesecond = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -249,42 +252,54 @@ class Signup extends StatelessWidget {
                                 )
                               ],
                             ),
-                            Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.1,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    child: ElevatedButton(
-                                        onPressed: () {},
-                                        child: Container(
-                                            padding: const EdgeInsets.all(12),
-                                            color: const Color.fromARGB(
-                                                122, 68, 137, 255),
-                                            width: double.infinity,
-                                            child: const Text(
-                                              'SIGN UP',
-                                              textAlign: TextAlign.center,
-                                            ))))),
-                            Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: TextButton(
-                                  onPressed: () {
-                                    Get.to(Signup());
-                                  },
-                                  child: Text.rich(
-                                    TextSpan(
-                                        text: 'Already Have An Account',
-                                        style: TextStyle(color: dark),
-                                        children: const [
-                                          TextSpan(
-                                              text: ' SIGN UP',
-                                              style: TextStyle(
-                                                  color: Colors.blueAccent))
-                                        ]),
-                                  ),
-                                )),
+                            const SizedBox(height: 20),
+                            Row(
+                              children: [
+                                Checkbox(
+                                    value: valuefirst,
+                                    onChanged: (value) {
+                                      valuefirst = value!;
+                                    }),
+                                Text(
+                                  'I agree with the Terms and Conditions',
+                                  style: GoogleFonts.roboto(
+                                      color: dark, fontSize: 14),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                            Container(
+                                width: MediaQuery.of(context).size.width * 0.1,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: ElevatedButton(
+                                    onPressed: () {},
+                                    child: Container(
+                                        padding: const EdgeInsets.all(12),
+                                        color: const Color.fromARGB(
+                                            122, 68, 137, 255),
+                                        width: double.infinity,
+                                        child: const Text(
+                                          'SIGN UP',
+                                          textAlign: TextAlign.center,
+                                        )))),
+                            const SizedBox(height: 10),
+                            TextButton(
+                              onPressed: () {
+                                Get.to(Signup());
+                              },
+                              child: Text.rich(
+                                TextSpan(
+                                    text: 'Already Have An Account',
+                                    style: TextStyle(color: dark),
+                                    children: const [
+                                      TextSpan(
+                                          text: ' SIGN IN',
+                                          style: TextStyle(
+                                              color: Colors.blueAccent))
+                                    ]),
+                              ),
+                            ),
                           ]))
                 ]),
           ).asGlass(),
