@@ -13,7 +13,7 @@ class _EssaiState extends State<Essai> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(children: [
-        Padding(
+        /*Padding(
             padding: const EdgeInsets.all(36),
             child: FutureBuilder(
                 future:
@@ -21,7 +21,7 @@ class _EssaiState extends State<Essai> {
                 builder: (context, snapshot) {
                   final grade = snapshot.data;
                   return Text(grade.toString());
-                }))
+                }))*/
       ]),
     );
   }
