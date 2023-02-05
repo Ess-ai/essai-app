@@ -1,5 +1,4 @@
 import 'package:essai/pages/auth/signin.dart';
-import 'package:essai/pages/essai.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
