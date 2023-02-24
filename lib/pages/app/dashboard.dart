@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -11,86 +12,63 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    var _isActive;
     return Scaffold(
         backgroundColor: Colors.transparent,
-        body: Row(children: [
-          Expanded(
-            child: Container(
-              alignment: Alignment.topLeft,
-              padding: const EdgeInsets.all(20),
+        body: Column(
+          children: [
+            Container(
               color: Colors.white,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              padding: const EdgeInsets.all(10),
+              child: Row(
                 children: [
-                  const Text(
-                    'Essai',
-                    style: TextStyle(
-                        fontSize: 32,
-                        fontFamily: 'Blanka',
-                        color: Color.fromARGB(255, 2, 21, 80)),
-                  ),
-                  Row(children: const [
-                    Icon(Icons.dashboard),
-                    Text('Dashboard'),
+                  Row(children: [
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        ' essai',
+                        style: GoogleFonts.lobsterTwo(
+                            fontSize: 28,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    TextButton(
+                        onPressed: () {},
+                        child: Text('Dashboard',
+                            style: GoogleFonts.ptSans(
+                              fontSize: 20,
+                              color: Colors.black,
+                            ))),
+                    const SizedBox(width: 5),
+                    TextButton(
+                        onPressed: () {},
+                        child: Text('Docs',
+                            style: GoogleFonts.ptSans(
+                              fontSize: 20,
+                              color: Colors.black,
+                            ))),
+                    const SizedBox(width: 5),
+                    TextButton(
+                        onPressed: () {},
+                        child: Text('Support',
+                            style: GoogleFonts.ptSans(
+                              fontSize: 20,
+                              color: Colors.black,
+                            ))),
                   ]),
-                  Container(
-                    color: _isActive,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Profile'),
-                        Row(children: const [
-                          Icon(Icons.dashboard),
-                          Text('Dashboard'),
-                        ]),
-                        Row(children: const [
-                          Icon(Icons.dashboard),
-                          Text('Dashboard'),
-                        ]),
-                        Row(children: const [
-                          Icon(Icons.dashboard),
-                          Text('Dashboard'),
-                        ]),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: _isActive,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Learn'),
-                        Row(children: const [
-                          Icon(Icons.dashboard),
-                          Text('Dashboard'),
-                        ]),
-                        Row(children: const [
-                          Icon(Icons.dashboard),
-                          Text('Dashboard'),
-                        ]),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: _isActive,
-                    child: Row(
-                      children: const [
-                        Icon(Icons.person),
-                        Icon(Icons.explore),
-                      ],
-                    ),
-                  ),
+                  const Spacer(),
+                  const CircleAvatar(
+                    radius: 15,
+                  )
                 ],
               ),
             ),
-          ),
-          Expanded(
-              flex: 5,
-              child: Container(color: const Color.fromARGB(255, 226, 240, 255)))
-        ]));
+            Expanded(
+                child: Container(
+              padding: const EdgeInsets.all(10),
+            ))
+          ],
+        ));
   }
 }
