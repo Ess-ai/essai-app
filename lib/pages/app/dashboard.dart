@@ -21,6 +21,7 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
         body: Column(
       children: [
+        //Top Bar
         Container(
           color: Colors.white,
           padding: const EdgeInsets.only(left: 200, right: 200, top: 20),
@@ -74,7 +75,10 @@ class _DashboardState extends State<Dashboard> {
             ],
           ),
         ),
+
+        //Body
         Expanded(
+            child: SingleChildScrollView(
           child: Container(
             alignment: Alignment.topLeft,
             padding: const EdgeInsets.only(top: 50, left: 200, right: 200),
@@ -83,6 +87,7 @@ class _DashboardState extends State<Dashboard> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                //Greetings
                 Text(
                   '👋 Hi There, $user',
                   style: GoogleFonts.ptSans(
@@ -91,6 +96,7 @@ class _DashboardState extends State<Dashboard> {
                 const SizedBox(
                   height: 30,
                 ),
+                //Welcome Card
                 Container(
                   padding: const EdgeInsets.all(10),
                   width: double.infinity,
@@ -110,8 +116,8 @@ class _DashboardState extends State<Dashboard> {
                       ),
                       Text(
                         'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-                        style:
-                            GoogleFonts.lora(color: Colors.white, fontSize: 14),
+                        style: GoogleFonts.ptSans(
+                            color: Colors.white, fontSize: 14),
                       ),
                       const SizedBox(
                         height: 10,
@@ -144,6 +150,143 @@ class _DashboardState extends State<Dashboard> {
                 const SizedBox(
                   height: 30,
                 ),
+
+                //Recent Essays Title
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Recent Essays',
+                      style: GoogleFonts.ptSans(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    OutlinedButton(
+                        onPressed: () {},
+                        style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.black),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            Text('View All'),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Icon(
+                              Iconsax.arrow_right,
+                              size: 20,
+                            )
+                          ],
+                        ))
+                  ],
+                ),
+                const Divider(),
+                const SizedBox(
+                  height: 20,
+                ),
+
+                //Recent Essays List
+                SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                              padding: const EdgeInsets.all(0)),
+                          child: Container(
+                              width: MediaQuery.of(context).size.width * 0.15,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(
+                                      width: 0.5, color: Colors.grey)),
+                              alignment: Alignment.topLeft,
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                alignment: Alignment.topLeft,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Plastic be Banned',
+                                      textAlign: TextAlign.left,
+                                      style: GoogleFonts.ptSans(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      'Plastic bags are a major cause of environmental pollution. Plastic as a substance is non-biodegradable and thus plastic bags remain in the environment for hundreds of years polluting it immensely.',
+                                      textAlign: TextAlign.left,
+                                      style: GoogleFonts.ptSans(
+                                          color: Colors.black, fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                              )),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.03,
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                              padding: const EdgeInsets.all(0)),
+                          child: Container(
+                              width: MediaQuery.of(context).size.width * 0.15,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(
+                                      width: 0.5, color: Colors.grey)),
+                              alignment: Alignment.topLeft,
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                alignment: Alignment.topLeft,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Wonder of Science',
+                                      textAlign: TextAlign.left,
+                                      style: GoogleFonts.ptSans(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      'Looking at the age when a man led a life like a savage, we notice how far we have come. Similarly, the evolution of mankind is truly commendable. One of the major driving forces behind this is science.',
+                                      textAlign: TextAlign.left,
+                                      style: GoogleFonts.ptSans(
+                                          color: Colors.black, fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                              )),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.05,
+                        ),
+                      ],
+                    )),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Divider(),
+
+                //Spacings
+                const SizedBox(
+                  height: 20,
+                ),
+
+                //Popular Tools Title
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -175,6 +318,8 @@ class _DashboardState extends State<Dashboard> {
                 const SizedBox(
                   height: 20,
                 ),
+
+                //Popular Tools List
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -372,10 +517,15 @@ class _DashboardState extends State<Dashboard> {
                   height: 20,
                 ),
                 const Divider(),
+
+                //Spacing
+                const SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),
-        )
+        ))
       ],
     ));
   }
