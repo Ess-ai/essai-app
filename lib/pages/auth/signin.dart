@@ -1,7 +1,5 @@
 import 'package:essai/pages/auth/signup.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_acrylic/window.dart';
-import 'package:flutter_acrylic/window_effect.dart';
 import 'package:get/get.dart';
 import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,8 +18,7 @@ class Signin extends StatelessWidget {
       body: Row(children: [
         Expanded(
             flex: 2,
-            child: Container(
-                child: Stack(children: [
+            child: Stack(children: [
               Container(
                 alignment: Alignment.topLeft,
                 decoration: const BoxDecoration(
@@ -97,7 +94,7 @@ class Signin extends StatelessWidget {
                       )
                     ]),
               )
-            ]))),
+            ])),
         Expanded(
           child: Container(
             padding: const EdgeInsets.all(36),

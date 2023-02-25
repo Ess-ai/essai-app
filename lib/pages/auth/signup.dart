@@ -1,10 +1,10 @@
+import 'package:essai/pages/app/dashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_acrylic/window.dart';
-import 'package:flutter_acrylic/window_effect.dart';
 import 'package:get/get.dart';
 import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// ignore: must_be_immutable
 class Signup extends StatelessWidget {
   Signup({Key? key}) : super(key: key);
 
@@ -21,8 +21,7 @@ class Signup extends StatelessWidget {
       backgroundColor: Colors.transparent,
       body: Row(children: [
         Expanded(
-            child: Container(
-                child: Stack(children: [
+            child: Stack(children: [
           Container(
             alignment: Alignment.topLeft,
             decoration: const BoxDecoration(
@@ -98,7 +97,7 @@ class Signup extends StatelessWidget {
                   )
                 ]),
           )
-        ]))),
+        ])),
         Expanded(
           flex: 2,
           child: Container(
@@ -273,7 +272,9 @@ class Signup extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8)),
                                 child: ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Get.to(Dashboard());
+                                    },
                                     child: Container(
                                         padding: const EdgeInsets.all(12),
                                         color: const Color.fromARGB(
