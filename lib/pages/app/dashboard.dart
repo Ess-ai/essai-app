@@ -22,19 +22,18 @@ class _DashboardState extends State<Dashboard> {
         body: Column(
       children: [
         Container(
-          color: const Color.fromARGB(255, 238, 242, 251),
-          padding: const EdgeInsets.all(10),
+          color: Colors.white,
+          padding: const EdgeInsets.only(left: 200, right: 200, top: 20),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Row(children: [
-                Container(
-                  padding: const EdgeInsets.all(4),
-                  child: const Image(
-                    image: AssetImage('assets/images/logo.png'),
-                    height: 40,
-                  ),
-                ),
+                TextButton(
+                    onPressed: () {},
+                    child: const Text('essai',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Blanka',
+                            fontSize: 30))),
                 const SizedBox(width: 20),
                 TextButton(
                     onPressed: () {},
@@ -68,6 +67,7 @@ class _DashboardState extends State<Dashboard> {
                             color: Colors.black,
                             fontWeight: FontWeight.bold))),
               ]),
+              const Spacer(),
               const CircleAvatar(
                 radius: 15,
               )
@@ -77,16 +77,69 @@ class _DashboardState extends State<Dashboard> {
         Expanded(
           child: Container(
             alignment: Alignment.topLeft,
-            padding: const EdgeInsets.only(top: 50, left: 200, right: 300),
+            padding: const EdgeInsets.only(top: 50, left: 200, right: 200),
             color: Colors.white,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '👋 Hi, $user',
+                  '👋 Hi There, $user',
                   style: GoogleFonts.ptSans(
                       fontSize: 26, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.blue.shade900,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Welcome Back',
+                        style: GoogleFonts.ptSans(
+                            color: Colors.white, fontSize: 20),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+                        style:
+                            GoogleFonts.lora(color: Colors.white, fontSize: 14),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(children: [
+                        ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.black,
+                                padding: const EdgeInsets.all(5)),
+                            child: Text(
+                              'Get Started',
+                              style: GoogleFonts.lora(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 14),
+                            )),
+                        TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'CONTINUE',
+                              style: GoogleFonts.lora(
+                                  color: Colors.white, fontSize: 14),
+                            ))
+                      ])
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
@@ -125,176 +178,200 @@ class _DashboardState extends State<Dashboard> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                        padding: const EdgeInsets.all(5),
-                        width: MediaQuery.of(context).size.width * 0.15,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(width: 0.5, color: Colors.grey)),
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
+                    TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                          padding: const EdgeInsets.all(0)),
+                      child: Container(
+                          width: MediaQuery.of(context).size.width * 0.15,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border:
+                                  Border.all(width: 0.5, color: Colors.grey)),
                           alignment: Alignment.topLeft,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Icon(
-                                Iconsax.scan,
-                                size: 30,
-                                color: Colors.black,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'Document Marker',
-                                textAlign: TextAlign.left,
-                                style: GoogleFonts.ptSans(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.',
-                                textAlign: TextAlign.left,
-                                style: GoogleFonts.ptSans(
-                                    color: Colors.black, fontSize: 12),
-                              ),
-                            ],
-                          ),
-                        )),
-                    Container(
-                        padding: const EdgeInsets.all(5),
-                        width: MediaQuery.of(context).size.width * 0.15,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(width: 0.5, color: Colors.grey)),
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            alignment: Alignment.topLeft,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Icon(
+                                  Iconsax.scan,
+                                  size: 30,
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'Document Scanner',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.ptSans(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'No need to Type your essay, Just Scan with your camera.',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.ptSans(
+                                      color: Colors.black, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          )),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                          padding: const EdgeInsets.all(0)),
+                      child: Container(
+                          width: MediaQuery.of(context).size.width * 0.15,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border:
+                                  Border.all(width: 0.5, color: Colors.grey)),
                           alignment: Alignment.topLeft,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Icon(
-                                Iconsax.scan,
-                                size: 30,
-                                color: Colors.black,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'Document Marker',
-                                textAlign: TextAlign.left,
-                                style: GoogleFonts.ptSans(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.',
-                                textAlign: TextAlign.left,
-                                style: GoogleFonts.ptSans(
-                                    color: Colors.black, fontSize: 12),
-                              ),
-                            ],
-                          ),
-                        )),
-                    Container(
-                        padding: const EdgeInsets.all(5),
-                        width: MediaQuery.of(context).size.width * 0.15,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(width: 0.5, color: Colors.grey)),
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            alignment: Alignment.topLeft,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Icon(
+                                  Iconsax.document,
+                                  size: 30,
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'File Marker',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.ptSans(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'Upload your typed essay from multiple formats e.g docs, img',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.ptSans(
+                                      color: Colors.black, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          )),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                          padding: const EdgeInsets.all(0)),
+                      child: Container(
+                          width: MediaQuery.of(context).size.width * 0.15,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border:
+                                  Border.all(width: 0.5, color: Colors.grey)),
                           alignment: Alignment.topLeft,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Icon(
-                                Iconsax.scan,
-                                size: 30,
-                                color: Colors.black,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'Document Marker',
-                                textAlign: TextAlign.left,
-                                style: GoogleFonts.ptSans(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.',
-                                textAlign: TextAlign.left,
-                                style: GoogleFonts.ptSans(
-                                    color: Colors.black, fontSize: 12),
-                              ),
-                            ],
-                          ),
-                        )),
-                    Container(
-                        padding: const EdgeInsets.all(5),
-                        width: MediaQuery.of(context).size.width * 0.15,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(width: 0.5, color: Colors.grey)),
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            alignment: Alignment.topLeft,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Icon(
+                                  Iconsax.pen_add,
+                                  size: 30,
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'Write',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.ptSans(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'Write or paste your essay here with our writing tool',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.ptSans(
+                                      color: Colors.black, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          )),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                          padding: const EdgeInsets.all(0)),
+                      child: Container(
+                          width: MediaQuery.of(context).size.width * 0.15,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border:
+                                  Border.all(width: 0.5, color: Colors.grey)),
                           alignment: Alignment.topLeft,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Icon(
-                                Iconsax.scan,
-                                size: 30,
-                                color: Colors.black,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'Document Marker',
-                                textAlign: TextAlign.left,
-                                style: GoogleFonts.ptSans(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.',
-                                textAlign: TextAlign.left,
-                                style: GoogleFonts.ptSans(
-                                    color: Colors.black, fontSize: 12),
-                              ),
-                            ],
-                          ),
-                        )),
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            alignment: Alignment.topLeft,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Icon(
+                                  Iconsax.d_cube_scan,
+                                  size: 30,
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'Essay Zone',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.ptSans(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'Get Essay Prompts and even generate or get essay samples.',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.ptSans(
+                                      color: Colors.black, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          )),
+                    ),
                   ],
-                )
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Divider(),
               ],
             ),
           ),
