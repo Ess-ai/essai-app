@@ -14,6 +14,16 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   final List menu = ['DashBoard', 'Essays', 'Tools'];
+  // Initial Selected Value
+  String dropdownvalue = 'Joe Gakah';
+
+  // List of items in our dropdown menu
+  var items = [
+    'Joe Gakah',
+    'Profile',
+    'Settings',
+    'Log Out',
+  ];
   final String user = 'Joe';
 
   @override
@@ -73,8 +83,53 @@ class _DashboardState extends State<Dashboard> {
                             fontWeight: FontWeight.bold))),
               ]),
               const Spacer(),
-              const CircleAvatar(
-                radius: 15,
+              Row(
+                children: [
+                  const CircleAvatar(
+                    radius: 10,
+                    child: Icon(Iconsax.profile),
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  DropdownButton(
+                    underline: Container(),
+                    style: GoogleFonts.ptSans(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                    value: dropdownvalue,
+                    icon: const Icon(Iconsax.arrow_down_1),
+                    items: items.map((String items) {
+                      return DropdownMenuItem(
+                        value: items,
+                        child: Text(items),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownvalue = newValue!;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  const Text('|'),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue.shade900,
+                          foregroundColor: Colors.white),
+                      child: Text(
+                        'Donate',
+                        style: GoogleFonts.ptSans(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ))
+                ],
               )
             ],
           ),
