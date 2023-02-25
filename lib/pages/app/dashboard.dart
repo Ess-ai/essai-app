@@ -24,10 +24,12 @@ class _DashboardState extends State<Dashboard> {
         //Top Bar
         Container(
           color: Colors.white,
-          padding: const EdgeInsets.only(left: 200, right: 200, top: 20),
+          padding:
+              const EdgeInsets.only(left: 200, right: 200, top: 10, bottom: 10),
           child: Row(
             children: [
               Row(children: [
+                //Logo
                 TextButton(
                     onPressed: () {},
                     child: const Text('essai',
@@ -36,6 +38,8 @@ class _DashboardState extends State<Dashboard> {
                             fontFamily: 'Blanka',
                             fontSize: 30))),
                 const SizedBox(width: 20),
+
+                //Menu Items
                 TextButton(
                     onPressed: () {},
                     child: Text('Dashboard',
@@ -81,7 +85,7 @@ class _DashboardState extends State<Dashboard> {
             child: SingleChildScrollView(
           child: Container(
             alignment: Alignment.topLeft,
-            padding: const EdgeInsets.only(top: 50, left: 200, right: 200),
+            padding: const EdgeInsets.only(top: 30, left: 200, right: 200),
             color: Colors.white,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -96,6 +100,7 @@ class _DashboardState extends State<Dashboard> {
                 const SizedBox(
                   height: 30,
                 ),
+
                 //Welcome Card
                 Container(
                   padding: const EdgeInsets.all(10),
@@ -517,6 +522,22 @@ class _DashboardState extends State<Dashboard> {
                   height: 20,
                 ),
                 const Divider(),
+
+                //Spacing
+                const SizedBox(
+                  height: 20,
+                ),
+
+                //Footer
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Copyright © 2023\nAudRead',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.ptSans(
+                        fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                ),
 
                 //Spacing
                 const SizedBox(
