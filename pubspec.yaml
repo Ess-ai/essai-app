@@ -44,7 +44,7 @@ dependencies:
   window_manager: ^0.3.0
   glass: ^1.0.1+1
   google_fonts: ^4.0.1
-  flutter_side_menu: ^0.3.0
+  iconsax: ^0.0.8
 
 dev_dependencies:
   flutter_test:
