@@ -16,9 +16,16 @@ class EssayState extends State<Essay> {
   final List<ChartData> chartData = [
     ChartData('Performance', 78),
   ];
+
+  final String title = 'Plastics Should be Banned';
+  final String title2 = 'Why Plastics Should be Banned';
+  final String _essay =
+      'Plastics have become an integral part of modern society, and their production and usage have increased dramatically over the past few decades. Plastics are versatile, lightweight, durable, and inexpensive, making them ideal for various applications. However, the widespread use of plastics has also led to significant environmental problems, and the negative impacts of plastics are becoming more apparent. In this essay, I will argue that plastics should be banned due to their detrimental effects on the environment and human health.\n\nFirst and foremost, plastics have severe consequences for the environment. Plastics are not biodegradable, meaning that they do not break down naturally and can persist in the environment for hundreds of years. As a result, they accumulate in the oceans, landfills, and other ecosystems, leading to a range of environmental problems. Plastic waste in the oceans poses a significant threat to marine life, as it can be mistaken for food and ingested, leading to injury or death. Plastics also release toxic chemicals as they degrade, contaminating soil and water resources.\n\nMoreover, plastics are a significant source of greenhouse gas emissions. The production of plastics is energy-intensive and involves the extraction and processing of fossil fuels. Additionally, the transportation and disposal of plastics also contribute to greenhouse gas emissions. These emissions contribute to climate change, which has far-reaching environmental and social impacts, including rising sea levels, more frequent natural disasters, and food and water scarcity.\n\nFurthermore, plastics have harmful effects on human health. Plastic products contain chemicals such as phthalates and bisphenol-A, which have been linked to a range of health problems, including reproductive disorders, developmental problems in children, and cancer. These chemicals can leach into food and water, especially when plastics are exposed to heat or other stressors, and can cause significant health risks.\n\nIn conclusion, plastics should be banned due to their negative impact on the environment and human health. Although plastics have numerous benefits, the costs of their production, usage, and disposal far outweigh the benefits. Governments, businesses, and individuals need to take action to reduce the use of plastics and transition to more sustainable alternatives. This can include measures such as introducing plastic taxes, promoting reusable and biodegradable products, and investing in research and innovation to find alternative materials. By taking action to ban plastics, we can protect the environment and safeguard the health of current and future generations.';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           //Header
@@ -40,7 +47,7 @@ class EssayState extends State<Essay> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Plastics Should be Banned',
+                                  title,
                                   style: GoogleFonts.ptSans(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
@@ -143,7 +150,7 @@ class EssayState extends State<Essay> {
                                           children: [
                                             //Essay Title
                                             Text(
-                                              'Why Plastics Should be Banned',
+                                              title2,
                                               textAlign: TextAlign.left,
                                               style: GoogleFonts.ptSans(
                                                   color: Colors.black,
@@ -156,7 +163,7 @@ class EssayState extends State<Essay> {
 
                                             //Essay Body
                                             Text(
-                                              'Plastics have become an integral part of modern society, and their production and usage have increased dramatically over the past few decades. Plastics are versatile, lightweight, durable, and inexpensive, making them ideal for various applications. However, the widespread use of plastics has also led to significant environmental problems, and the negative impacts of plastics are becoming more apparent. In this essay, I will argue that plastics should be banned due to their detrimental effects on the environment and human health.\n\nFirst and foremost, plastics have severe consequences for the environment. Plastics are not biodegradable, meaning that they do not break down naturally and can persist in the environment for hundreds of years. As a result, they accumulate in the oceans, landfills, and other ecosystems, leading to a range of environmental problems. Plastic waste in the oceans poses a significant threat to marine life, as it can be mistaken for food and ingested, leading to injury or death. Plastics also release toxic chemicals as they degrade, contaminating soil and water resources.\n\nMoreover, plastics are a significant source of greenhouse gas emissions. The production of plastics is energy-intensive and involves the extraction and processing of fossil fuels. Additionally, the transportation and disposal of plastics also contribute to greenhouse gas emissions. These emissions contribute to climate change, which has far-reaching environmental and social impacts, including rising sea levels, more frequent natural disasters, and food and water scarcity.\n\nFurthermore, plastics have harmful effects on human health. Plastic products contain chemicals such as phthalates and bisphenol-A, which have been linked to a range of health problems, including reproductive disorders, developmental problems in children, and cancer. These chemicals can leach into food and water, especially when plastics are exposed to heat or other stressors, and can cause significant health risks.\n\nIn conclusion, plastics should be banned due to their negative impact on the environment and human health. Although plastics have numerous benefits, the costs of their production, usage, and disposal far outweigh the benefits. Governments, businesses, and individuals need to take action to reduce the use of plastics and transition to more sustainable alternatives. This can include measures such as introducing plastic taxes, promoting reusable and biodegradable products, and investing in research and innovation to find alternative materials. By taking action to ban plastics, we can protect the environment and safeguard the health of current and future generations.',
+                                              _essay,
                                               textAlign: TextAlign.left,
                                               style: GoogleFonts.ptSans(
                                                   color: Colors.black,
@@ -266,7 +273,7 @@ class EssayState extends State<Essay> {
                                                             FontWeight.bold),
                                                   ),
                                                   Text(
-                                                    '15/20',
+                                                    '.../20',
                                                     style: GoogleFonts.ptSans(
                                                         fontSize: 18,
                                                         color: Colors.lightBlue,
@@ -300,7 +307,7 @@ class EssayState extends State<Essay> {
                                                             FontWeight.bold),
                                                   ),
                                                   Text(
-                                                    'A-',
+                                                    '...',
                                                     style: GoogleFonts.ptSans(
                                                         fontSize: 18,
                                                         color: Colors.green,
@@ -334,7 +341,7 @@ class EssayState extends State<Essay> {
                                                             FontWeight.bold),
                                                   ),
                                                   Text(
-                                                    '300',
+                                                    '${_essay.split(' ').length}',
                                                     style: GoogleFonts.ptSans(
                                                         fontSize: 18,
                                                         color: Colors.red,
@@ -368,7 +375,7 @@ class EssayState extends State<Essay> {
                                                             FontWeight.bold),
                                                   ),
                                                   Text(
-                                                    '1372',
+                                                    '${_essay.characters.length}',
                                                     style: GoogleFonts.ptSans(
                                                         fontSize: 18,
                                                         color: Colors.red,
