@@ -1,5 +1,5 @@
-import 'dart:convert';
-
+import 'package:essai/pages/app/widgets/footer.dart';
+import 'package:essai/pages/app/widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
@@ -8,22 +8,10 @@ class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _DashboardState createState() => _DashboardState();
+  DashboardState createState() => DashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
-  final List menu = ['DashBoard', 'Essays', 'Tools'];
-  // Initial Selected Value
-  String dropdownvalue = 'Joe Gakah';
-
-  // List of items in our dropdown menu
-  var items = [
-    'Joe Gakah',
-    'Profile',
-    'Settings',
-    'Log Out',
-  ];
+class DashboardState extends State<Dashboard> {
   final String user = 'Joe';
 
   @override
@@ -32,109 +20,7 @@ class _DashboardState extends State<Dashboard> {
         body: Column(
       children: [
         //Top Bar
-        Container(
-          color: Colors.white,
-          padding:
-              const EdgeInsets.only(left: 200, right: 200, top: 10, bottom: 10),
-          child: Row(
-            children: [
-              Row(children: [
-                //Logo
-                TextButton(
-                    onPressed: () {},
-                    child: const Text('essai',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Blanka',
-                            fontSize: 30))),
-                const SizedBox(width: 20),
-
-                //Menu Items
-                TextButton(
-                    onPressed: () {},
-                    child: Text('Dashboard',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold))),
-                const SizedBox(width: 15),
-                TextButton(
-                    onPressed: () {},
-                    child: Text('Essays',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold))),
-                const SizedBox(width: 15),
-                TextButton(
-                    onPressed: () {},
-                    child: Text('Tools',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold))),
-                const SizedBox(width: 15),
-                TextButton(
-                    onPressed: () {},
-                    child: Text('Support',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold))),
-              ]),
-              const Spacer(),
-              Row(
-                children: [
-                  const CircleAvatar(
-                    radius: 10,
-                    child: Icon(Iconsax.profile),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  DropdownButton(
-                    underline: Container(),
-                    style: GoogleFonts.ptSans(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
-                    value: dropdownvalue,
-                    icon: const Icon(Iconsax.arrow_down_1),
-                    items: items.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Text(items),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        dropdownvalue = newValue!;
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  const Text('|'),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue.shade900,
-                          foregroundColor: Colors.white),
-                      child: Text(
-                        'Donate',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ))
-                ],
-              )
-            ],
-          ),
-        ),
-
+        const Header(),
         //Body
         Expanded(
             child: SingleChildScrollView(
@@ -584,15 +470,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
 
                 //Footer
-                Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Copyright © 2023\nAudRead',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.ptSans(
-                        fontSize: 15, fontWeight: FontWeight.bold),
-                  ),
-                ),
+                const Footer(),
 
                 //Spacing
                 const SizedBox(
