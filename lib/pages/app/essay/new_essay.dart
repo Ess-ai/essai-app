@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:essai/pages/app/dashboard.dart';
-import 'package:get/get.dart';
 import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
@@ -27,7 +25,7 @@ class NewEssayState extends State<NewEssay> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.black,
       body: Row(children: [
         //Essay Display
         Expanded(
@@ -36,8 +34,9 @@ class NewEssayState extends State<NewEssay> {
                 alignment: Alignment.topLeft,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/images/quest.jpg'),
+                      image: AssetImage('assets/images/bg.jpg'),
                       fit: BoxFit.cover,
+                      opacity: 0.3,
                       filterQuality: FilterQuality.high),
                 ),
                 child: SingleChildScrollView(
@@ -97,10 +96,31 @@ class NewEssayState extends State<NewEssay> {
                                 children: const [
                                   Text('Submit'),
                                   SizedBox(
-                                    width: 15,
+                                    width: 8,
                                   ),
                                   Icon(
                                     Iconsax.document_upload,
+                                    size: 20,
+                                  )
+                                ],
+                              )),
+                          const SizedBox(width: 10),
+
+                          //Save as Draft
+                          OutlinedButton(
+                              onPressed: () {},
+                              style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.blue.shade900),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text('Save'),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Icon(
+                                    Iconsax.document_cloud,
                                     size: 20,
                                   )
                                 ],
@@ -118,7 +138,7 @@ class NewEssayState extends State<NewEssay> {
                                 children: const [
                                   Text('Discard'),
                                   SizedBox(
-                                    width: 15,
+                                    width: 8,
                                   ),
                                   Icon(
                                     Iconsax.trash,
@@ -129,6 +149,8 @@ class NewEssayState extends State<NewEssay> {
                         ],
                       ),
                       const Divider(),
+
+                      //Counter
                       Row(
                         children: [
                           Text(
