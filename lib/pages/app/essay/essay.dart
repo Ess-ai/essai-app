@@ -3,6 +3,7 @@ import 'package:essai/pages/app/widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Essay extends StatefulWidget {
   const Essay({Key? key}) : super(key: key);
@@ -12,6 +13,9 @@ class Essay extends StatefulWidget {
 }
 
 class EssayState extends State<Essay> {
+  final List<ChartData> chartData = [
+    ChartData('Performance', 78),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -182,7 +186,8 @@ class EssayState extends State<Essay> {
                                                     color: Colors.grey)),
                                             child: Column(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Text(
                                                     'SCORE:',
@@ -190,9 +195,188 @@ class EssayState extends State<Essay> {
                                                         fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.bold),
-                                                  )
+                                                  ),
+                                                  Container(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      padding: EdgeInsets.zero,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.1,
+                                                      child: SfCircularChart(
+                                                          margin:
+                                                              EdgeInsets.zero,
+                                                          legend: Legend(
+                                                              title: LegendTitle(
+                                                                  text: '78')),
+                                                          series: <
+                                                              CircularSeries>[
+                                                            // Renders radial bar chart
+                                                            RadialBarSeries<
+                                                                    ChartData,
+                                                                    String>(
+                                                                trackColor:
+                                                                    Colors
+                                                                        .green,
+                                                                maximumValue:
+                                                                    100,
+                                                                radius: '50%',
+                                                                innerRadius:
+                                                                    '80%',
+                                                                dataSource:
+                                                                    chartData,
+                                                                xValueMapper:
+                                                                    (ChartData data,
+                                                                            _) =>
+                                                                        data.x,
+                                                                yValueMapper:
+                                                                    (ChartData data,
+                                                                            _) =>
+                                                                        data.y,
+                                                                cornerStyle:
+                                                                    CornerStyle
+                                                                        .bothCurve)
+                                                          ]))
                                                 ]),
                                           ),
+                                          const SizedBox(height: 20),
+
+                                          //Marks
+                                          Container(
+                                              alignment: Alignment.topLeft,
+                                              padding: const EdgeInsets.all(5),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  border: Border.all(
+                                                      width: 0.5,
+                                                      color: Colors.grey)),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'Marks:',
+                                                    style: GoogleFonts.ptSans(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  Text(
+                                                    '15/20',
+                                                    style: GoogleFonts.ptSans(
+                                                        fontSize: 18,
+                                                        color: Colors.lightBlue,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )
+                                                ],
+                                              )),
+                                          const SizedBox(height: 8),
+
+                                          //Grade
+                                          Container(
+                                              alignment: Alignment.topLeft,
+                                              padding: const EdgeInsets.all(5),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  border: Border.all(
+                                                      width: 0.5,
+                                                      color: Colors.grey)),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'Grade:',
+                                                    style: GoogleFonts.ptSans(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  Text(
+                                                    'A-',
+                                                    style: GoogleFonts.ptSans(
+                                                        fontSize: 18,
+                                                        color: Colors.green,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )
+                                                ],
+                                              )),
+                                          const SizedBox(height: 8),
+
+                                          //Words
+                                          Container(
+                                              alignment: Alignment.topLeft,
+                                              padding: const EdgeInsets.all(5),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  border: Border.all(
+                                                      width: 0.5,
+                                                      color: Colors.grey)),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'WORDS:',
+                                                    style: GoogleFonts.ptSans(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  Text(
+                                                    '300',
+                                                    style: GoogleFonts.ptSans(
+                                                        fontSize: 18,
+                                                        color: Colors.red,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )
+                                                ],
+                                              )),
+                                          const SizedBox(height: 8),
+
+                                          //Characters
+                                          Container(
+                                              alignment: Alignment.topLeft,
+                                              padding: const EdgeInsets.all(5),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  border: Border.all(
+                                                      width: 0.5,
+                                                      color: Colors.grey)),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'CHARACTERS:',
+                                                    style: GoogleFonts.ptSans(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  Text(
+                                                    '1372',
+                                                    style: GoogleFonts.ptSans(
+                                                        fontSize: 18,
+                                                        color: Colors.red,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )
+                                                ],
+                                              )),
                                         ],
                                       )),
                                 ),
@@ -214,4 +398,10 @@ class EssayState extends State<Essay> {
       ),
     );
   }
+}
+
+class ChartData {
+  ChartData(this.x, this.y);
+  final String x;
+  final double y;
 }
