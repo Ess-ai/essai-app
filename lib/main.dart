@@ -1,4 +1,5 @@
 import 'package:essai/pages/app/essay/essay.dart';
+import 'package:essai/pages/app/essay/new_essay.dart';
 import 'package:essai/pages/auth/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Essay(),
+      home: NewEssay(),
     );
   }
 }
