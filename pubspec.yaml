@@ -45,6 +45,7 @@ dependencies:
   glass: ^1.0.1+1
   google_fonts: ^4.0.1
   iconsax: ^0.0.8
+  syncfusion_flutter_charts: ^20.4.51
 
 dev_dependencies:
   flutter_test:
