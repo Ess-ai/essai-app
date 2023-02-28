@@ -1,6 +1,8 @@
+import 'package:essai/pages/app/essay/new_essay.dart';
 import 'package:essai/pages/app/widgets/footer.dart';
 import 'package:essai/pages/app/widgets/header.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -56,7 +58,9 @@ class EssayState extends State<Essay> {
 
                                 //Edit Essay Button
                                 OutlinedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Get.to(const NewEssay());
+                                    },
                                     style: OutlinedButton.styleFrom(
                                         foregroundColor: Colors.blue),
                                     child: Row(

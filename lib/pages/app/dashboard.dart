@@ -1,6 +1,8 @@
+import 'package:essai/pages/app/essay/essay.dart';
 import 'package:essai/pages/app/widgets/footer.dart';
 import 'package:essai/pages/app/widgets/header.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -137,7 +139,9 @@ class DashboardState extends State<Dashboard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(const Essay());
+                          },
                           style: TextButton.styleFrom(
                               padding: const EdgeInsets.all(0)),
                           child: Container(
