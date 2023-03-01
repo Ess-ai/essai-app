@@ -12,16 +12,12 @@ class Splash extends StatelessWidget {
     splashController.loadScreen();
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-            color: Colors.black,
-            image: DecorationImage(
-                image: AssetImage('assets/images/silhouette.jpg'),
-                opacity: 0.6,
-                fit: BoxFit.cover)),
-        child: const Center(
-            child: Image(
-          image: AssetImage('assets/images/w-essai.png'),
-          filterQuality: FilterQuality.high,
+        color: Colors.white,
+        child: Center(
+            child: Text(
+          'Essai',
+          style: TextStyle(
+              color: Colors.blue.shade900, fontSize: 48, fontFamily: 'Blanka'),
         )),
       ),
     );

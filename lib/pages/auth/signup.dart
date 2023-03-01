@@ -273,7 +273,7 @@ class Signup extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(8)),
                                 child: ElevatedButton(
                                     onPressed: () {
-                                      Get.to(Dashboard());
+                                      Get.to(const Dashboard());
                                     },
                                     child: Container(
                                         padding: const EdgeInsets.all(12),
