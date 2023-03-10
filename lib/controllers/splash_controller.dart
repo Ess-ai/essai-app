@@ -6,7 +6,7 @@ class SplashController extends GetxController {
 
   Future loadScreen() async {
     await Future.delayed(
-      const Duration(milliseconds: 2000),
+      const Duration(milliseconds: 3000),
     );
     Get.to(Signin());
   }
