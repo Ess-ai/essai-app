@@ -1,7 +1,6 @@
 import 'package:essai/pages/auth/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Signin extends StatelessWidget {
@@ -220,7 +219,7 @@ class Signin extends StatelessWidget {
                     ),
                   )
                 ]),
-          ).asGlass(),
+          ),
         ),
       ]),
     );
