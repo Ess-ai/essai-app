@@ -1,3 +1,4 @@
+import 'package:essai/pages/app/essay/essay.dart';
 import 'package:essai/pages/app/essay/essay_marking.dart';
 import 'package:essai/pages/auth/splash.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: EssayMarking(),
+      home: Essay(),
     );
   }
 }

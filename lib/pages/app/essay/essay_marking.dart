@@ -17,6 +17,27 @@ class EssayMarking extends StatefulWidget {
 
 class EssayMarkingState extends State<EssayMarking> {
   String title = 'Plastics Should be banned';
+  bool _isMarking = false;
+
+  Widget body() {
+    if (_isMarking) {
+      return Column(
+        children: [
+          Center(child: Lottie.asset('assets/resources/downloading.json')),
+          Center(
+              child: Text(
+            'Your essay is being marked\nYou will get your results Shortly',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.ptSans(
+                color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+          )),
+        ],
+      );
+    } else {
+      return const Text('Results');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,18 +64,7 @@ class EssayMarkingState extends State<EssayMarking> {
                             ),
 
                             //Essay Body
-                            Center(
-                                child: Lottie.asset(
-                                    'assets/resources/downloading.json')),
-                            Center(
-                                child: Text(
-                              'Your essay is being marked\nYou will get your results Shortly',
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.ptSans(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            )),
+                            body(),
 
                             const Divider(),
                             const SizedBox(
