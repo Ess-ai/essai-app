@@ -1,7 +1,6 @@
 import 'package:essai/pages/app/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
@@ -303,7 +302,7 @@ class Signup extends StatelessWidget {
                             ),
                           ]))
                 ]),
-          ).asGlass(),
+          ),
         ),
       ]),
     );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:glass/glass.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -236,7 +235,7 @@ class NewEssayState extends State<NewEssay> {
                                 )
                               ]))
                     ]),
-              ).asGlass(),
+              ),
             )),
       ]),
     );
