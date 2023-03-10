@@ -1,5 +1,3 @@
-import 'package:essai/pages/app/essay/essay.dart';
-import 'package:essai/pages/app/essay/essay_marking.dart';
 import 'package:essai/pages/auth/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -23,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Essay(),
+      home: Splash(),
     );
   }
 }
