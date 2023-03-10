@@ -1,4 +1,6 @@
+import 'package:essai/pages/app/essay/essay.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -86,7 +88,9 @@ class NewEssayState extends State<NewEssay> {
 
                           //Submit Essay Button
                           OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(const Essay());
+                              },
                               style: OutlinedButton.styleFrom(
                                   foregroundColor: Colors.green),
                               child: Row(
@@ -107,7 +111,9 @@ class NewEssayState extends State<NewEssay> {
 
                           //Save as Draft
                           OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(const Essay());
+                              },
                               style: OutlinedButton.styleFrom(
                                   foregroundColor: Colors.blue.shade900),
                               child: Row(
