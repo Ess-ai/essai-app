@@ -1,4 +1,3 @@
-import 'package:essai/pages/app/dashboard.dart';
 import 'package:essai/pages/auth/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Dashboard(),
+      home: Splash(),
     );
   }
 }

@@ -37,7 +37,7 @@ class NewEssayState extends State<NewEssay> {
             children: const [
               Text('Edit'),
               SizedBox(
-                width: 15,
+                width: 10,
               ),
               Icon(
                 Iconsax.edit,
@@ -58,7 +58,7 @@ class NewEssayState extends State<NewEssay> {
             children: const [
               Text('Submit'),
               SizedBox(
-                width: 15,
+                width: 10,
               ),
               Icon(
                 Iconsax.document_upload,
@@ -77,7 +77,7 @@ class NewEssayState extends State<NewEssay> {
             children: const [
               Text('Delete'),
               SizedBox(
-                width: 15,
+                width: 10,
               ),
               Icon(
                 Iconsax.document_upload,
