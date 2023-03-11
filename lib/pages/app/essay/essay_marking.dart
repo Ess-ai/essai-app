@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
 
-import '../widgets/footer.dart';
-import '../widgets/header.dart';
-import 'new_essay.dart';
+import '../navigation/footer.dart';
+import '../navigation/header.dart';
 
 class EssayMarking extends StatefulWidget {
   const EssayMarking({Key? key}) : super(key: key);
