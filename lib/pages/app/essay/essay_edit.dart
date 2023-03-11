@@ -24,6 +24,70 @@ class NewEssayState extends State<NewEssay> {
   final String title2 = 'Expository Essay';
   String _essay = '';
 
+  Widget essayActionButtons() {
+    return Row(children: [
+      //Edit Essay Button
+      OutlinedButton(
+          onPressed: () {
+            Get.to(const NewEssay());
+          },
+          style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Edit'),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Iconsax.edit,
+                size: 20,
+              )
+            ],
+          )),
+      const SizedBox(width: 10),
+
+      //Submit Essay Button
+      OutlinedButton(
+          onPressed: () {
+            Get.to(const Essay());
+          },
+          style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Submit'),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Iconsax.document_upload,
+                size: 20,
+              )
+            ],
+          )),
+      const SizedBox(width: 10),
+
+      //Delete Essay Button
+      OutlinedButton(
+          onPressed: () {},
+          style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Delete'),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Iconsax.document_upload,
+                size: 20,
+              )
+            ],
+          )),
+    ]);
+  }
+
   Widget essayDisplayArea() {
     return Container(
         alignment: Alignment.topLeft,
@@ -56,6 +120,7 @@ class NewEssayState extends State<NewEssay> {
   }
 
   Widget essayInputArea() {
+    double width = MediaQuery.of(context).size.width;
     return Expanded(
         flex: 5,
         child: SingleChildScrollView(
@@ -76,71 +141,14 @@ class NewEssayState extends State<NewEssay> {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       const Spacer(),
-
-                      //Submit Essay Button
-                      OutlinedButton(
-                          onPressed: () {
-                            Get.to(const Essay());
-                          },
-                          style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.green),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text('Submit'),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Icon(
-                                Iconsax.document_upload,
-                                size: 20,
-                              )
-                            ],
-                          )),
-                      const SizedBox(width: 10),
-
-                      //Save as Draft
-                      OutlinedButton(
-                          onPressed: () {
-                            Get.to(const Essay());
-                          },
-                          style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.blue.shade900),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text('Save'),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Icon(
-                                Iconsax.document_cloud,
-                                size: 20,
-                              )
-                            ],
-                          )),
-                      const SizedBox(width: 10),
-
-                      //Delete Essay Button
-                      OutlinedButton(
-                          onPressed: () {},
-                          style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.red),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text('Discard'),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Icon(
-                                Iconsax.trash,
-                                size: 20,
-                              )
-                            ],
-                          )),
+                      width >= 650 ? essayActionButtons() : Container(),
                     ],
                   ),
+                  width >= 650
+                      ? Container()
+                      : Container(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: essayActionButtons()),
                   const Divider(),
 
                   //Counter
