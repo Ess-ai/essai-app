@@ -18,6 +18,9 @@ class DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    var padding = screenWidth * 0.05;
+    print(screenWidth);
     return Scaffold(
         body: Column(
       children: [
@@ -28,7 +31,7 @@ class DashboardState extends State<Dashboard> {
             child: SingleChildScrollView(
           child: Container(
             alignment: Alignment.topLeft,
-            padding: const EdgeInsets.only(top: 30, left: 200, right: 200),
+            padding: EdgeInsets.only(top: 30, left: padding, right: padding),
             color: Colors.white,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
