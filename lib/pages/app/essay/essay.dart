@@ -1,6 +1,6 @@
 import 'package:essai/pages/app/essay/new_essay.dart';
-import 'package:essai/pages/app/widgets/footer.dart';
-import 'package:essai/pages/app/widgets/header.dart';
+import 'package:essai/pages/app/navigation/footer.dart';
+import 'package:essai/pages/app/navigation/header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
