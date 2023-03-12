@@ -1,3 +1,4 @@
+import 'package:essai/pages/app/essay/all_essays.dart';
 import 'package:essai/pages/auth/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
