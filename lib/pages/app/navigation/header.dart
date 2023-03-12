@@ -1,5 +1,6 @@
 import 'package:essai/pages/app/dashboard.dart';
 import 'package:essai/pages/app/essay/all_essays.dart';
+import 'package:essai/pages/app/tools/tools.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -61,7 +62,9 @@ class HeaderState extends State<Header> {
                       fontWeight: FontWeight.bold))),
           const SizedBox(width: 15),
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(const Tools());
+              },
               child: Text('Tools',
                   style: GoogleFonts.ptSans(
                       fontSize: 20,
