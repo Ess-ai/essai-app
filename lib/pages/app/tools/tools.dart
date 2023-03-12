@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:lottie/lottie.dart';
 
 import '../navigation/footer.dart';
 import '../navigation/header.dart';
@@ -85,6 +87,64 @@ class ToolsState extends State<Tools> {
                 ),
                 const SizedBox(
                   height: 30,
+                ),
+
+                //Tools
+                //Upload .doc type
+                Wrap(
+                  spacing: MediaQuery.of(context).size.width * 0.03,
+                  runSpacing: MediaQuery.of(context).size.width * 0.02,
+                  children: [
+                    for (int x = 1; x <= 10; x++) ...[
+                      TextButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                            padding: const EdgeInsets.all(0)),
+                        child: Container(
+                            width: width >= 840 ? width * 0.15 : width * 0.25,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border:
+                                    Border.all(width: 0.5, color: Colors.grey)),
+                            alignment: Alignment.topLeft,
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              alignment: Alignment.topLeft,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Icon(
+                                    Iconsax.scan,
+                                    size: 30,
+                                    color: Colors.black,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Document Scanner',
+                                    textAlign: TextAlign.left,
+                                    style: GoogleFonts.ptSans(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'No need to Type your essay, Just Scan with your camera.',
+                                    textAlign: TextAlign.left,
+                                    style: GoogleFonts.ptSans(
+                                        color: Colors.black, fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            )),
+                      ),
+                    ]
+                  ],
                 ),
 
                 //Spacing
