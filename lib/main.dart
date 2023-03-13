@@ -1,15 +1,15 @@
 import 'package:essai/pages/app/essay/all_essays.dart';
 import 'package:essai/pages/auth/splash.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+
+import 'controllers/secret_loader_controller.dart';
+import 'models/secret.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await dotenv.load(fileName: ".env.local", mergeWith: {
-    'TEST_VAR': '5',
-  });
+  Secret secret = await SecretLoader().load();
 
   runApp(const MyApp());
 }
