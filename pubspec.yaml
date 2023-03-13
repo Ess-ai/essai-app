@@ -44,6 +44,7 @@ dependencies:
   iconsax: ^0.0.8
   syncfusion_flutter_charts: ^20.4.51
   lottie: ^2.2.0
+  supabase_flutter: ^1.5.0
 
 dev_dependencies:
   flutter_test:
