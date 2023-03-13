@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 Future<String> generateResponse(String prompt) async {
-  final apiKey = dotenv.env['API_KEY'];
+  final apiKey = dotenv.env['OPENAI_API_KEY'];
 
   var url = Uri.https("api.openai.com", "/v1/completions");
   final response = await http.post(
