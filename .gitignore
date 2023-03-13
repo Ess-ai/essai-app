@@ -94,7 +94,6 @@ android/app/key3.jks
 .flutter-plugins-dependencies
 ios/Flutter/flutter_export_environment.sh 
 pubspec.lock
-secrets.json
 
 
 backup/
