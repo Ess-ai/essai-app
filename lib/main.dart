@@ -1,15 +1,11 @@
-import 'package:essai/pages/app/essay/all_essays.dart';
 import 'package:essai/pages/auth/splash.dart';
+import 'package:essai/services/env.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await dotenv.load(fileName: ".env.local", mergeWith: {
-    'TEST_VAR': '5',
-  });
+  await Env().init();
 
   runApp(const MyApp());
 }
