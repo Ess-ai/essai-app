@@ -38,7 +38,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   chat_gpt_sdk: ^1.0.2+3
   http: ^0.13.5
-  flutter_dotenv: ^5.0.2
   get: ^4.6.5
   google_fonts: ^4.0.1
   iconsax: ^0.0.8
@@ -70,7 +69,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - secrets.json
     - assets/images/
     - assets/resources/
 
