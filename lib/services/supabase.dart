@@ -1,18 +1,13 @@
+import 'package:essai/constants.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final supabase = Supabase.instance.client;
 
 class SupabaseService {
-  final String supabaseUrl = const String.fromEnvironment(
-    'SUPABASE_URL',
-    defaultValue: '',
-  );
-  final String supabaseAnonKey = const String.fromEnvironment(
-    'SUPABASE_ANON_KEY',
-    defaultValue: '',
-  );
+  final String supabaseUrl = AppConstants().supabaseUrl;
+  final String supabaseAnonKey = AppConstants().supabaseAnonKey;
+
   Future<void> init() async {
     await Supabase.initialize(
       url: supabaseUrl,
