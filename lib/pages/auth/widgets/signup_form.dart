@@ -67,7 +67,15 @@ class SignupFormState extends State<SignupForm> {
                       child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8)),
-                          child: TextField(
+                          child: TextFormField(
+                              controller: controller.email,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Enter Email';
+                                }
+                                controller.validateEmail(value);
+                                return null;
+                              },
                               maxLines: 1,
                               style:
                                   GoogleFonts.lora(color: dark, fontSize: 14),
@@ -97,7 +105,17 @@ class SignupFormState extends State<SignupForm> {
                       child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8)),
-                          child: TextField(
+                          child: TextFormField(
+                              controller: controller.password,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Enter Password';
+                                }
+                                if (value.length < 6) {
+                                  return 'Password must have more than 6 characters';
+                                }
+                                return null;
+                              },
                               style: GoogleFonts.lora(color: dark),
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.zero,
