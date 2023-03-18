@@ -1,8 +1,10 @@
+import 'package:essai/controllers/signin_controller.dart';
+import 'package:essai/pages/app/widgets/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../app/dashboard.dart';
 import '../signup.dart';
 
 class SigninForm extends StatefulWidget {
@@ -13,9 +15,16 @@ class SigninForm extends StatefulWidget {
 }
 
 class SigninFormState extends State<SigninForm> {
-  final _formKey = GlobalKey<FormState>();
+  final controller = Get.put(SignInController());
+
   final Color primary = const Color.fromARGB(255, 0, 0, 77);
   final Color dark = const Color.fromARGB(156, 0, 0, 17);
+
+  @override
+  void dispose() {
+    //controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +57,7 @@ class SigninFormState extends State<SigninForm> {
               style: GoogleFonts.roboto(color: dark, fontSize: 14),
             ),
             Form(
-              key: _formKey,
+              key: controller.formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +126,8 @@ class SigninFormState extends State<SigninForm> {
                               borderRadius: BorderRadius.circular(8)),
                           child: ElevatedButton(
                               onPressed: () {
-                                Get.to(const Dashboard());
+                                controller.login(controller.email.text,
+                                    controller.password.text);
                               },
                               child: Container(
                                   padding: const EdgeInsets.all(12),
