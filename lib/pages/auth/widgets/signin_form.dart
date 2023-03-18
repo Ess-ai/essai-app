@@ -1,9 +1,7 @@
 import 'package:essai/controllers/signin_controller.dart';
-import 'package:essai/pages/app/widgets/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../signup.dart';
 
@@ -22,7 +20,6 @@ class SigninFormState extends State<SigninForm> {
 
   @override
   void dispose() {
-    //controller.dispose();
     super.dispose();
   }
 

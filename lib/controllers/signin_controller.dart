@@ -28,7 +28,7 @@ class SignInController {
         state: 'Loading',
         context: context,
       ).snackMessage();
-      signin(email, password).then((value) {
+      await signin(email, password).then((value) {
         if (value == null) {
           SnackMessage(
             state: 'Message',

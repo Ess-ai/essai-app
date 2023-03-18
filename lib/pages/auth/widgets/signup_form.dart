@@ -1,8 +1,8 @@
+import 'package:essai/controllers/signup_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../app/dashboard.dart';
 import '../signin.dart';
 
 class SignupForm extends StatefulWidget {
@@ -13,7 +13,13 @@ class SignupForm extends StatefulWidget {
 }
 
 class SignupFormState extends State<SignupForm> {
-  final _formKey = GlobalKey<FormState>();
+  final controller = Get.put(SignUpController());
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   final Color primary = const Color.fromARGB(255, 0, 0, 77);
   final Color dark = const Color.fromARGB(156, 0, 0, 17);
 
@@ -46,7 +52,7 @@ class SignupFormState extends State<SignupForm> {
               style: GoogleFonts.roboto(color: dark, fontSize: 14),
             ),
             Form(
-              key: _formKey,
+              key: controller.formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +121,8 @@ class SignupFormState extends State<SignupForm> {
                               borderRadius: BorderRadius.circular(8)),
                           child: ElevatedButton(
                               onPressed: () {
-                                Get.to(const Dashboard());
+                                controller.signup(controller.email.text,
+                                    controller.password.text);
                               },
                               child: Container(
                                   padding: const EdgeInsets.all(12),
