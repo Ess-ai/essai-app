@@ -22,34 +22,39 @@ class SignInController {
     return userId;
   }
 
-  login(email, password) async {
+  login(email, password, BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      const SnackMessage(state: 'Loading');
-      /*signin(email, password).then((value) {
+      SnackMessage(
+        state: 'Loading',
+        context: context,
+      ).snackMessage();
+      signin(email, password).then((value) {
         if (value == null) {
-          const SnackMessage(
+          SnackMessage(
             state: 'Message',
+            context: context,
             color: Colors.red,
             message: "Invalid Credentials. Retry",
-          );
+          ).snackMessage();
         } else {
           if (value.runtimeType == AuthException) {
             final AuthException res = value;
             SnackMessage(
               state: 'Message',
+              context: context,
               color: Colors.red,
               message: res.message,
-            );
+            ).snackMessage();
           } else {
-            const SnackMessage(
+            SnackMessage(
               state: 'Message',
+              context: context,
               color: Colors.blue,
               message: "Welcome",
-            );
+            ).snackMessage();
           }
         }
       });
-    */
     }
   }
 }
