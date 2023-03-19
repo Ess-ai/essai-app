@@ -29,16 +29,12 @@ class HeaderState extends State<Header> {
   ];
 
   itemFunctions() {
-    print('object');
     switch (dropdownvalue) {
       case 'Profile':
-        print('Profile');
         break;
       case 'Settings':
-        print('Settings');
         break;
       case 'Log Out':
-        print('Log Out');
         service.auth.signOut();
         break;
 

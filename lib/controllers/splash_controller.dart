@@ -11,19 +11,20 @@ class SplashController extends GetxController {
 
   Future loadScreen() async {
     await Future.wait([
-      SupabaseAuth.instance.initialSession,
       Future.delayed(
         const Duration(milliseconds: 2000),
       ),
-    ]).then((responseList) async {
-      final session = responseList.first as Session?;
+    ]);
+
+    try {
+      final session = await SupabaseAuth.instance.initialSession;
       if (session != null) {
         Get.to(const Dashboard());
       } else {
         Get.to(const Signin());
       }
-    }).catchError((_) {
+    } catch (_) {
       Get.to(const Signin());
-    });
+    }
   }
 }
