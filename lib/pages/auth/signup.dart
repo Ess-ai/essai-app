@@ -12,8 +12,8 @@ class Signup extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Row(children: [
-        width <= 840 ? Container() : const Expanded(flex: 2, child: LeftPart()),
-        const Expanded(child: SignupForm())
+        const Expanded(child: SignupForm()),
+        width <= 840 ? Container() : const Expanded(flex: 2, child: LeftPart())
       ]),
     );
   }
