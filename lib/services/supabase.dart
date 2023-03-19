@@ -1,5 +1,7 @@
 import 'package:essai/constants.dart';
-import 'package:flutter/material.dart';
+import 'package:essai/pages/app/dashboard.dart';
+import 'package:essai/pages/auth/signin.dart';
+import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final supabase = Supabase.instance.client;
@@ -14,20 +16,22 @@ class SupabaseService {
       anonKey: supabaseAnonKey,
     );
   }
-}
 
-extension ShowSnackBar on BuildContext {
-  void showSnackBar({
-    required String message,
-    Color backgroundColor = Colors.white,
-  }) {
-    ScaffoldMessenger.of(this).showSnackBar(SnackBar(
-      content: Text(message),
-      backgroundColor: backgroundColor,
-    ));
-  }
-
-  void showErrorSnackBar({required String message}) {
-    showSnackBar(message: message, backgroundColor: Colors.red);
+  void listentoHeaders() {
+    /// Listen for authentication events and redirect to
+    /// correct page when key events are detected.
+    Supabase.instance.client.auth.onAuthStateChange.listen((authState) {
+      final event = authState.event;
+      final session = authState.session;
+      if (event == AuthChangeEvent.signedIn) {
+        if (session != null) {
+          Get.to(const Dashboard());
+        } else {
+          Get.to(const Signin());
+        }
+      } else if (event == AuthChangeEvent.signedOut) {
+        Get.to(const Signin());
+      }
+    });
   }
 }

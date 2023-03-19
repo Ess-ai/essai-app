@@ -14,7 +14,7 @@ class EssayMarking extends StatefulWidget {
 
 class EssayMarkingState extends State<EssayMarking> {
   String title = 'Plastics Should be banned';
-  bool _isMarking = false;
+  final bool _isMarking = false;
 
   Widget body() {
     if (_isMarking) {

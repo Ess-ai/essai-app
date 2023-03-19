@@ -1,6 +1,7 @@
 import 'package:essai/pages/app/dashboard.dart';
 import 'package:essai/pages/app/essay/all_essays.dart';
 import 'package:essai/pages/app/tools/tools.dart';
+import 'package:essai/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,6 +18,7 @@ class HeaderState extends State<Header> {
   final List menu = ['DashBoard', 'Essays', 'Tools'];
   // Initial Selected Value
   String dropdownvalue = 'Joe Gakah';
+  final service = Services();
 
   // List of items in our dropdown menu
   var items = [
@@ -25,6 +27,20 @@ class HeaderState extends State<Header> {
     'Settings',
     'Log Out',
   ];
+
+  itemFunctions() {
+    switch (dropdownvalue) {
+      case 'Profile':
+        break;
+      case 'Settings':
+        break;
+      case 'Log Out':
+        service.auth.signOut();
+        break;
+
+      default:
+    }
+  }
 
   Widget bigDevice() {
     return Row(
@@ -185,6 +201,7 @@ class HeaderState extends State<Header> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     var padding = screenWidth * 0.05;
+    itemFunctions();
     return Container(
         color: Colors.white,
         padding:
