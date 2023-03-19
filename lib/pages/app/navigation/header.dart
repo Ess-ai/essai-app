@@ -7,8 +7,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
-final service = Services();
-
 class Header extends StatefulWidget {
   const Header({Key? key}) : super(key: key);
 
@@ -20,6 +18,7 @@ class HeaderState extends State<Header> {
   final List menu = ['DashBoard', 'Essays', 'Tools'];
   // Initial Selected Value
   String dropdownvalue = 'Joe Gakah';
+  final service = Services();
 
   // List of items in our dropdown menu
   var items = [
@@ -28,6 +27,24 @@ class HeaderState extends State<Header> {
     'Settings',
     'Log Out',
   ];
+
+  itemFunctions() {
+    print('object');
+    switch (dropdownvalue) {
+      case 'Profile':
+        print('Profile');
+        break;
+      case 'Settings':
+        print('Settings');
+        break;
+      case 'Log Out':
+        print('Log Out');
+        service.auth.signOut();
+        break;
+
+      default:
+    }
+  }
 
   Widget bigDevice() {
     return Row(
@@ -173,7 +190,9 @@ class HeaderState extends State<Header> {
                 );
               }).toList(),
               onChanged: (String? newValue) {
-                service.auth.signOut();
+                setState(() {
+                  dropdownvalue = newValue!;
+                });
               },
             ),
           ],
@@ -186,6 +205,7 @@ class HeaderState extends State<Header> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     var padding = screenWidth * 0.05;
+    itemFunctions();
     return Container(
         color: Colors.white,
         padding:
