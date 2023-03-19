@@ -23,7 +23,7 @@ class SnackMessage {
     } else {
       return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           duration: const Duration(milliseconds: 3000),
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: color,
           content: Container(
               color: color,
               padding: const EdgeInsets.all(36),

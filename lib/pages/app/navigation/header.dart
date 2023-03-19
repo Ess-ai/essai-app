@@ -1,10 +1,13 @@
 import 'package:essai/pages/app/dashboard.dart';
 import 'package:essai/pages/app/essay/all_essays.dart';
 import 'package:essai/pages/app/tools/tools.dart';
+import 'package:essai/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+
+final service = Services();
 
 class Header extends StatefulWidget {
   const Header({Key? key}) : super(key: key);
@@ -170,9 +173,7 @@ class HeaderState extends State<Header> {
                 );
               }).toList(),
               onChanged: (String? newValue) {
-                setState(() {
-                  dropdownvalue = newValue!;
-                });
+                service.auth.signOut();
               },
             ),
           ],

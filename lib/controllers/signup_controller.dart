@@ -1,10 +1,11 @@
 import 'package:essai/pages/app/widgets/snack_message.dart';
+import 'package:essai/pages/auth/signin.dart';
 import 'package:essai/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SignUpController {
+class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
 
   final formKey = GlobalKey<FormState>();
@@ -22,7 +23,7 @@ class SignUpController {
     return userId;
   }
 
-  login(email, password, BuildContext context) async {
+  register(email, password, BuildContext context) async {
     if (formKey.currentState!.validate()) {
       SnackMessage(
         state: 'Loading',
@@ -52,6 +53,7 @@ class SignUpController {
               color: Colors.blue,
               message: "Check your Email Inbox to verify your email",
             ).snackMessage();
+            Get.to(const Signin());
           }
         }
       });

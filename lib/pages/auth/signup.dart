@@ -1,5 +1,5 @@
 import 'package:essai/pages/auth/widgets/left_part.dart';
-import 'package:essai/pages/auth/widgets/signin_form.dart';
+import 'package:essai/pages/auth/widgets/signup_form.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -13,7 +13,7 @@ class Signup extends StatelessWidget {
       backgroundColor: Colors.transparent,
       body: Row(children: [
         width <= 840 ? Container() : const Expanded(flex: 2, child: LeftPart()),
-        const Expanded(child: SigninForm())
+        const Expanded(child: SignupForm())
       ]),
     );
   }

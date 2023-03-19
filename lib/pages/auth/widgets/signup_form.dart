@@ -139,8 +139,8 @@ class SignupFormState extends State<SignupForm> {
                               borderRadius: BorderRadius.circular(8)),
                           child: ElevatedButton(
                               onPressed: () {
-                                controller.signup(controller.email.text,
-                                    controller.password.text);
+                                controller.register(controller.email.text,
+                                    controller.password.text, context);
                               },
                               child: Container(
                                   padding: const EdgeInsets.all(12),
