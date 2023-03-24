@@ -1,11 +1,14 @@
-import 'package:essai/pages/app/dashboard.dart';
-import 'package:essai/pages/app/essay/all_essays.dart';
-import 'package:essai/pages/app/tools/tools.dart';
-import 'package:essai/services/services.dart';
+import 'package:essai/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:essai/pages/app/dashboard.dart';
+import 'package:essai/pages/app/essay/all_essays.dart';
+import 'package:essai/pages/app/tools/tools.dart';
+import 'package:essai/services/services.dart';
+
+final service = Services();
 
 class Header extends StatefulWidget {
   const Header({Key? key}) : super(key: key);
@@ -15,14 +18,27 @@ class Header extends StatefulWidget {
 }
 
 class HeaderState extends State<Header> {
-  final List menu = ['DashBoard', 'Essays', 'Tools'];
+  @override
+  void initState() {
+    super.initState();
+    service.getusr.getUser().then((user) {
+      setState(() {
+        usr = user;
+        items[0] = user.userName;
+        dropdownvalue = user.userName;
+      });
+    });
+  }
+
+  UserModel usr = UserModel(id: '', userName: '');
+
   // Initial Selected Value
-  String dropdownvalue = 'Joe Gakah';
-  final service = Services();
+  String dropdownvalue = 'user';
 
   // List of items in our dropdown menu
-  var items = [
-    'Joe Gakah',
+  final List menu = ['DashBoard', 'Essays', 'Tools'];
+  final items = [
+    'user',
     'Profile',
     'Settings',
     'Log Out',
