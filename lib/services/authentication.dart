@@ -71,4 +71,9 @@ class SupabaseAuthentication {
     await supabase.auth.signOut();
     return;
   }
+
+  Session? session() {
+    final session = supabase.auth.currentSession;
+    return session;
+  }
 }
