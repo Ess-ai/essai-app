@@ -25,7 +25,9 @@ class RecentEssaysState extends State<RecentEssays> {
             for (int x = 0; x < essays!.length; x++) ...[
               TextButton(
                 onPressed: () {
-                  Get.to(const Essay());
+                  Get.to(Essay(
+                    essay: essays[x],
+                  ));
                 },
                 style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
                 child: Container(
