@@ -15,14 +15,14 @@ class RecentEssays extends StatefulWidget {
 class RecentEssaysState extends State<RecentEssays> {
   @override
   Widget build(BuildContext context) {
-    List? essays = widget.essays;
+    List? essays = widget.essays!;
     var width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            for (int x = 0; x < essays!.length; x++) ...[
+            for (int x = 0; x < essays.length; x++) ...[
               TextButton(
                 onPressed: () {
                   Get.to(Essay(

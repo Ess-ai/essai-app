@@ -11,8 +11,8 @@ import 'package:lottie/lottie.dart';
 //import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Essay extends StatefulWidget {
-  final EssayModel? essay;
-  const Essay({Key? key, this.essay}) : super(key: key);
+  final EssayModel essay;
+  const Essay({Key? key, required this.essay}) : super(key: key);
 
   @override
   EssayState createState() => EssayState();
@@ -95,7 +95,7 @@ class EssayState extends State<Essay> {
   }
 
   Widget essayStats() {
-    var essay = widget.essay!;
+    var essay = widget.essay;
     return Expanded(
       flex: 2,
       child: Container(
@@ -249,7 +249,7 @@ class EssayState extends State<Essay> {
 
   @override
   Widget build(BuildContext context) {
-    var essay = widget.essay!;
+    var essay = widget.essay;
     double width = MediaQuery.of(context).size.width;
     var padding = width * 0.05;
     return Scaffold(

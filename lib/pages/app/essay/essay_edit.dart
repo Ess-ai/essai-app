@@ -49,9 +49,7 @@ class NewEssayState extends State<NewEssay> {
 
       //Submit Essay Button
       OutlinedButton(
-          onPressed: () {
-            Get.to(const Essay());
-          },
+          onPressed: () {},
           style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
