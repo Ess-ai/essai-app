@@ -135,7 +135,9 @@ class DashboardState extends State<Dashboard> {
                 ),
 
                 //Recent Essays List
-                const RecentEssays(),
+                const RecentEssays(
+                  essays: [],
+                ),
                 const SizedBox(
                   height: 20,
                 ),

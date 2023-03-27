@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../models/essay.dart';
 import '../../../services/get_essays.dart';
 import '../navigation/footer.dart';
 import '../navigation/header.dart';
@@ -23,7 +22,7 @@ class AllEssaysState extends State<AllEssays> {
 
   bool isLoading = true;
 
-  List essays = [EssayModel()];
+  List essays = [];
 
   @override
   void initState() {
@@ -150,7 +149,9 @@ class AllEssaysState extends State<AllEssays> {
                             ),
 
                             //Recent Essays List
-                            const RecentEssays(),
+                            RecentEssays(
+                              essays: essays,
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
