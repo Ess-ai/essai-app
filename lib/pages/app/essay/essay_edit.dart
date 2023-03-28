@@ -1,7 +1,13 @@
+import 'package:essai/models/essay.dart';
+import 'package:essai/pages/app/essay/essay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../../services/add_essay.dart';
+import '../widgets/snack_message.dart';
 
 class NewEssay extends StatefulWidget {
   const NewEssay({Key? key}) : super(key: key);
@@ -12,7 +18,12 @@ class NewEssay extends StatefulWidget {
 
 // ignore: must_be_immutable
 class NewEssayState extends State<NewEssay> {
+  final addEssays = AddEssay();
+
   final _formKey = GlobalKey<FormState>();
+  final essayBody = TextEditingController();
+  final essayTitle = TextEditingController();
+
   final Color primary = const Color.fromARGB(255, 0, 0, 77);
   final Color dark = const Color.fromARGB(156, 0, 0, 17);
 
@@ -22,6 +33,37 @@ class NewEssayState extends State<NewEssay> {
   String title = '';
   final String title2 = 'Expository Essay';
   String _essay = '';
+
+  submitEssay() async {
+    if (_formKey.currentState!.validate()) {
+      var essay = EssayModel(
+          essayCategory: '67ce4435-d675-454b-beb7-5c87486141e9',
+          essayBody: essayBody.text,
+          essayTitle: essayTitle.text);
+      var res = await addEssays.addEssays(essay);
+      SnackMessage(
+        state: 'Loading',
+        context: context,
+      ).snackMessage();
+      if (res.runtimeType == PostgrestException) {
+        final PostgrestException resp = res;
+        SnackMessage(
+          state: 'Message',
+          context: context,
+          color: Colors.red,
+          message: resp.message,
+        ).snackMessage();
+      } else {
+        SnackMessage(
+          state: 'Message',
+          context: context,
+          color: Colors.blue,
+          message: "Essay Submitted",
+        ).snackMessage();
+        Get.to(Essay(essay: essay));
+      }
+    }
+  }
 
   Widget essayActionButtons() {
     return Row(children: [
@@ -48,7 +90,7 @@ class NewEssayState extends State<NewEssay> {
 
       //Submit Essay Button
       OutlinedButton(
-          onPressed: () {},
+          onPressed: submitEssay,
           style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -183,6 +225,7 @@ class NewEssayState extends State<NewEssay> {
                           children: [
                             //Essay Title
                             TextFormField(
+                              controller: essayTitle,
                               onChanged: (value) =>
                                   setState(() => title = value),
                               style: GoogleFonts.ptSans(
@@ -213,6 +256,7 @@ class NewEssayState extends State<NewEssay> {
                             //Essay Title
                             TextFormField(
                               maxLines: 40,
+                              controller: essayBody,
                               onChanged: (value) =>
                                   setState(() => _essay = value),
                               style: GoogleFonts.ptSans(
