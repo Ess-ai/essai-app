@@ -1,5 +1,6 @@
 import 'package:card_loading/card_loading.dart';
 import 'package:essai/pages/app/essay/add_essay.dart';
+import 'package:essai/pages/app/essays.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -122,7 +123,9 @@ class AllEssaysState extends State<AllEssays> {
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             OutlinedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.to(const Essays());
+                                },
                                 style: OutlinedButton.styleFrom(
                                     foregroundColor: Colors.black),
                                 child: Row(
@@ -163,7 +166,9 @@ class AllEssaysState extends State<AllEssays> {
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             OutlinedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.to(const Essays());
+                                },
                                 style: OutlinedButton.styleFrom(
                                     foregroundColor: Colors.black),
                                 child: Row(
