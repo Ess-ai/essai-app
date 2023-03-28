@@ -1,4 +1,5 @@
 import 'package:essai/models/essay.dart';
+import 'package:essai/pages/app/essay/all_essays.dart';
 import 'package:essai/pages/app/essay/essay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,6 +35,35 @@ class NewEssayState extends State<NewEssay> {
   final String title2 = 'Expository Essay';
   String _essay = '';
 
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Are you sure?',
+                style: Theme.of(context).textTheme.headlineLarge),
+            content: Text(
+                'Do you want to Delete this Essay?\nYou will lose your progress',
+                style: Theme.of(context).textTheme.labelMedium),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () =>
+                    Navigator.of(context).pop(false), //<-- SEE HERE
+                child:
+                    Text('No', style: Theme.of(context).textTheme.labelSmall),
+              ),
+              TextButton(
+                onPressed: () => Get.to(const AllEssays()), // <-- SEE HERE
+                child:
+                    Text('Yes', style: Theme.of(context).textTheme.labelSmall),
+              ),
+            ],
+          ),
+        )) ??
+        false;
+  }
+
+  saveEssay() {}
+
   submitEssay() async {
     if (_formKey.currentState!.validate()) {
       var essay = EssayModel(
@@ -65,23 +95,25 @@ class NewEssayState extends State<NewEssay> {
     }
   }
 
+  deleteEssay() {
+    _onWillPop();
+  }
+
   Widget essayActionButtons() {
     return Row(children: [
       //Edit Essay Button
       OutlinedButton(
-          onPressed: () {
-            Get.to(const NewEssay());
-          },
+          onPressed: saveEssay,
           style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
-              Text('Edit'),
+              Text('Save'),
               SizedBox(
                 width: 10,
               ),
               Icon(
-                Iconsax.edit,
+                Iconsax.save_2,
                 size: 20,
               )
             ],
@@ -109,7 +141,7 @@ class NewEssayState extends State<NewEssay> {
 
       //Delete Essay Button
       OutlinedButton(
-          onPressed: () {},
+          onPressed: deleteEssay,
           style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

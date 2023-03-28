@@ -8,6 +8,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../../services/delete_essay.dart';
+import '../widgets/snack_message.dart';
+import 'all_essays.dart';
 //import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Essay extends StatefulWidget {
@@ -20,8 +25,62 @@ class Essay extends StatefulWidget {
 
 class EssayState extends State<Essay> {
   final getEssays = GetEssays();
+  final delEssay = EssayDelete();
 
   bool _isMarking = false;
+
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Are you sure?',
+                style: Theme.of(context).textTheme.headlineLarge),
+            content: Text(
+                'Do you want to Delete this Essay?\nYou will lose this essay.',
+                style: Theme.of(context).textTheme.labelMedium),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () =>
+                    Navigator.of(context).pop(false), //<-- SEE HERE
+                child:
+                    Text('No', style: Theme.of(context).textTheme.labelSmall),
+              ),
+              TextButton(
+                onPressed: deleteEssay, // <-- SEE HERE
+                child:
+                    Text('Yes', style: Theme.of(context).textTheme.labelSmall),
+              ),
+            ],
+          ),
+        )) ??
+        false;
+  }
+
+  deleteEssay() async {
+    var essay = EssayModel(id: widget.essay.id);
+    var res = await delEssay.deleteEssay(essay);
+    SnackMessage(
+      state: 'Loading',
+      context: context,
+    ).snackMessage();
+    if (res.runtimeType == PostgrestException) {
+      final PostgrestException resp = res;
+      SnackMessage(
+        state: 'Message',
+        context: context,
+        color: Colors.red,
+        message: resp.message,
+      ).snackMessage();
+    } else {
+      SnackMessage(
+        state: 'Message',
+        context: context,
+        color: Colors.red,
+        message: "Essay Deleted",
+      ).snackMessage();
+      Get.to(const AllEssays());
+    }
+  }
 
   Widget essayActionButtons() {
     var essay = widget.essay;
@@ -77,7 +136,7 @@ class EssayState extends State<Essay> {
 
       //Delete Essay Button
       OutlinedButton(
-          onPressed: () {},
+          onPressed: _onWillPop,
           style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
