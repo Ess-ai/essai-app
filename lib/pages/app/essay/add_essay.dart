@@ -103,7 +103,7 @@ class NewEssayState extends State<NewEssay> {
     return Row(children: [
       //Edit Essay Button
       OutlinedButton(
-          onPressed: saveEssay,
+          onPressed: submitEssay,
           style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

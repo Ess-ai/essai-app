@@ -147,9 +147,7 @@ class AllEssaysState extends State<AllEssays> {
                         ),
 
                         //Recent Essays List
-                        RecentEssays(
-                          essays: essays,
-                        ),
+                        const RecentEssays(),
                         const SizedBox(
                           height: 20,
                         ),
