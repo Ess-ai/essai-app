@@ -1,3 +1,4 @@
+import 'package:card_loading/card_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,8 +21,29 @@ class RecentEssaysState extends State<RecentEssays> {
     return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (essays.isEmpty) ...[
+              for (int x = 0; x < 5; x++) ...[
+                Container(
+                    width: width >= 840 ? width * 0.2 : width * 0.4,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(width: 0.5, color: Colors.grey)),
+                    alignment: Alignment.topLeft,
+                    padding: const EdgeInsets.all(2),
+                    child: const CardLoading(
+                      height: 140,
+                      cardLoadingTheme: CardLoadingTheme(
+                          colorOne: Color.fromARGB(255, 240, 240, 240),
+                          colorTwo: Color.fromARGB(255, 236, 235, 235)),
+                    )),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.03,
+                )
+              ]
+            ],
             for (int x = 0; x < essays.length; x++) ...[
               TextButton(
                 onPressed: () {

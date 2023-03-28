@@ -9,7 +9,7 @@ class Loader extends StatelessWidget {
     return Container(
         padding: const EdgeInsets.all(30),
         alignment: Alignment.center,
-        child: LoadingAnimationWidget.staggeredDotsWave(
+        child: LoadingAnimationWidget.threeRotatingDots(
             color: Colors.blue.shade900, size: 60));
   }
 }
