@@ -24,11 +24,12 @@ class EssayState extends State<Essay> {
   bool _isMarking = false;
 
   Widget essayActionButtons() {
+    var essay = widget.essay;
     return Row(children: [
       //Edit Essay Button
       OutlinedButton(
           onPressed: () {
-            Get.to(const NewEssay());
+            Get.to(EditEssay(essay: essay));
           },
           style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
           child: Row(

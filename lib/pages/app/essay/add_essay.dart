@@ -7,20 +7,18 @@ import 'package:iconsax/iconsax.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../services/add_essay.dart';
-import '../../../services/edit_essay.dart';
 import '../widgets/snack_message.dart';
 
-class EditEssay extends StatefulWidget {
-  final EssayModel essay;
-  const EditEssay({Key? key, required this.essay}) : super(key: key);
+class NewEssay extends StatefulWidget {
+  const NewEssay({Key? key}) : super(key: key);
 
   @override
-  EditEssayState createState() => EditEssayState();
+  NewEssayState createState() => NewEssayState();
 }
 
 // ignore: must_be_immutable
-class EditEssayState extends State<EditEssay> {
-  final editEssays = EssayEdit();
+class NewEssayState extends State<NewEssay> {
+  final addEssays = AddEssay();
 
   final _formKey = GlobalKey<FormState>();
   final essayBody = TextEditingController();
@@ -37,17 +35,12 @@ class EditEssayState extends State<EditEssay> {
   String _essay = '';
 
   submitEssay() async {
-    if (_formKey.currentState!.validate()) {}
-  }
-
-  saveEssay() async {
     if (_formKey.currentState!.validate()) {
       var essay = EssayModel(
-          id: widget.essay.id,
-          essayCategory: widget.essay.essayCategory,
-          essayBody: _essay,
-          essayTitle: title);
-      var res = await editEssays.editEssays(essay);
+          essayCategory: '67ce4435-d675-454b-beb7-5c87486141e9',
+          essayBody: essayBody.text,
+          essayTitle: essayTitle.text);
+      var res = await addEssays.addEssays(essay);
       SnackMessage(
         state: 'Loading',
         context: context,
@@ -65,32 +58,30 @@ class EditEssayState extends State<EditEssay> {
           state: 'Message',
           context: context,
           color: Colors.blue,
-          message: "Essay Successfully edited",
+          message: "Essay Submitted",
         ).snackMessage();
         Get.to(Essay(essay: essay));
       }
     }
   }
 
-  deleteEssay() async {
-    if (_formKey.currentState!.validate()) {}
-  }
-
   Widget essayActionButtons() {
     return Row(children: [
       //Edit Essay Button
       OutlinedButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.to(const NewEssay());
+          },
           style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
-              Text('Save'),
+              Text('Edit'),
               SizedBox(
                 width: 10,
               ),
               Icon(
-                Iconsax.save_add,
+                Iconsax.edit,
                 size: 20,
               )
             ],
@@ -99,7 +90,7 @@ class EditEssayState extends State<EditEssay> {
 
       //Submit Essay Button
       OutlinedButton(
-          onPressed: saveEssay,
+          onPressed: submitEssay,
           style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -169,7 +160,6 @@ class EditEssayState extends State<EditEssay> {
 
   Widget essayInputArea() {
     double width = MediaQuery.of(context).size.width;
-    var essay = widget.essay;
     return Expanded(
         flex: 5,
         child: SingleChildScrollView(
@@ -235,8 +225,7 @@ class EditEssayState extends State<EditEssay> {
                           children: [
                             //Essay Title
                             TextFormField(
-                              initialValue: essay.essayTitle,
-                              //controller: essayTitle,
+                              controller: essayTitle,
                               onChanged: (value) =>
                                   setState(() => title = value),
                               style: GoogleFonts.ptSans(
@@ -266,9 +255,8 @@ class EditEssayState extends State<EditEssay> {
 
                             //Essay Title
                             TextFormField(
-                              initialValue: essay.essayBody,
                               maxLines: 40,
-                              //controller: essayBody,
+                              controller: essayBody,
                               onChanged: (value) =>
                                   setState(() => _essay = value),
                               style: GoogleFonts.ptSans(

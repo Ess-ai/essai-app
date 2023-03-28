@@ -1,5 +1,5 @@
 import 'package:card_loading/card_loading.dart';
-import 'package:essai/pages/app/widgets/loader.dart';
+import 'package:essai/pages/app/essay/add_essay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +22,6 @@ class AllEssaysState extends State<AllEssays> {
   final getEssays = GetEssays();
 
   bool isLoading = true;
-
   List essays = [];
 
   @override
@@ -84,7 +83,9 @@ class AllEssaysState extends State<AllEssays> {
                               ),
                               Row(children: [
                                 ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Get.to(const NewEssay());
+                                    },
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.white,
                                         foregroundColor: Colors.black,
