@@ -1,8 +1,10 @@
+import 'package:essai/pages/app/essays.dart';
 import 'package:essai/pages/app/navigation/footer.dart';
 import 'package:essai/pages/app/navigation/header.dart';
 import 'package:essai/pages/app/widgets/popular_tools.dart';
 import 'package:essai/pages/app/widgets/recent_essays.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -111,7 +113,9 @@ class DashboardState extends State<Dashboard> {
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(const Essays());
+                        },
                         style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.black),
                         child: Row(

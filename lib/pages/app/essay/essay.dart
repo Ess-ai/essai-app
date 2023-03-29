@@ -1,257 +1,55 @@
+import 'package:essai/models/essay.dart';
 import 'package:essai/pages/app/essay/essay_edit.dart';
+import 'package:essai/pages/app/essay/widgets/essay_stats.dart';
 import 'package:essai/pages/app/navigation/footer.dart';
 import 'package:essai/pages/app/navigation/header.dart';
+import 'package:essai/services/get_essays.dart';
+import 'package:essai/services/mark_essay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../services/delete_essay.dart';
+import '../widgets/snack_message.dart';
+import 'all_essays.dart';
+
+// ignore: must_be_immutable
 class Essay extends StatefulWidget {
-  const Essay({Key? key}) : super(key: key);
+  EssayModel essay;
+  Essay({Key? key, required this.essay}) : super(key: key);
 
   @override
   EssayState createState() => EssayState();
 }
 
 class EssayState extends State<Essay> {
-  final List<ChartData> chartData = [
-    ChartData('Performance', 78),
-  ];
+  final getEssays = GetEssays();
+  final delEssay = EssayDelete();
+  final markEssay = MarkEssay();
 
   bool _isMarking = false;
 
-  final String title = 'Plastics Should be Banned';
-  final String title2 = 'Why Plastics Should be Banned';
-  final String _essay =
-      'Plastics have become an integral part of modern society, and their production and usage have increased dramatically over the past few decades. Plastics are versatile, lightweight, durable, and inexpensive, making them ideal for various applications. However, the widespread use of plastics has also led to significant environmental problems, and the negative impacts of plastics are becoming more apparent. In this essay, I will argue that plastics should be banned due to their detrimental effects on the environment and human health.\n\nFirst and foremost, plastics have severe consequences for the environment. Plastics are not biodegradable, meaning that they do not break down naturally and can persist in the environment for hundreds of years. As a result, they accumulate in the oceans, landfills, and other ecosystems, leading to a range of environmental problems. Plastic waste in the oceans poses a significant threat to marine life, as it can be mistaken for food and ingested, leading to injury or death. Plastics also release toxic chemicals as they degrade, contaminating soil and water resources.\n\nMoreover, plastics are a significant source of greenhouse gas emissions. The production of plastics is energy-intensive and involves the extraction and processing of fossil fuels. Additionally, the transportation and disposal of plastics also contribute to greenhouse gas emissions. These emissions contribute to climate change, which has far-reaching environmental and social impacts, including rising sea levels, more frequent natural disasters, and food and water scarcity.\n\nFurthermore, plastics have harmful effects on human health. Plastic products contain chemicals such as phthalates and bisphenol-A, which have been linked to a range of health problems, including reproductive disorders, developmental problems in children, and cancer. These chemicals can leach into food and water, especially when plastics are exposed to heat or other stressors, and can cause significant health risks.\n\nIn conclusion, plastics should be banned due to their negative impact on the environment and human health. Although plastics have numerous benefits, the costs of their production, usage, and disposal far outweigh the benefits. Governments, businesses, and individuals need to take action to reduce the use of plastics and transition to more sustainable alternatives. This can include measures such as introducing plastic taxes, promoting reusable and biodegradable products, and investing in research and innovation to find alternative materials. By taking action to ban plastics, we can protect the environment and safeguard the health of current and future generations.';
+  get markessay => markingEssay;
 
-  Widget essayActionButtons() {
-    return Row(children: [
-      //Edit Essay Button
-      OutlinedButton(
-          onPressed: () {
-            Get.to(const NewEssay());
-          },
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Edit'),
-              SizedBox(
-                width: 15,
-              ),
-              Icon(
-                Iconsax.edit,
-                size: 20,
-              )
-            ],
-          )),
-      const SizedBox(width: 10),
+  Future markingEssay() async {
+    var essay = widget.essay;
+    setState(() => _isMarking = true);
+    final res = await markEssay.markEssay(essay);
+    final ess = await getEssays.getEssay(res);
+    print(ess);
 
-      //Submit Essay Button
-      OutlinedButton(
-          onPressed: () {
-            setState(() {
-              _isMarking = true;
-              Future.delayed(const Duration(milliseconds: 3500)).then((value) {
-                setState(() {
-                  _isMarking = false;
-                });
-              });
-            });
-          },
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Submit'),
-              SizedBox(
-                width: 15,
-              ),
-              Icon(
-                Iconsax.document_upload,
-                size: 20,
-              )
-            ],
-          )),
-      const SizedBox(width: 10),
-
-      //Delete Essay Button
-      OutlinedButton(
-          onPressed: () {},
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Delete'),
-              SizedBox(
-                width: 15,
-              ),
-              Icon(
-                Iconsax.document_upload,
-                size: 20,
-              )
-            ],
-          )),
-    ]);
-  }
-
-  Widget essayStats() {
-    return Expanded(
-      flex: 2,
-      child: Container(
-          padding: const EdgeInsets.only(left: 10),
-          child: Column(
-            children: [
-              //Score
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(width: 0.5, color: Colors.grey)),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'SCORE:',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.zero,
-                          height: MediaQuery.of(context).size.width * 0.1,
-                          child: SfCircularChart(
-                              margin: EdgeInsets.zero,
-                              legend: Legend(title: LegendTitle(text: '78')),
-                              series: <CircularSeries>[
-                                // Renders radial bar chart
-                                RadialBarSeries<ChartData, String>(
-                                    trackColor: Colors.green,
-                                    maximumValue: 100,
-                                    radius: '50%',
-                                    innerRadius: '80%',
-                                    dataSource: chartData,
-                                    xValueMapper: (ChartData data, _) => data.x,
-                                    yValueMapper: (ChartData data, _) => data.y,
-                                    cornerStyle: CornerStyle.bothCurve)
-                              ]))
-                    ]),
-              ),
-              const SizedBox(height: 20),
-
-              //Marks
-              Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(width: 0.5, color: Colors.grey)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Marks:',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '.../20',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 18,
-                            color: Colors.lightBlue,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  )),
-              const SizedBox(height: 8),
-
-              //Grade
-              Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(width: 0.5, color: Colors.grey)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Grade:',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '...',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 18,
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  )),
-              const SizedBox(height: 8),
-
-              //Words
-              Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(width: 0.5, color: Colors.grey)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'WORDS:',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '${_essay.split(' ').length}',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 18,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  )),
-              const SizedBox(height: 8),
-
-              //Characters
-              Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(width: 0.5, color: Colors.grey)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'CHARACTERS:',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '${_essay.characters.length}',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 18,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  )),
-            ],
-          )),
-    );
+    setState(() {
+      widget.essay = ess;
+      _isMarking = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    var essay = widget.essay;
     double width = MediaQuery.of(context).size.width;
     var padding = width * 0.05;
     return Scaffold(
@@ -277,15 +75,13 @@ class EssayState extends State<Essay> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  title,
+                                  essay.essayTitle.toString(),
                                   style: GoogleFonts.ptSans(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 const Spacer(),
-                                width >= 650
-                                    ? essayActionButtons()
-                                    : Container(),
+                                width >= 650 ? essayButtons() : Container(),
                               ],
                             ),
 
@@ -293,7 +89,7 @@ class EssayState extends State<Essay> {
                                 ? Container()
                                 : Container(
                                     padding: const EdgeInsets.only(top: 10),
-                                    child: essayActionButtons()),
+                                    child: essayButtons()),
                             const Divider(),
                             const SizedBox(
                               height: 20,
@@ -349,7 +145,7 @@ class EssayState extends State<Essay> {
                                                     children: [
                                                       //Essay Title
                                                       Text(
-                                                        title2,
+                                                        '${essay.essayTitle}',
                                                         textAlign:
                                                             TextAlign.left,
                                                         style:
@@ -367,7 +163,7 @@ class EssayState extends State<Essay> {
 
                                                       //Essay Body
                                                       Text(
-                                                        _essay,
+                                                        '${essay.essayBody}',
                                                         textAlign:
                                                             TextAlign.left,
                                                         style:
@@ -383,7 +179,7 @@ class EssayState extends State<Essay> {
 
                                           //Essay Stats
                                           width >= 650
-                                              ? essayStats()
+                                              ? EssayStats(essay: widget.essay)
                                               : Container(),
                                         ])
                                   ]),
@@ -403,10 +199,142 @@ class EssayState extends State<Essay> {
       ),
     );
   }
-}
 
-class ChartData {
-  ChartData(this.x, this.y);
-  final String x;
-  final double y;
+  Widget essayButtons() {
+    return Row(children: [
+      //Edit Essay Button
+      OutlinedButton(
+          onPressed: () {
+            Get.to(EditEssay(essay: widget.essay));
+          },
+          style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Edit'),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Iconsax.edit,
+                size: 20,
+              )
+            ],
+          )),
+      const SizedBox(width: 10),
+
+      //Submit Essay Button
+      OutlinedButton(
+          onPressed: () {
+            markingEssay();
+          },
+          style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Submit'),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Iconsax.document_upload,
+                size: 20,
+              )
+            ],
+          )),
+      const SizedBox(width: 10),
+
+      //Delete Essay Button
+      OutlinedButton(
+          onPressed: _onWillPop,
+          style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Delete'),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Iconsax.trash,
+                size: 20,
+              )
+            ],
+          )),
+      const SizedBox(width: 10),
+
+      //Exit Essay Button
+      OutlinedButton(
+          onPressed: () {
+            Get.back();
+          },
+          style: OutlinedButton.styleFrom(foregroundColor: Colors.black),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Exit'),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Iconsax.back_square,
+                size: 20,
+              )
+            ],
+          )),
+    ]);
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Are you sure?',
+                style: Theme.of(context).textTheme.headlineLarge),
+            content: Text(
+                'Do you want to Delete this Essay?\nYou will lose this essay.',
+                style: Theme.of(context).textTheme.labelMedium),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () =>
+                    Navigator.of(context).pop(false), //<-- SEE HERE
+                child:
+                    Text('No', style: Theme.of(context).textTheme.labelSmall),
+              ),
+              TextButton(
+                onPressed: deleteEssay, // <-- SEE HERE
+                child:
+                    Text('Yes', style: Theme.of(context).textTheme.labelSmall),
+              ),
+            ],
+          ),
+        )) ??
+        false;
+  }
+
+  deleteEssay() async {
+    var essay = EssayModel(id: widget.essay.id);
+    var res = await delEssay.deleteEssay(essay);
+    SnackMessage(
+      state: 'Loading',
+      context: context,
+    ).snackMessage();
+    if (res.runtimeType == PostgrestException) {
+      final PostgrestException resp = res;
+      SnackMessage(
+        state: 'Message',
+        context: context,
+        color: Colors.red,
+        message: resp.message,
+      ).snackMessage();
+    } else {
+      SnackMessage(
+        state: 'Message',
+        context: context,
+        color: Colors.red,
+        message: "Essay Deleted",
+      ).snackMessage();
+      Get.to(const AllEssays());
+    }
+  }
 }

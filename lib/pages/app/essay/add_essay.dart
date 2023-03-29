@@ -1,28 +1,26 @@
 import 'package:essai/models/essay.dart';
+import 'package:essai/models/essay_category.dart';
 import 'package:essai/pages/app/essay/all_essays.dart';
 import 'package:essai/pages/app/essay/essay.dart';
-import 'package:essai/services/delete_essay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../services/edit_essay.dart';
+import '../../../services/add_essay.dart';
 import '../widgets/snack_message.dart';
 
-class EditEssay extends StatefulWidget {
-  final EssayModel essay;
-  const EditEssay({Key? key, required this.essay}) : super(key: key);
+class NewEssay extends StatefulWidget {
+  const NewEssay({Key? key}) : super(key: key);
 
   @override
-  EditEssayState createState() => EditEssayState();
+  NewEssayState createState() => NewEssayState();
 }
 
 // ignore: must_be_immutable
-class EditEssayState extends State<EditEssay> {
-  final editEssays = EssayEdit();
-  final delEssay = EssayDelete();
+class NewEssayState extends State<NewEssay> {
+  final addEssays = AddEssay();
 
   final _formKey = GlobalKey<FormState>();
   final essayBody = TextEditingController();
@@ -38,18 +36,43 @@ class EditEssayState extends State<EditEssay> {
   final String title2 = 'Expository Essay';
   String _essay = '';
 
-  submitEssay() async {
-    if (_formKey.currentState!.validate()) {}
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Are you sure?',
+                style: Theme.of(context).textTheme.headlineLarge),
+            content: Text(
+                'Do you want to Delete this Essay?\nYou will lose your progress',
+                style: Theme.of(context).textTheme.labelMedium),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () =>
+                    Navigator.of(context).pop(false), //<-- SEE HERE
+                child:
+                    Text('No', style: Theme.of(context).textTheme.labelSmall),
+              ),
+              TextButton(
+                onPressed: () => Get.to(const AllEssays()), // <-- SEE HERE
+                child:
+                    Text('Yes', style: Theme.of(context).textTheme.labelSmall),
+              ),
+            ],
+          ),
+        )) ??
+        false;
   }
 
-  saveEssay() async {
+  saveEssay() {}
+
+  submitEssay() async {
     if (_formKey.currentState!.validate()) {
       var essay = EssayModel(
-          id: widget.essay.id,
-          essayCategory: widget.essay.essayCategory,
-          essayBody: _essay,
-          essayTitle: title);
-      var res = await editEssays.editEssays(essay);
+          essayCategory:
+              EssayCategoryModel(id: '67ce4435-d675-454b-beb7-5c87486141e9'),
+          essayBody: essayBody.text,
+          essayTitle: essayTitle.text);
+      var res = await addEssays.addEssays(essay);
       SnackMessage(
         state: 'Loading',
         context: context,
@@ -67,73 +90,22 @@ class EditEssayState extends State<EditEssay> {
           state: 'Message',
           context: context,
           color: Colors.blue,
-          message: "Essay Successfully edited",
+          message: "Essay Submitted",
         ).snackMessage();
         Get.to(Essay(essay: essay));
       }
     }
   }
 
-  Future<bool> _onWillPop() async {
-    return (await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Are you sure?',
-                style: Theme.of(context).textTheme.headlineLarge),
-            content: Text(
-                'Do you want to Delete this Essay?\nYou will lose this essay.',
-                style: Theme.of(context).textTheme.labelMedium),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () =>
-                    Navigator.of(context).pop(false), //<-- SEE HERE
-                child:
-                    Text('No', style: Theme.of(context).textTheme.labelSmall),
-              ),
-              TextButton(
-                onPressed: deleteEssay, // <-- SEE HERE
-                child:
-                    Text('Yes', style: Theme.of(context).textTheme.labelSmall),
-              ),
-            ],
-          ),
-        )) ??
-        false;
-  }
-
-  deleteEssay() async {
-    if (_formKey.currentState!.validate()) {
-      var essay = EssayModel(id: widget.essay.id);
-      var res = await delEssay.deleteEssay(essay);
-      SnackMessage(
-        state: 'Loading',
-        context: context,
-      ).snackMessage();
-      if (res.runtimeType == PostgrestException) {
-        final PostgrestException resp = res;
-        SnackMessage(
-          state: 'Message',
-          context: context,
-          color: Colors.red,
-          message: resp.message,
-        ).snackMessage();
-      } else {
-        SnackMessage(
-          state: 'Message',
-          context: context,
-          color: Colors.red,
-          message: "Essay Deleted",
-        ).snackMessage();
-        Get.to(const AllEssays());
-      }
-    }
+  deleteEssay() {
+    _onWillPop();
   }
 
   Widget essayActionButtons() {
     return Row(children: [
       //Edit Essay Button
       OutlinedButton(
-          onPressed: saveEssay,
+          onPressed: submitEssay,
           style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -143,7 +115,7 @@ class EditEssayState extends State<EditEssay> {
                 width: 10,
               ),
               Icon(
-                Iconsax.save_add,
+                Iconsax.save_2,
                 size: 20,
               )
             ],
@@ -171,7 +143,7 @@ class EditEssayState extends State<EditEssay> {
 
       //Delete Essay Button
       OutlinedButton(
-          onPressed: _onWillPop,
+          onPressed: deleteEssay,
           style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -243,7 +215,6 @@ class EditEssayState extends State<EditEssay> {
 
   Widget essayInputArea() {
     double width = MediaQuery.of(context).size.width;
-    var essay = widget.essay;
     return Expanded(
         flex: 5,
         child: SingleChildScrollView(
@@ -309,8 +280,7 @@ class EditEssayState extends State<EditEssay> {
                           children: [
                             //Essay Title
                             TextFormField(
-                              initialValue: essay.essayTitle,
-                              //controller: essayTitle,
+                              controller: essayTitle,
                               onChanged: (value) =>
                                   setState(() => title = value),
                               style: GoogleFonts.ptSans(
@@ -340,9 +310,8 @@ class EditEssayState extends State<EditEssay> {
 
                             //Essay Title
                             TextFormField(
-                              initialValue: essay.essayBody,
                               maxLines: 40,
-                              //controller: essayBody,
+                              controller: essayBody,
                               onChanged: (value) =>
                                   setState(() => _essay = value),
                               style: GoogleFonts.ptSans(

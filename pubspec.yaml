@@ -46,6 +46,7 @@ dependencies:
   supabase_flutter: ^1.5.0
   loading_animation_widget: ^1.2.0+4
   provider: ^6.0.5
+  card_loading: ^0.3.0
 
 dev_dependencies:
   flutter_test:
