@@ -4,20 +4,20 @@ class EssayResultsModel {
   String? id;
   String? userId;
   EssayModel? essayId;
-  String? essayScore;
-  String? essayGrade;
-  String? essayImprovement;
-  String? aiRemarks;
+  String? score;
+  String? grade;
+  String? improvements;
+  String? reasons;
   String? createdAt;
 
   EssayResultsModel(
       {this.id,
       this.userId,
       this.essayId,
-      this.essayScore,
-      this.essayGrade,
-      this.essayImprovement,
-      this.aiRemarks,
+      this.score,
+      this.grade,
+      this.reasons,
+      this.improvements,
       this.createdAt});
 
   static EssayResultsModel fromJson(Map<String, dynamic> json) =>
@@ -25,20 +25,20 @@ class EssayResultsModel {
           id: json['id'],
           userId: json['user_id'],
           essayId: EssayModel.fromJson(json['essay_id']),
-          essayScore: json['essay_title'],
-          essayGrade: json['essay_body'],
-          aiRemarks: json['is_submitted'],
-          essayImprovement: json[''],
+          score: json['score'],
+          reasons: json['reasons'],
+          grade: json['grade'],
+          improvements: json['improvements'],
           createdAt: json['created_at']);
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'id': id,
         'user_id': userId,
         'essay_category': essayId,
-        'essay_title': essayScore,
-        'essay_body': essayGrade,
-        '': aiRemarks,
-        'is_submitted': essayImprovement,
+        'score': score,
+        'reasons': reasons,
+        'grade': grade,
+        'improvements': improvements,
         'created_at': createdAt,
       };
 }
