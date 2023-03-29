@@ -38,14 +38,13 @@ class EssayState extends State<Essay> {
     var essay = widget.essay;
     setState(() => _isMarking = true);
     final res = await markEssay.markEssay(essay);
-    SnackMessage(
-      state: 'Message',
-      context: context,
-      color: Colors.red,
-      message: res.reasons,
-    ).snackMessage();
+    final ess = await getEssays.getEssay(res);
+    print(ess);
 
-    setState(() => _isMarking = false);
+    setState(() {
+      widget.essay = ess;
+      _isMarking = false;
+    });
   }
 
   @override

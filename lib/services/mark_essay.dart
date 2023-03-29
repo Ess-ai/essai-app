@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:essai/models/algorithm.dart';
 import 'package:essai/models/essay_results.dart';
 import 'package:essai/services/add_essay_result.dart';
-import 'package:essai/services/get_essays.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../models/essay.dart';
@@ -30,13 +27,51 @@ class MarkEssay {
           userId: user.id,
           reasons: res.reasons,
           improvements: res.improvements,
-          grade: ' ',
+          grade: gradeScore(res.score),
           score: res.score.toString());
       final essres = await AddEssayResult().addEssays(essayResult);
-      print(essres);
-      return essayResult;
+      return essres;
     } on PostgrestException catch (_) {
       return _;
+    }
+  }
+
+  String gradeScore(score) {
+    switch (score) {
+      case 0:
+        {
+          return 'F';
+        }
+
+      case 1:
+        {
+          return 'E';
+        }
+
+      case 2:
+        {
+          return 'D';
+        }
+
+      case 3:
+        {
+          return 'C';
+        }
+
+      case 4:
+        {
+          return 'B';
+        }
+
+      case 5:
+        {
+          return 'A';
+        }
+
+      default:
+        {
+          return "Not Graded";
+        }
     }
   }
 }

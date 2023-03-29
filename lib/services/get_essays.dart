@@ -28,7 +28,8 @@ class GetEssays {
           .select(
               'id, essay_category(id, essay_category_name), essay_title, essay_body, created_at, is_submitted')
           .eq('user_id', user.id)
-          .eq('id', id);
+          .eq('id', id)
+          .single();
 
       final essay = EssayModel.fromJson(response);
       return essay;
