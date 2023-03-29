@@ -8,7 +8,7 @@ class AiMaker {
     final apiKey = AppConstants().openaiApiKey;
     try {
       var url = Uri.https("api.openai.com", "/v1/completions");
-      /*final response = await http.post(
+      final response = await http.post(
         url,
         headers: {
           'Content-Type': 'application/json',
@@ -23,14 +23,13 @@ class AiMaker {
           'frequency_penalty': 0.0,
           'presence_penalty': 0.0,
         }),
-      );*/
+      );
 
       // Do something with the response
-
-      final Map<String, dynamic> response = await jsonDecode(
-          '{"score": 4,"reasons":"Addresses the topic and task using somewhat developed explanations, exemplifications and/or details, Displays unity, progression and coherence, though connection of ideas may be occasionally obscured, May demonstrate inconsistent facility in sentence formation and word choice that may result in lack of clarity and occasionally obscure meaning","improvements":"Improve sentence formation and word choice to ensure clarity and meaning, Elaborate on explanations, exemplifications and/or details to provide more depth to the essay"}');
-      final res = AiResposeModel.fromJson(response);
-      return res;
+      Map<String, dynamic> res = jsonDecode(response.body);
+      final aires = AiResposeModel.fromJson(
+          jsonDecode(res['choices'][0]['text']) as Map<String, dynamic>);
+      return aires;
     } catch (e) {
       return e;
     }

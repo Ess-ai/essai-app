@@ -55,12 +55,12 @@ class MarkEssay {
 
       case 3:
         {
-          return 'C';
+          return 'B';
         }
 
       case 4:
         {
-          return 'B';
+          return 'A-';
         }
 
       case 5:
