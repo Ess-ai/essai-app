@@ -1,5 +1,6 @@
 import 'package:essai/models/essay.dart';
 import 'package:essai/pages/app/essay/essay_edit.dart';
+import 'package:essai/pages/app/essay/widgets/essay_stats.dart';
 import 'package:essai/pages/app/navigation/footer.dart';
 import 'package:essai/pages/app/navigation/header.dart';
 import 'package:essai/services/get_essays.dart';
@@ -14,11 +15,11 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../services/delete_essay.dart';
 import '../widgets/snack_message.dart';
 import 'all_essays.dart';
-//import 'package:syncfusion_flutter_charts/charts.dart';
 
+// ignore: must_be_immutable
 class Essay extends StatefulWidget {
-  final EssayModel essay;
-  const Essay({Key? key, required this.essay}) : super(key: key);
+  EssayModel essay;
+  Essay({Key? key, required this.essay}) : super(key: key);
 
   @override
   EssayState createState() => EssayState();
@@ -31,307 +32,20 @@ class EssayState extends State<Essay> {
 
   bool _isMarking = false;
 
-  makingEssay(essay) async {
-    setState(() {
-      _isMarking = true;
-    });
+  get markessay => markingEssay;
+
+  Future markingEssay() async {
+    var essay = widget.essay;
+    setState(() => _isMarking = true);
     final res = await markEssay.markEssay(essay);
-    print(res);
-    setState(() {
-      _isMarking = false;
-    });
-  }
-
-  Future<bool> _onWillPop() async {
-    return (await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Are you sure?',
-                style: Theme.of(context).textTheme.headlineLarge),
-            content: Text(
-                'Do you want to Delete this Essay?\nYou will lose this essay.',
-                style: Theme.of(context).textTheme.labelMedium),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () =>
-                    Navigator.of(context).pop(false), //<-- SEE HERE
-                child:
-                    Text('No', style: Theme.of(context).textTheme.labelSmall),
-              ),
-              TextButton(
-                onPressed: deleteEssay, // <-- SEE HERE
-                child:
-                    Text('Yes', style: Theme.of(context).textTheme.labelSmall),
-              ),
-            ],
-          ),
-        )) ??
-        false;
-  }
-
-  deleteEssay() async {
-    var essay = EssayModel(id: widget.essay.id);
-    var res = await delEssay.deleteEssay(essay);
     SnackMessage(
-      state: 'Loading',
+      state: 'Message',
       context: context,
+      color: Colors.red,
+      message: res.reasons,
     ).snackMessage();
-    if (res.runtimeType == PostgrestException) {
-      final PostgrestException resp = res;
-      SnackMessage(
-        state: 'Message',
-        context: context,
-        color: Colors.red,
-        message: resp.message,
-      ).snackMessage();
-    } else {
-      SnackMessage(
-        state: 'Message',
-        context: context,
-        color: Colors.red,
-        message: "Essay Deleted",
-      ).snackMessage();
-      Get.to(const AllEssays());
-    }
-  }
 
-  Widget essayActionButtons() {
-    var essay = widget.essay;
-    return Row(children: [
-      //Edit Essay Button
-      OutlinedButton(
-          onPressed: () {
-            Get.to(EditEssay(essay: essay));
-          },
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Edit'),
-              SizedBox(
-                width: 15,
-              ),
-              Icon(
-                Iconsax.edit,
-                size: 20,
-              )
-            ],
-          )),
-      const SizedBox(width: 10),
-
-      //Submit Essay Button
-      OutlinedButton(
-          onPressed: () {
-            makingEssay(widget.essay);
-          },
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Submit'),
-              SizedBox(
-                width: 15,
-              ),
-              Icon(
-                Iconsax.document_upload,
-                size: 20,
-              )
-            ],
-          )),
-      const SizedBox(width: 10),
-
-      //Delete Essay Button
-      OutlinedButton(
-          onPressed: _onWillPop,
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Delete'),
-              SizedBox(
-                width: 15,
-              ),
-              Icon(
-                Iconsax.trash,
-                size: 20,
-              )
-            ],
-          )),
-      const SizedBox(width: 10),
-
-      //Exit Essay Button
-      OutlinedButton(
-          onPressed: () {
-            Get.back();
-          },
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.black),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Exit'),
-              SizedBox(
-                width: 15,
-              ),
-              Icon(
-                Iconsax.document_upload,
-                size: 20,
-              )
-            ],
-          )),
-    ]);
-  }
-
-  Widget essayStats() {
-    var essay = widget.essay;
-    return Expanded(
-      flex: 2,
-      child: Container(
-          padding: const EdgeInsets.only(left: 10),
-          child: Column(
-            children: [
-              /*Score
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(width: 0.5, color: Colors.grey)),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'SCORE:',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.zero,
-                          height: MediaQuery.of(context).size.width * 0.1,
-                          child: SfCircularChart(
-                              margin: EdgeInsets.zero,
-                              legend: Legend(title: LegendTitle(text: '78')),
-                              series: <CircularSeries>[
-                                // Renders radial bar chart
-                                RadialBarSeries<ChartData, String>(
-                                    trackColor: Colors.green,
-                                    maximumValue: 100,
-                                    radius: '50%',
-                                    innerRadius: '80%',
-                                    dataSource: chartData,
-                                    xValueMapper: (ChartData data, _) => data.x,
-                                    yValueMapper: (ChartData data, _) => data.y,
-                                    cornerStyle: CornerStyle.bothCurve)
-                              ]))
-                    ]),
-              ),
-              const SizedBox(height: 20),
-              */
-              //Marks
-              Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(width: 0.5, color: Colors.grey)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Marks:',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        essay.isSubmitted == null ? 'Not Submitted' : 'loading',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 18,
-                            color: Colors.lightBlue,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  )),
-              const SizedBox(height: 8),
-
-              //Grade
-              Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(width: 0.5, color: Colors.grey)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Grade:',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        essay.isSubmitted == null ? 'Not Submitted' : 'loading',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 18,
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  )),
-              const SizedBox(height: 8),
-
-              //Words
-              Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(width: 0.5, color: Colors.grey)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'WORDS:',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '${essay.essayBody!.split(' ').length}',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 18,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  )),
-              const SizedBox(height: 8),
-
-              //Characters
-              Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(width: 0.5, color: Colors.grey)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'CHARACTERS:',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '${essay.essayBody!.characters.length}',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 18,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  )),
-            ],
-          )),
-    );
+    setState(() => _isMarking = false);
   }
 
   @override
@@ -368,9 +82,7 @@ class EssayState extends State<Essay> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 const Spacer(),
-                                width >= 650
-                                    ? essayActionButtons()
-                                    : Container(),
+                                width >= 650 ? essayButtons() : Container(),
                               ],
                             ),
 
@@ -378,7 +90,7 @@ class EssayState extends State<Essay> {
                                 ? Container()
                                 : Container(
                                     padding: const EdgeInsets.only(top: 10),
-                                    child: essayActionButtons()),
+                                    child: essayButtons()),
                             const Divider(),
                             const SizedBox(
                               height: 20,
@@ -468,7 +180,7 @@ class EssayState extends State<Essay> {
 
                                           //Essay Stats
                                           width >= 650
-                                              ? essayStats()
+                                              ? EssayStats(essay: widget.essay)
                                               : Container(),
                                         ])
                                   ]),
@@ -488,10 +200,142 @@ class EssayState extends State<Essay> {
       ),
     );
   }
-}
 
-class ChartData {
-  ChartData(this.x, this.y);
-  final String x;
-  final double y;
+  Widget essayButtons() {
+    return Row(children: [
+      //Edit Essay Button
+      OutlinedButton(
+          onPressed: () {
+            Get.to(EditEssay(essay: widget.essay));
+          },
+          style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Edit'),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Iconsax.edit,
+                size: 20,
+              )
+            ],
+          )),
+      const SizedBox(width: 10),
+
+      //Submit Essay Button
+      OutlinedButton(
+          onPressed: () {
+            markingEssay();
+          },
+          style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Submit'),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Iconsax.document_upload,
+                size: 20,
+              )
+            ],
+          )),
+      const SizedBox(width: 10),
+
+      //Delete Essay Button
+      OutlinedButton(
+          onPressed: _onWillPop,
+          style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Delete'),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Iconsax.trash,
+                size: 20,
+              )
+            ],
+          )),
+      const SizedBox(width: 10),
+
+      //Exit Essay Button
+      OutlinedButton(
+          onPressed: () {
+            Get.back();
+          },
+          style: OutlinedButton.styleFrom(foregroundColor: Colors.black),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Exit'),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Iconsax.back_square,
+                size: 20,
+              )
+            ],
+          )),
+    ]);
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Are you sure?',
+                style: Theme.of(context).textTheme.headlineLarge),
+            content: Text(
+                'Do you want to Delete this Essay?\nYou will lose this essay.',
+                style: Theme.of(context).textTheme.labelMedium),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () =>
+                    Navigator.of(context).pop(false), //<-- SEE HERE
+                child:
+                    Text('No', style: Theme.of(context).textTheme.labelSmall),
+              ),
+              TextButton(
+                onPressed: deleteEssay, // <-- SEE HERE
+                child:
+                    Text('Yes', style: Theme.of(context).textTheme.labelSmall),
+              ),
+            ],
+          ),
+        )) ??
+        false;
+  }
+
+  deleteEssay() async {
+    var essay = EssayModel(id: widget.essay.id);
+    var res = await delEssay.deleteEssay(essay);
+    SnackMessage(
+      state: 'Loading',
+      context: context,
+    ).snackMessage();
+    if (res.runtimeType == PostgrestException) {
+      final PostgrestException resp = res;
+      SnackMessage(
+        state: 'Message',
+        context: context,
+        color: Colors.red,
+        message: resp.message,
+      ).snackMessage();
+    } else {
+      SnackMessage(
+        state: 'Message',
+        context: context,
+        color: Colors.red,
+        message: "Essay Deleted",
+      ).snackMessage();
+      Get.to(const AllEssays());
+    }
+  }
 }

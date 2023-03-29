@@ -1,8 +1,9 @@
+import 'dart:convert';
+
 import 'package:essai/models/algorithm.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../models/essay.dart';
-import 'authentication.dart';
 import 'aimarker.dart';
 
 final algorithm = EssayMarkingAlgorithm();
@@ -16,8 +17,9 @@ class MarkEssay {
           algorithm.score4 +
           algorithm.score5);
       String prompt =
-          'Imagine you are an English Teacher, Mark this ${input.essayCategory!.essayCategory} essay, Return only the Score. Algorithm: $alg Essay: ${input.essayBody}';
-      final res = AiMaker().aiMaker(prompt);
+          'Imagine you are an English Teacher, Mark this ${input.essayCategory!.essayCategory} essay using the score algorithm below, Return score, reasons and improvement areas(improvements) in this example fomat {"score": 8,"reasons":"","improvements":""}: $alg Essay: ${input.essayBody}';
+      final res = await AiMaker().aiMaker(prompt);
+      print(res);
       return res;
     } on PostgrestException catch (_) {
       return _;
