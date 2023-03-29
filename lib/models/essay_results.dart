@@ -25,9 +25,9 @@ class EssayResultsModel {
           id: json['id'],
           userId: json['user_id'],
           essayId: EssayModel.fromJson(json['essay_id']),
-          score: json['score'],
+          score: json['essay_score'],
           reasons: json['reasons'],
-          grade: json['grade'],
+          grade: json['essay_grade'],
           improvements: json['improvements'],
           createdAt: json['created_at']);
 

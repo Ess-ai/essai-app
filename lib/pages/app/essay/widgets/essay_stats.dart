@@ -2,6 +2,8 @@ import 'package:essai/models/essay.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../services/get_essays.dart';
+
 // ignore: must_be_immutable
 class EssayStats extends StatefulWidget {
   EssayStats({Key? key, this.essay}) : super(key: key);
@@ -12,9 +14,25 @@ class EssayStats extends StatefulWidget {
 }
 
 class EssayStatsState extends State<EssayStats> {
+  final getEssays = GetEssays();
+  Future<List> getScores(id) async {
+    final scr = await getEssays.getEssayResult(id);
+    setState(() {
+      score = scr.score;
+      grade = scr.grade;
+    });
+    return [scr.score, scr.grade];
+  }
+
+  var score = '0';
+  var grade = '';
+
   @override
   Widget build(BuildContext context) {
     var essay = widget.essay;
+    if (essay!.isSubmitted != null) {
+      getScores(essay.id);
+    }
     return Expanded(
       flex: 2,
       child: Container(
@@ -33,14 +51,14 @@ class EssayStatsState extends State<EssayStats> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Marks:',
+                        'Score:',
                         style: GoogleFonts.ptSans(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        essay!.isSubmitted == null
+                        essay.isSubmitted == null
                             ? 'Not Submitted'
-                            : 'loading',
+                            : score.toString(),
                         style: GoogleFonts.ptSans(
                             fontSize: 18,
                             color: Colors.lightBlue,
@@ -66,7 +84,7 @@ class EssayStatsState extends State<EssayStats> {
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        essay.isSubmitted == null ? 'Not Submitted' : 'loading',
+                        essay.isSubmitted == null ? 'Not Submitted' : grade,
                         style: GoogleFonts.ptSans(
                             fontSize: 18,
                             color: Colors.green,
@@ -87,7 +105,7 @@ class EssayStatsState extends State<EssayStats> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'WORDS:',
+                        'Words:',
                         style: GoogleFonts.ptSans(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
@@ -113,7 +131,7 @@ class EssayStatsState extends State<EssayStats> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'CHARACTERS:',
+                        'Characters:',
                         style: GoogleFonts.ptSans(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),

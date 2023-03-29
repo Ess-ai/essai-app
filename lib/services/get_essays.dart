@@ -2,6 +2,8 @@ import 'package:essai/models/essay.dart';
 import 'package:essai/services/authentication.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../models/essay_results.dart';
+
 class GetEssays {
   Future<List<dynamic>> getEssays() async {
     try {
@@ -44,13 +46,15 @@ class GetEssays {
       final response = await Supabase.instance.client
           .from('essay_results')
           .select(
-              'id, essay_category(id, essay_category_name), essay_title, essay_body, created_at, is_submitted')
+              'id, essay_id(id, essay_category(id)), essay_score, reasons, essay_grade, improvements, created_at')
           .eq('user_id', user.id)
-          .eq('id', id);
+          .eq('essay_id', id)
+          .single();
 
-      final essay = EssayModel.fromJson(response);
+      final essay = EssayResultsModel.fromJson(response);
       return essay;
     } on PostgrestException catch (e) {
+      print(e.message);
       return e;
     }
   }
