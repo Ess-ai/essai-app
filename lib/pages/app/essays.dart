@@ -33,6 +33,16 @@ class EssaysState extends State<Essays> {
     });
   }
 
+  Text submittedResult(submitState) {
+    if (submitState == null) {
+      return Text('Draft',
+          textAlign: TextAlign.left,
+          style: GoogleFonts.ptSans(
+              color: Colors.yellow, fontSize: 12, fontWeight: FontWeight.bold));
+    }
+    return const Text('');
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -163,6 +173,11 @@ class EssaysState extends State<Essays> {
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  submittedResult(
+                                                      essays[x].isSubmitted),
                                                   const SizedBox(
                                                     height: 10,
                                                   ),

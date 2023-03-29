@@ -151,6 +151,27 @@ class EssayState extends State<Essay> {
               )
             ],
           )),
+      const SizedBox(width: 10),
+
+      //Exit Essay Button
+      OutlinedButton(
+          onPressed: () {
+            Get.back();
+          },
+          style: OutlinedButton.styleFrom(foregroundColor: Colors.black),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Exit'),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Iconsax.document_upload,
+                size: 20,
+              )
+            ],
+          )),
     ]);
   }
 
