@@ -1,4 +1,5 @@
 import 'package:essai/models/essay.dart';
+import 'package:essai/models/essay_category.dart';
 import 'package:essai/pages/app/essay/all_essays.dart';
 import 'package:essai/pages/app/essay/essay.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,8 @@ class NewEssayState extends State<NewEssay> {
   submitEssay() async {
     if (_formKey.currentState!.validate()) {
       var essay = EssayModel(
-          essayCategory: '67ce4435-d675-454b-beb7-5c87486141e9',
+          essayCategory:
+              EssayCategoryModel(id: '67ce4435-d675-454b-beb7-5c87486141e9'),
           essayBody: essayBody.text,
           essayTitle: essayTitle.text);
       var res = await addEssays.addEssays(essay);
@@ -151,7 +153,7 @@ class NewEssayState extends State<NewEssay> {
                 width: 10,
               ),
               Icon(
-                Iconsax.document_upload,
+                Iconsax.trash,
                 size: 20,
               )
             ],

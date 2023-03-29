@@ -3,6 +3,7 @@ import 'package:essai/pages/app/essay/essay_edit.dart';
 import 'package:essai/pages/app/navigation/footer.dart';
 import 'package:essai/pages/app/navigation/header.dart';
 import 'package:essai/services/get_essays.dart';
+import 'package:essai/services/mark_essay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,8 +27,20 @@ class Essay extends StatefulWidget {
 class EssayState extends State<Essay> {
   final getEssays = GetEssays();
   final delEssay = EssayDelete();
+  final markEssay = MarkEssay();
 
   bool _isMarking = false;
+
+  makingEssay(essay) async {
+    setState(() {
+      _isMarking = true;
+    });
+    final res = await markEssay.markEssay(essay);
+    print(res);
+    setState(() {
+      _isMarking = false;
+    });
+  }
 
   Future<bool> _onWillPop() async {
     return (await showDialog(
@@ -109,14 +122,7 @@ class EssayState extends State<Essay> {
       //Submit Essay Button
       OutlinedButton(
           onPressed: () {
-            setState(() {
-              _isMarking = true;
-              Future.delayed(const Duration(milliseconds: 3500)).then((value) {
-                setState(() {
-                  _isMarking = false;
-                });
-              });
-            });
+            makingEssay(widget.essay);
           },
           style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
           child: Row(
@@ -146,7 +152,7 @@ class EssayState extends State<Essay> {
                 width: 15,
               ),
               Icon(
-                Iconsax.document_upload,
+                Iconsax.trash,
                 size: 20,
               )
             ],

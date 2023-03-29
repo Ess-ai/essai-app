@@ -18,7 +18,7 @@ class EssaiState extends State<Essai> {
             padding: const EdgeInsets.all(36),
             child: FutureBuilder(
                 future:
-                    generateResponse('Give me a plan to come a Billionaire'),
+                    AiMaker().aiMaker('Give me a plan to come a Billionaire'),
                 builder: (context, snapshot) {
                   final grade = snapshot.data;
                   return Text(grade.toString());

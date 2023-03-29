@@ -181,7 +181,7 @@ class EditEssayState extends State<EditEssay> {
                 width: 10,
               ),
               Icon(
-                Iconsax.document_upload,
+                Iconsax.trash,
                 size: 20,
               )
             ],

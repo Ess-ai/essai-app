@@ -1,7 +1,9 @@
+import 'package:essai/models/essay_category.dart';
+
 class EssayModel {
   String? id;
   String? userId;
-  String? essayCategory;
+  EssayCategoryModel? essayCategory;
   String? essayTitle;
   String? essayBody;
   String? createdAt;
@@ -19,7 +21,7 @@ class EssayModel {
   static EssayModel fromJson(Map<String, dynamic> json) => EssayModel(
       id: json['id'] as String?,
       userId: json['user_id'] as String?,
-      essayCategory: json['essay_category_id'] as String?,
+      essayCategory: EssayCategoryModel.fromJson(json['essay_category']),
       essayTitle: json['essay_title'] as String?,
       essayBody: json['essay_body'] as String?,
       createdAt: json['created_at'] as String?,
@@ -28,7 +30,7 @@ class EssayModel {
   Map<String, dynamic> toJson() => <String, dynamic>{
         'id': id,
         'user_id': userId,
-        'essay_category_id': essayCategory,
+        'essay_category': essayCategory,
         'essay_title': essayTitle,
         'essay_body': essayBody,
         'created_at': createdAt,

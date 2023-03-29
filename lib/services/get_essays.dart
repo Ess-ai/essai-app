@@ -8,14 +8,16 @@ class GetEssays {
       final user = SupabaseAuthentication().session()!.user;
       final response = await Supabase.instance.client
           .from('essays')
-          .select()
+          .select(
+              'id, essay_category(id, essay_category_name), essay_title, essay_body, created_at, is_submitted')
           .eq('user_id', user.id);
 
       final essays =
           response.map((essay) => EssayModel.fromJson(essay)).toList();
       return essays;
     } on PostgrestException catch (e) {
-      return [e];
+      print('Message${e.message}');
+      return List.empty();
     }
   }
 }

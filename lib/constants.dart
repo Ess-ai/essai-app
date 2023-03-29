@@ -8,7 +8,7 @@ class AppConstants {
     defaultValue: '',
   );
   final String openaiApiKey = const String.fromEnvironment(
-    'OPENAI_KEY',
+    'OPENAI_API_KEY',
     defaultValue: '',
   );
 }
