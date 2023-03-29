@@ -1,3 +1,4 @@
+import 'package:card_loading/card_loading.dart';
 import 'package:essai/models/essay.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +27,7 @@ class EssayStatsState extends State<EssayStats> {
     return [scr.score, scr.grade];
   }
 
-  var score = '0';
+  var score = '';
   var grade = '';
   var reasons = '';
   var improvement = '';
@@ -45,9 +46,9 @@ class EssayStatsState extends State<EssayStats> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                wid == 'reasoms'
-                    ? 'Teacher Remarks'
-                    : 'Where you should Improve on',
+                wid == 'reasons'
+                    ? 'Teacher Remarks:'
+                    : 'Where you should Improve on:',
                 textAlign: TextAlign.left,
                 style: GoogleFonts.ptSans(
                     color: Colors.black,
@@ -87,25 +88,48 @@ class EssayStatsState extends State<EssayStats> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       border: Border.all(width: 0.5, color: Colors.grey)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Score:',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        essay.isSubmitted == null
-                            ? 'Not Submitted'
-                            : score.toString(),
-                        style: GoogleFonts.ptSans(
-                            fontSize: 18,
-                            color: Colors.lightBlue,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  )),
+                  child: essay.isSubmitted == null
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Score:',
+                              style: GoogleFonts.ptSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              'Not Submitted',
+                              style: GoogleFonts.ptSans(
+                                  fontSize: 18,
+                                  color: Colors.lightBlue,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        )
+                      : score.isEmpty
+                          ? const CardLoading(
+                              height: 40,
+                              cardLoadingTheme: CardLoadingTheme(
+                                  colorOne: Color.fromARGB(255, 240, 240, 240),
+                                  colorTwo: Color.fromARGB(255, 236, 235, 235)))
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Score:',
+                                  style: GoogleFonts.ptSans(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  score,
+                                  style: GoogleFonts.ptSans(
+                                      fontSize: 18,
+                                      color: Colors.lightBlue,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            )),
               const SizedBox(height: 8),
 
               //Grade
@@ -115,23 +139,72 @@ class EssayStatsState extends State<EssayStats> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       border: Border.all(width: 0.5, color: Colors.grey)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Grade:',
-                        style: GoogleFonts.ptSans(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        essay.isSubmitted == null ? 'Not Submitted' : grade,
-                        style: GoogleFonts.ptSans(
-                            fontSize: 18,
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  )),
+                  child: essay.isSubmitted == null
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Grade:',
+                              style: GoogleFonts.ptSans(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              'Not Submitted',
+                              style: GoogleFonts.ptSans(
+                                  fontSize: 18,
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        )
+                      : score.isEmpty
+                          ? const CardLoading(
+                              height: 40,
+                              cardLoadingTheme: CardLoadingTheme(
+                                  colorOne: Color.fromARGB(255, 240, 240, 240),
+                                  colorTwo: Color.fromARGB(255, 236, 235, 235)))
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Grade:',
+                                  style: GoogleFonts.ptSans(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  grade,
+                                  style: GoogleFonts.ptSans(
+                                      fontSize: 18,
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            )),
+              const SizedBox(height: 8),
+
+              //Reasons
+              essay.isSubmitted == null
+                  ? Container()
+                  : reasons.isEmpty
+                      ? const CardLoading(
+                          height: 100,
+                          cardLoadingTheme: CardLoadingTheme(
+                              colorOne: Color.fromARGB(255, 240, 240, 240),
+                              colorTwo: Color.fromARGB(255, 236, 235, 235)))
+                      : remarksImprovement('reasons', reasons),
+              const SizedBox(height: 8),
+
+              //Improvements
+              essay.isSubmitted == null
+                  ? Container()
+                  : improvement.isEmpty
+                      ? const CardLoading(
+                          height: 100,
+                          cardLoadingTheme: CardLoadingTheme(
+                              colorOne: Color.fromARGB(255, 240, 240, 240),
+                              colorTwo: Color.fromARGB(255, 236, 235, 235)))
+                      : remarksImprovement('impr', improvement),
               const SizedBox(height: 8),
 
               //Words
@@ -184,16 +257,7 @@ class EssayStatsState extends State<EssayStats> {
                       )
                     ],
                   )),
-
-              //Reasons
-              essay.isSubmitted == null
-                  ? Container()
-                  : remarksImprovement('reasons', reasons),
-
-              //Improvements
-              essay.isSubmitted == null
-                  ? Container()
-                  : remarksImprovement('impr', improvement)
+              const SizedBox(height: 8),
             ],
           )),
     );
