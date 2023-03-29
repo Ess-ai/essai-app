@@ -20,12 +20,52 @@ class EssayStatsState extends State<EssayStats> {
     setState(() {
       score = scr.score;
       grade = scr.grade;
+      reasons = scr.reasons;
+      improvement = scr.improvements;
     });
     return [scr.score, scr.grade];
   }
 
   var score = '0';
   var grade = '';
+  var reasons = '';
+  var improvement = '';
+
+  Widget remarksImprovement(wid, mess) {
+    return Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(width: 0.5, color: Colors.grey)),
+        alignment: Alignment.topLeft,
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          alignment: Alignment.topLeft,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                wid == 'reasoms'
+                    ? 'Teacher Remarks'
+                    : 'Where you should Improve on',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.ptSans(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                mess,
+                textAlign: TextAlign.left,
+                style: GoogleFonts.ptSans(color: Colors.black, fontSize: 12),
+              ),
+            ],
+          ),
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,6 +184,16 @@ class EssayStatsState extends State<EssayStats> {
                       )
                     ],
                   )),
+
+              //Reasons
+              essay.isSubmitted == null
+                  ? Container()
+                  : remarksImprovement('reasons', reasons),
+
+              //Improvements
+              essay.isSubmitted == null
+                  ? Container()
+                  : remarksImprovement('impr', improvement)
             ],
           )),
     );
