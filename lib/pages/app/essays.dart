@@ -20,7 +20,16 @@ class EssaysState extends State<Essays> {
   final getEssays = GetEssays();
 
   bool isLoading = true;
+  int score = 0;
   List essays = [];
+  List colors = [
+    Colors.red,
+    Colors.pink,
+    Colors.orange,
+    Colors.lightGreen,
+    Colors.green,
+    Colors.blue
+  ];
 
   @override
   void initState() {
@@ -33,14 +42,25 @@ class EssaysState extends State<Essays> {
     });
   }
 
-  Text submittedResult(submitState) {
-    if (submitState == null) {
-      return Text('Draft',
+  getScores(id) async {
+    var scr = await getEssays.getEssayResult(id);
+    setState(() {
+      score = int.parse(scr.score);
+    });
+  }
+
+  Text submittedResult(submitState, [id]) {
+    if (submitState != null) {
+      getScores(id);
+      return Text('Score: $score',
           textAlign: TextAlign.left,
           style: GoogleFonts.ptSans(
-              color: Colors.yellow, fontSize: 12, fontWeight: FontWeight.bold));
+              color: colors[score], fontSize: 12, fontWeight: FontWeight.bold));
     }
-    return const Text('');
+    return Text('Draft',
+        textAlign: TextAlign.left,
+        style: GoogleFonts.ptSans(
+            color: Colors.yellow, fontSize: 12, fontWeight: FontWeight.bold));
   }
 
   @override
@@ -177,7 +197,8 @@ class EssaysState extends State<Essays> {
                                                     height: 10,
                                                   ),
                                                   submittedResult(
-                                                      essays[x].isSubmitted),
+                                                      essays[x].isSubmitted,
+                                                      essays[x].id),
                                                   const SizedBox(
                                                     height: 10,
                                                   ),
