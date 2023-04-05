@@ -1,3 +1,4 @@
+import 'package:essai/models/airesponse.dart';
 import 'package:essai/models/algorithm.dart';
 import 'package:essai/models/essay_results.dart';
 import 'package:essai/services/add_essay_result.dart';
@@ -22,15 +23,19 @@ class MarkEssay {
       String prompt =
           'Imagine you are an English Teacher, Mark this ${input.essayCategory!.essayCategory} essay using the score algorithm below, Return score, reasons and improvement areas(improvements) in this example fomat {"score": 8,"reasons":"","improvements":""}: $alg Essay: ${input.essayBody}';
       final res = await AiMaker().aiMaker(prompt);
-      var essayResult = EssayResultsModel(
-          essayId: input,
-          userId: user.id,
-          reasons: res.reasons,
-          improvements: res.improvements,
-          grade: gradeScore(res.score),
-          score: res.score.toString());
-      final essres = await AddEssayResult().addEssays(essayResult);
-      return essres;
+      if (res.runtimeType != AiResposeModel) {
+        print(res);
+      } else {
+        var essayResult = EssayResultsModel(
+            essayId: input,
+            userId: user.id,
+            reasons: res.reasons,
+            improvements: res.improvements,
+            grade: gradeScore(res.score),
+            score: res.score.toString());
+        final essres = await AddEssayResult().addEssays(essayResult);
+        return essres;
+      }
     } on PostgrestException catch (_) {
       return _;
     }

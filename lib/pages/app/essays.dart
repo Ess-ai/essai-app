@@ -42,10 +42,11 @@ class EssaysState extends State<Essays> {
     });
   }
 
-  getScores(id) async {
-    var scr = await getEssays.getEssayResult(id);
-    setState(() {
-      score = int.parse(scr.score);
+  getScores(id) {
+    getEssays.getEssayResult(id).then((value) {
+      setState(() {
+        score = int.parse(value.score);
+      });
     });
   }
 
