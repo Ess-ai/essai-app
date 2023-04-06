@@ -23,7 +23,8 @@ class DashboardState extends State<Dashboard> {
     double width = MediaQuery.of(context).size.width;
     var padding = width * 0.05;
     return Scaffold(
-        body: Column(
+        body: SafeArea(
+            child: Column(
       children: [
         //Top Bar
         const Header(),
@@ -207,6 +208,6 @@ class DashboardState extends State<Dashboard> {
           ),
         ))
       ],
-    ));
+    )));
   }
 }

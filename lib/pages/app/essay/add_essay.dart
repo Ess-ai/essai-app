@@ -341,16 +341,17 @@ class NewEssayState extends State<NewEssay> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Row(children: [
-        //Essay Display
-        width >= 840
-            ? Expanded(flex: 3, child: essayDisplayArea())
-            : Container(),
+        backgroundColor: Colors.black,
+        body: SafeArea(
+          child: Row(children: [
+            //Essay Display
+            width >= 840
+                ? Expanded(flex: 3, child: essayDisplayArea())
+                : Container(),
 
-        //Essay Text Area
-        essayInputArea()
-      ]),
-    );
+            //Essay Text Area
+            essayInputArea()
+          ]),
+        ));
   }
 }

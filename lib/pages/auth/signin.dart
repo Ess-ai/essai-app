@@ -9,11 +9,14 @@ class Signin extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Row(children: [
-        width <= 840 ? Container() : const Expanded(flex: 2, child: LeftPart()),
-        const Expanded(child: SigninForm()),
-      ]),
-    );
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
+          child: Row(children: [
+            width <= 840
+                ? Container()
+                : const Expanded(flex: 2, child: LeftPart()),
+            const Expanded(child: SigninForm()),
+          ]),
+        ));
   }
 }

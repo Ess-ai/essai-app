@@ -41,7 +41,8 @@ class AllEssaysState extends State<AllEssays> {
     double width = MediaQuery.of(context).size.width;
     var padding = width * 0.05;
     return Scaffold(
-        body: Column(children: [
+        body: SafeArea(
+            child: (Column(children: [
       //Top Bar
       const Header(),
       //Body
@@ -299,6 +300,6 @@ class AllEssaysState extends State<AllEssays> {
                           height: 20,
                         ),
                       ]))))
-    ]));
+    ]))));
   }
 }

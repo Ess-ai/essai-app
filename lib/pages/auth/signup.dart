@@ -10,11 +10,14 @@ class Signup extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Row(children: [
-        const Expanded(child: SignupForm()),
-        width <= 840 ? Container() : const Expanded(flex: 2, child: LeftPart())
-      ]),
-    );
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
+          child: Row(children: [
+            const Expanded(child: SignupForm()),
+            width <= 840
+                ? Container()
+                : const Expanded(flex: 2, child: LeftPart())
+          ]),
+        ));
   }
 }

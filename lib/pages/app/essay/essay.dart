@@ -53,151 +53,158 @@ class EssayState extends State<Essay> {
     double width = MediaQuery.of(context).size.width;
     var padding = width * 0.05;
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          //Header
-          const Header(),
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: Column(
+            children: [
+              //Header
+              const Header(),
 
-          //Body
-          Expanded(
-              child: SingleChildScrollView(
-                  child: Container(
-                      alignment: Alignment.topLeft,
-                      padding: EdgeInsets.only(
-                          top: 30, left: padding, right: padding),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            //Recent Essays Title
-                            Row(
+              //Body
+              Expanded(
+                  child: SingleChildScrollView(
+                      child: Container(
+                          alignment: Alignment.topLeft,
+                          padding: EdgeInsets.only(
+                              top: 30, left: padding, right: padding),
+                          child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  essay.essayTitle.toString(),
-                                  style: GoogleFonts.ptSans(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
+                                //Recent Essays Title
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      essay.essayTitle.toString(),
+                                      style: GoogleFonts.ptSans(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const Spacer(),
+                                    width >= 650 ? essayButtons() : Container(),
+                                  ],
                                 ),
-                                const Spacer(),
-                                width >= 650 ? essayButtons() : Container(),
-                              ],
-                            ),
 
-                            width >= 650
-                                ? Container()
-                                : Container(
-                                    padding: const EdgeInsets.only(top: 10),
-                                    child: essayButtons()),
-                            const Divider(),
-                            const SizedBox(
-                              height: 20,
-                            ),
+                                width >= 650
+                                    ? Container()
+                                    : Container(
+                                        padding: const EdgeInsets.only(top: 10),
+                                        child: essayButtons()),
+                                const Divider(),
+                                const SizedBox(
+                                  height: 20,
+                                ),
 
-                            //Essay Body
-                            _isMarking
-                                ? Column(
-                                    children: [
-                                      Center(
-                                          child: Lottie.asset(
-                                              'assets/resources/downloading.json')),
-                                      Center(
-                                          child: Text(
-                                        'Your essay is being marked\nYou will get your results Shortly',
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.ptSans(
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                    ],
-                                  )
-                                : Column(children: [
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                //Essay Body
+                                _isMarking
+                                    ? Column(
                                         children: [
-                                          //Essay Content
-                                          Expanded(
-                                            flex: 4,
-                                            child: Container(
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    border: Border.all(
-                                                        width: 0.5,
-                                                        color: Colors.grey)),
-                                                alignment: Alignment.topLeft,
+                                          Center(
+                                              child: Lottie.asset(
+                                                  'assets/resources/downloading.json')),
+                                          Center(
+                                              child: Text(
+                                            'Your essay is being marked\nYou will get your results Shortly',
+                                            textAlign: TextAlign.center,
+                                            style: GoogleFonts.ptSans(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                        ],
+                                      )
+                                    : Column(children: [
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              //Essay Content
+                                              Expanded(
+                                                flex: 4,
                                                 child: Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  alignment: Alignment.topLeft,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      //Essay Title
-                                                      Text(
-                                                        '${essay.essayTitle}',
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        style:
-                                                            GoogleFonts.ptSans(
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        border: Border.all(
+                                                            width: 0.5,
+                                                            color:
+                                                                Colors.grey)),
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8),
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          //Essay Title
+                                                          Text(
+                                                            '${essay.essayTitle}',
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            style: GoogleFonts.ptSans(
                                                                 color: Colors
                                                                     .black,
                                                                 fontSize: 16,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 10,
+                                                          ),
+
+                                                          //Essay Body
+                                                          Text(
+                                                            '${essay.essayBody}',
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            style: GoogleFonts
+                                                                .ptSans(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize:
+                                                                        14),
+                                                          ),
+                                                        ],
                                                       ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
+                                                    )),
+                                              ),
 
-                                                      //Essay Body
-                                                      Text(
-                                                        '${essay.essayBody}',
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        style:
-                                                            GoogleFonts.ptSans(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: 14),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )),
-                                          ),
+                                              //Essay Stats
+                                              width >= 650
+                                                  ? EssayStats(
+                                                      essay: widget.essay)
+                                                  : Container(),
+                                            ])
+                                      ]),
 
-                                          //Essay Stats
-                                          width >= 650
-                                              ? EssayStats(essay: widget.essay)
-                                              : Container(),
-                                        ])
-                                  ]),
+                                const Divider(),
+                                const SizedBox(
+                                  height: 20,
+                                ),
 
-                            const Divider(),
-                            const SizedBox(
-                              height: 20,
-                            ),
-
-                            //Footer
-                            const Footer(),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                          ])))),
-        ],
-      ),
-    );
+                                //Footer
+                                const Footer(),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              ])))),
+            ],
+          ),
+        ));
   }
 
   Widget essayButtons() {
