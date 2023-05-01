@@ -39,7 +39,6 @@ class EssayState extends State<Essay> {
     setState(() => _isMarking = true);
     final res = await markEssay.markEssay(essay);
     final ess = await getEssays.getEssay(res);
-    print(ess);
 
     setState(() {
       widget.essay = ess;
@@ -74,12 +73,13 @@ class EssayState extends State<Essay> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(
+                                Flexible(
+                                    child: Text(
                                   essay.essayTitle.toString(),
                                   style: GoogleFonts.ptSans(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
-                                ),
+                                )),
                                 const Spacer(),
                                 width >= 650 ? essayButtons() : Container(),
                               ],
@@ -201,88 +201,90 @@ class EssayState extends State<Essay> {
   }
 
   Widget essayButtons() {
-    return Row(children: [
-      //Edit Essay Button
-      OutlinedButton(
-          onPressed: () {
-            Get.to(EditEssay(essay: widget.essay));
-          },
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Edit'),
-              SizedBox(
-                width: 15,
-              ),
-              Icon(
-                Iconsax.edit,
-                size: 20,
-              )
-            ],
-          )),
-      const SizedBox(width: 10),
+    return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(children: [
+          //Edit Essay Button
+          OutlinedButton(
+              onPressed: () {
+                Get.to(EditEssay(essay: widget.essay));
+              },
+              style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Edit'),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Icon(
+                    Iconsax.edit,
+                    size: 20,
+                  )
+                ],
+              )),
+          const SizedBox(width: 10),
 
-      //Submit Essay Button
-      OutlinedButton(
-          onPressed: () {
-            markingEssay();
-          },
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Submit'),
-              SizedBox(
-                width: 15,
-              ),
-              Icon(
-                Iconsax.document_upload,
-                size: 20,
-              )
-            ],
-          )),
-      const SizedBox(width: 10),
+          //Submit Essay Button
+          OutlinedButton(
+              onPressed: () {
+                markingEssay();
+              },
+              style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Submit'),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Icon(
+                    Iconsax.document_upload,
+                    size: 20,
+                  )
+                ],
+              )),
+          const SizedBox(width: 10),
 
-      //Delete Essay Button
-      OutlinedButton(
-          onPressed: _onWillPop,
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Delete'),
-              SizedBox(
-                width: 15,
-              ),
-              Icon(
-                Iconsax.trash,
-                size: 20,
-              )
-            ],
-          )),
-      const SizedBox(width: 10),
+          //Delete Essay Button
+          OutlinedButton(
+              onPressed: _onWillPop,
+              style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Delete'),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Icon(
+                    Iconsax.trash,
+                    size: 20,
+                  )
+                ],
+              )),
+          const SizedBox(width: 10),
 
-      //Exit Essay Button
-      OutlinedButton(
-          onPressed: () {
-            Get.back();
-          },
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.black),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Exit'),
-              SizedBox(
-                width: 15,
-              ),
-              Icon(
-                Iconsax.back_square,
-                size: 20,
-              )
-            ],
-          )),
-    ]);
+          //Exit Essay Button
+          OutlinedButton(
+              onPressed: () {
+                Get.back();
+              },
+              style: OutlinedButton.styleFrom(foregroundColor: Colors.black),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Exit'),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Icon(
+                    Iconsax.back_square,
+                    size: 20,
+                  )
+                ],
+              )),
+        ]));
   }
 
   Future<bool> _onWillPop() async {

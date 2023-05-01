@@ -130,84 +130,86 @@ class EditEssayState extends State<EditEssay> {
   }
 
   Widget essayActionButtons() {
-    return Row(children: [
-      //Edit Essay Button
-      OutlinedButton(
-          onPressed: saveEssay,
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Save'),
-              SizedBox(
-                width: 10,
-              ),
-              Icon(
-                Iconsax.save_add,
-                size: 20,
-              )
-            ],
-          )),
-      const SizedBox(width: 10),
+    return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(children: [
+          //Edit Essay Button
+          OutlinedButton(
+              onPressed: saveEssay,
+              style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Save'),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Icon(
+                    Iconsax.save_add,
+                    size: 20,
+                  )
+                ],
+              )),
+          const SizedBox(width: 10),
 
-      //Submit Essay Button
-      OutlinedButton(
-          onPressed: submitEssay,
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Submit'),
-              SizedBox(
-                width: 10,
-              ),
-              Icon(
-                Iconsax.document_upload,
-                size: 20,
-              )
-            ],
-          )),
-      const SizedBox(width: 10),
+          //Submit Essay Button
+          OutlinedButton(
+              onPressed: submitEssay,
+              style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Submit'),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Icon(
+                    Iconsax.document_upload,
+                    size: 20,
+                  )
+                ],
+              )),
+          const SizedBox(width: 10),
 
-      //Delete Essay Button
-      OutlinedButton(
-          onPressed: _onWillPop,
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Delete'),
-              SizedBox(
-                width: 10,
-              ),
-              Icon(
-                Iconsax.trash,
-                size: 20,
-              )
-            ],
-          )),
-      const SizedBox(width: 10),
+          //Delete Essay Button
+          OutlinedButton(
+              onPressed: _onWillPop,
+              style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Delete'),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Icon(
+                    Iconsax.trash,
+                    size: 20,
+                  )
+                ],
+              )),
+          const SizedBox(width: 10),
 
-      //Exit
-      OutlinedButton(
-          onPressed: () {
-            Get.back();
-          },
-          style: OutlinedButton.styleFrom(foregroundColor: Colors.black),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Exit'),
-              SizedBox(
-                width: 15,
-              ),
-              Icon(
-                Iconsax.document_upload,
-                size: 20,
-              )
-            ],
-          )),
-    ]);
+          //Exit
+          OutlinedButton(
+              onPressed: () {
+                Get.back();
+              },
+              style: OutlinedButton.styleFrom(foregroundColor: Colors.black),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Exit'),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Icon(
+                    Iconsax.document_upload,
+                    size: 20,
+                  )
+                ],
+              )),
+        ]));
   }
 
   Widget essayDisplayArea() {

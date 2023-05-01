@@ -1,12 +1,15 @@
 import 'package:essai/pages/auth/splash.dart';
 import 'package:essai/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 final service = Services();
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await service.supabaseService.init();
+
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
   runApp(const MyApp());
 }
