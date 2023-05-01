@@ -1,8 +1,11 @@
+import 'package:essai/pages/app/essay/add_essay.dart';
+import 'package:essai/pages/app/essay/all_essays.dart';
 import 'package:essai/pages/app/essays.dart';
 import 'package:essai/pages/app/navigation/footer.dart';
 import 'package:essai/pages/app/navigation/header.dart';
 import 'package:essai/pages/app/widgets/popular_tools.dart';
 import 'package:essai/pages/app/widgets/recent_essays.dart';
+import 'package:essai/services/add_essay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -75,9 +78,11 @@ class DashboardState extends State<Dashboard> {
                         height: 10,
                       ),
                       Row(children: [
-                        ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
+                        TextButton(
+                            onPressed: () {
+                              Get.to(const NewEssay());
+                            },
+                            style: TextButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 foregroundColor: Colors.black,
                                 padding: const EdgeInsets.all(5)),
@@ -89,7 +94,9 @@ class DashboardState extends State<Dashboard> {
                                   fontSize: 14),
                             )),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.to(const AllEssays());
+                            },
                             child: Text(
                               'CONTINUE',
                               style: GoogleFonts.lora(
