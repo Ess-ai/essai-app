@@ -16,6 +16,11 @@ class EssayStats extends StatefulWidget {
 class EssayStatsState extends State<EssayStats> {
   final services = Services();
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Future<List> getScores(id) async {
     final scr = await services.essayServices.getEssayResults(id);
     setState(() {

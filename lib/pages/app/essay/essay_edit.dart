@@ -58,7 +58,7 @@ class EditEssayState extends State<EditEssay> {
         children: [
           //Edit Essay Button
           OutlinedButton(
-            onPressed: controller.saveEssay(context),
+            onPressed: () => controller.saveEssay(context),
             style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,7 +78,7 @@ class EditEssayState extends State<EditEssay> {
 
           //Submit Essay Button
           OutlinedButton(
-            onPressed: controller.submitEssay(context),
+            onPressed: () => controller.submitEssay(context),
             style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
