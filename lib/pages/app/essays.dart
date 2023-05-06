@@ -1,12 +1,12 @@
 import 'package:card_loading/card_loading.dart';
 import 'package:essai/pages/app/navigation/footer.dart';
 import 'package:essai/pages/app/navigation/header.dart';
+import 'package:essai/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../services/get_essays.dart';
 import 'essay/essay.dart';
 
 class Essays extends StatefulWidget {
@@ -17,7 +17,7 @@ class Essays extends StatefulWidget {
 }
 
 class EssaysState extends State<Essays> {
-  final getEssays = GetEssays();
+  final getEssays = Services().essayServices;
 
   bool isLoading = true;
   int score = 0;
@@ -43,7 +43,7 @@ class EssaysState extends State<Essays> {
   }
 
   getScores(id) {
-    getEssays.getEssayResult(id).then((value) {
+    getEssays.getEssayResults(id).then((value) {
       setState(() {
         score = int.parse(value.score);
       });
@@ -53,15 +53,25 @@ class EssaysState extends State<Essays> {
   Text submittedResult(submitState, [id]) {
     if (submitState != null) {
       getScores(id);
-      return Text('Score: $score',
-          textAlign: TextAlign.left,
-          style: GoogleFonts.ptSans(
-              color: colors[score], fontSize: 12, fontWeight: FontWeight.bold));
-    }
-    return Text('Draft',
+      return Text(
+        'Score: $score',
         textAlign: TextAlign.left,
         style: GoogleFonts.ptSans(
-            color: Colors.yellow, fontSize: 12, fontWeight: FontWeight.bold));
+          color: colors[score],
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    }
+    return Text(
+      'Draft',
+      textAlign: TextAlign.left,
+      style: GoogleFonts.ptSans(
+        color: Colors.yellow,
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 
   @override

@@ -21,7 +21,7 @@ class HeaderState extends State<Header> {
   @override
   void initState() {
     super.initState();
-    service.getusr.getUser().then((user) {
+    service.userServices.getUser().then((user) {
       setState(() {
         usr = user;
         items[0] = user.userName;
@@ -51,7 +51,7 @@ class HeaderState extends State<Header> {
       case 'Settings':
         break;
       case 'Log Out':
-        service.auth.signOut();
+        service.authService.signOut();
         break;
 
       default:

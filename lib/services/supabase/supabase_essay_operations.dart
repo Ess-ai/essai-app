@@ -5,7 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../models/essay_results.dart';
 
-class SupabaseEssayServices implements EssayOperationsRepository {
+class EssayOperations implements EssayOperationsRepository {
   SupabaseClient supabaseClient = Supabase.instance.client;
   UserModel user = UserModel(id: '', userName: 'userName');
 

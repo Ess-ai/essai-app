@@ -3,8 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../repositories/authentication_repository.dart';
 
 class SupabaseAuthentication implements AuthenticationRepository {
-  final SupabaseClient _supabaseClient;
-  const SupabaseAuthentication(this._supabaseClient);
+  final SupabaseClient _supabaseClient = Supabase.instance.client;
 
   @override
   Future signInEmailAndPassword(String email, String password) async {

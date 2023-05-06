@@ -11,7 +11,7 @@ import '../prompts.dart';
 class OpenAiService implements AiRepository {
   final marker = AiMaker();
   final prompts = Prompts();
-  final essayOperations = SupabaseEssayServices();
+  final essayOperations = EssayOperations();
   final UserModel user = UserModel(id: 'id', userName: 'userName');
 
   @override

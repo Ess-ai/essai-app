@@ -1,9 +1,9 @@
 import 'package:card_loading/card_loading.dart';
+import 'package:essai/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../services/get_essays.dart';
 import '../essay/essay.dart';
 
 class RecentEssays extends StatefulWidget {
@@ -14,7 +14,7 @@ class RecentEssays extends StatefulWidget {
 }
 
 class RecentEssaysState extends State<RecentEssays> {
-  final getEssays = GetEssays();
+  final getEssays = Services().essayServices;
 
   bool isLoading = true;
   List essays = [];
