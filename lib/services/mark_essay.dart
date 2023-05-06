@@ -36,6 +36,7 @@ class MarkEssay {
         return essres;
       }
     } on PostgrestException catch (_) {
+      print(_.message);
       return _;
     }
   }
