@@ -45,10 +45,11 @@ class EditEssayState extends State<EditEssay> {
   saveEssay() async {
     if (_formKey.currentState!.validate()) {
       var essay = EssayModel(
-          id: widget.essay.id,
-          essayCategory: widget.essay.essayCategory,
-          essayBody: _essay,
-          essayTitle: title);
+        id: widget.essay.id,
+        essayCategory: widget.essay.essayCategory,
+        essayBody: _essay,
+        essayTitle: title,
+      );
       var res = await editEssays.editEssays(essay);
       SnackMessage(
         state: 'Loading',

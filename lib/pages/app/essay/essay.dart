@@ -13,7 +13,6 @@ import 'package:lottie/lottie.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../services/delete_essay.dart';
-import '../widgets/snack_message.dart';
 import 'all_essays.dart';
 
 // ignore: must_be_immutable

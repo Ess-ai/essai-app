@@ -1,62 +1,37 @@
-import 'package:essai/pages/app/widgets/snack_message.dart';
-import 'package:essai/pages/auth/signin.dart';
-import 'package:essai/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SignUpController extends GetxController {
-  static SignUpController get instance => Get.find();
+import '../mixins/handle_exception_mixin.dart';
+import '../mixins/loading_mixin.dart';
+import '../services/supabase/supabase_authentication.dart';
 
-  final formKey = GlobalKey<FormState>();
-  final auth = SupabaseAuthentication();
+class SignupController extends GetxController
+    with LoadingMixin, HandleExceptions {
+  static SignupController get instance => Get.find();
+
+  final auth = SupabaseAuthentication(Supabase.instance.client);
+
   final email = TextEditingController();
   final password = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   bool validateEmail(String email) {
     final RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     return emailRegex.hasMatch(email);
   }
 
-  Future signup(String email, String password) async {
-    final userId = await auth.signUpEmailAndPassword(email, password);
-    return userId;
-  }
-
-  register(email, password, BuildContext context) async {
+  signup(context) async {
     if (formKey.currentState!.validate()) {
-      SnackMessage(
-        state: 'Loading',
-        context: context,
-      ).snackMessage();
-      await signup(email, password).then((value) {
-        if (value == null) {
-          SnackMessage(
-            state: 'Message',
-            context: context,
-            color: Colors.red,
-            message: "Invalid. Retry",
-          ).snackMessage();
-        } else {
-          if (value.runtimeType == AuthException) {
-            final AuthException res = value;
-            SnackMessage(
-              state: 'Message',
-              context: context,
-              color: Colors.red,
-              message: res.message,
-            ).snackMessage();
-          } else {
-            SnackMessage(
-              state: 'Message',
-              context: context,
-              color: Colors.blue,
-              message: "Check your Email Inbox to verify your email",
-            ).snackMessage();
-            Get.to(const Signin());
-          }
-        }
-      });
+      isLoading(true, context);
+      final res = await auth.signUpEmailAndPassword(
+        email.text,
+        password.text,
+      );
+      if (res.runtimeType != User) {
+        isLoading(false, context);
+        handleExceptions(context, res);
+      } else {}
     }
   }
 }

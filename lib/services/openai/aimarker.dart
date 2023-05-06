@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:essai/models/airesponse.dart';
 import 'package:http/http.dart' as http;
 
-import '../controllers/secret_loader_controller.dart';
-import '../models/secret.dart';
+import '../../controllers/secret_loader_controller.dart';
+import '../../models/secret.dart';
 
 class AiMaker {
   Future aiMaker(String prompt) async {

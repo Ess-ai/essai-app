@@ -13,7 +13,7 @@ class SigninForm extends StatefulWidget {
 }
 
 class SigninFormState extends State<SigninForm> {
-  final controller = Get.put(SignInController());
+  final controller = Get.put(SigninController());
 
   final Color primary = const Color.fromARGB(255, 0, 0, 77);
   final Color dark = const Color.fromARGB(156, 0, 0, 17);
@@ -141,8 +141,7 @@ class SigninFormState extends State<SigninForm> {
                               borderRadius: BorderRadius.circular(8)),
                           child: ElevatedButton(
                               onPressed: () {
-                                controller.login(controller.email.text,
-                                    controller.password.text, context);
+                                controller.signin(context);
                               },
                               child: Container(
                                   padding: const EdgeInsets.all(12),

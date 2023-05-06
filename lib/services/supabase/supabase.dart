@@ -3,8 +3,8 @@ import 'package:essai/pages/auth/signin.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../controllers/secret_loader_controller.dart';
-import '../models/secret.dart';
+import '../../controllers/secret_loader_controller.dart';
+import '../../models/secret.dart';
 
 final supabase = Supabase.instance.client;
 

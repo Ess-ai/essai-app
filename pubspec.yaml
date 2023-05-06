@@ -47,6 +47,8 @@ dependencies:
   loading_animation_widget: ^1.2.0+4
   provider: ^6.0.5
   card_loading: ^0.3.0
+  awesome_snackbar_content: ^0.1.1
+  localstorage: ^4.0.1+2
 
 dev_dependencies:
   flutter_test:

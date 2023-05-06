@@ -1,6 +1,6 @@
 #Environment Variables
 .env
-.env.local
+.env.locally 
 lib/secrets.json
 
 # Miscellaneous
@@ -99,3 +99,4 @@ pubspec.lock
 
 
 backup/
+lib/secrets.json

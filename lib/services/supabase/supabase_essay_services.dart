@@ -1,48 +1,54 @@
-import 'package:essai/models/essay.dart';
-import 'package:essai/services/authentication.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:essai/repositories/essay_repository.dart';
 
-import '../models/essay_results.dart';
+import '../../models/essay.dart';
+import '../../models/essay_results.dart';
+import '../../models/user.dart';
 
-class GetEssays {
-  Future<List<dynamic>> getEssays() async {
+class SupabaseEssayServices implements EssayRepository {
+  SupabaseClient supabaseClient = Supabase.instance.client;
+  UserModel user = UserModel(id: '', userName: 'userName');
+
+  @override
+  Future getEssays() async {
     try {
-      final user = SupabaseAuthentication().session()!.user;
-      final response = await Supabase.instance.client
+      final response = await supabaseClient
           .from('essays')
           .select(
-              'id, essay_category(id, essay_category_name), essay_title, essay_body, created_at, is_submitted')
+            'id, essay_category(id, essay_category_name), essay_title, essay_body, created_at, is_submitted',
+          )
           .eq('user_id', user.id);
 
       final essays =
           response.map((essay) => EssayModel.fromJson(essay)).toList();
       return essays;
-    } on PostgrestException catch (_) {
-      return List.empty();
+    } catch (e) {
+      return e;
     }
   }
 
-  Future getEssay(id) async {
+  @override
+  Future getEssay(String id) async {
     try {
-      final user = SupabaseAuthentication().session()!.user;
-      final response = await Supabase.instance.client
+      final response = await supabaseClient
           .from('essays')
           .select(
-              'id, essay_category(id, essay_category_name), essay_title, essay_body, created_at, is_submitted')
+            'id, essay_category(id, essay_category_name), essay_title, essay_body, created_at, is_submitted',
+          )
           .eq('user_id', user.id)
           .eq('id', id)
           .single();
 
       final essay = EssayModel.fromJson(response);
       return essay;
-    } on PostgrestException catch (e) {
+    } catch (e) {
       return e;
     }
   }
 
-  Future getEssayResult(id) async {
+  @override
+  Future getEssayResults(String id) async {
     try {
-      final user = SupabaseAuthentication().session()!.user;
       final response = await Supabase.instance.client
           .from('essay_results')
           .select(
@@ -53,7 +59,7 @@ class GetEssays {
 
       final essay = EssayResultsModel.fromJson(response);
       return essay;
-    } on PostgrestException catch (e) {
+    } catch (e) {
       return e;
     }
   }
