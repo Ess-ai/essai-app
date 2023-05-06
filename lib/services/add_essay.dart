@@ -15,10 +15,8 @@ class AddEssay {
       }).select();
 
       //final essays = EssayModel.fromJson(response);
-      print(response);
       return response;
     } on PostgrestException catch (e) {
-      print(e);
       return e;
     }
   }

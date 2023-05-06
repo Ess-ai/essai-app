@@ -1,6 +1,4 @@
 import 'package:essai/models/essay.dart';
-import 'package:essai/pages/app/essay/essay.dart';
-import 'package:essai/pages/essai.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
