@@ -14,7 +14,7 @@ class SigninController extends GetxController
   final email = TextEditingController();
   final password = TextEditingController();
 
-  final auth = SupabaseAuthentication(Supabase.instance.client);
+  final auth = SupabaseAuthentication();
 
   bool validateEmail(String email) {
     final RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');

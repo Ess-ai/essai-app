@@ -1,4 +1,4 @@
-import 'package:essai/pages/app/essay/add_essay.dart';
+import 'package:essai/pages/app/essay/new_essay.dart';
 import 'package:essai/pages/app/essay/all_essays.dart';
 import 'package:essai/pages/app/essays.dart';
 import 'package:essai/pages/app/navigation/footer.dart';

@@ -10,7 +10,7 @@ class SignupController extends GetxController
     with LoadingMixin, HandleExceptions {
   static SignupController get instance => Get.find();
 
-  final auth = SupabaseAuthentication(Supabase.instance.client);
+  final auth = SupabaseAuthentication();
 
   final email = TextEditingController();
   final password = TextEditingController();

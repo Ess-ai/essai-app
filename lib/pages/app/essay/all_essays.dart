@@ -1,12 +1,11 @@
 import 'package:card_loading/card_loading.dart';
-import 'package:essai/pages/app/essay/add_essay.dart';
+import 'package:essai/pages/app/essay/new_essay.dart';
 import 'package:essai/pages/app/essays.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../services/get_essays.dart';
 import '../navigation/footer.dart';
 import '../navigation/header.dart';
 import '../widgets/recent_essays.dart';
