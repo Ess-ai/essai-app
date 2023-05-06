@@ -3,12 +3,10 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../repositories/authentication_repository.dart';
 
 class SupabaseAuthentication implements AuthenticationRepository {
-  final SupabaseClient _supabaseClient = Supabase.instance.client;
-
   @override
   Future signInEmailAndPassword(String email, String password) async {
     try {
-      final response = await _supabaseClient.auth.signInWithPassword(
+      final response = await Supabase.instance.client.auth.signInWithPassword(
         email: email,
         password: password,
       );
@@ -28,7 +26,7 @@ class SupabaseAuthentication implements AuthenticationRepository {
   @override
   Future signUpEmailAndPassword(String email, String password) async {
     try {
-      final response = await _supabaseClient.auth.signUp(
+      final response = await Supabase.instance.client.auth.signUp(
         email: email,
         password: password,
         emailRedirectTo: "io.supabase.audread://login-callback/",
@@ -45,7 +43,8 @@ class SupabaseAuthentication implements AuthenticationRepository {
   @override
   Future verifySignUp(String email, String token) async {
     try {
-      final AuthResponse response = await _supabaseClient.auth.verifyOTP(
+      final AuthResponse response =
+          await Supabase.instance.client.auth.verifyOTP(
         email: email,
         token: token,
         type: OtpType.signup,
@@ -61,7 +60,7 @@ class SupabaseAuthentication implements AuthenticationRepository {
   @override
   Future sendRecoveryCode(String email) async {
     try {
-      await _supabaseClient.auth.signInWithOtp(email: email);
+      await Supabase.instance.client.auth.signInWithOtp(email: email);
 
       var res = 'You have recieved a password recovery code in your inbox.';
       return res;
@@ -73,7 +72,8 @@ class SupabaseAuthentication implements AuthenticationRepository {
   @override
   Future verifyRecoveryCode(String email, String token) async {
     try {
-      final AuthResponse response = await _supabaseClient.auth.verifyOTP(
+      final AuthResponse response =
+          await Supabase.instance.client.auth.verifyOTP(
         email: email,
         token: token,
         type: OtpType.magiclink,
@@ -87,7 +87,7 @@ class SupabaseAuthentication implements AuthenticationRepository {
 
   @override
   Future<void> signOut() async {
-    await _supabaseClient.auth.signOut();
+    await Supabase.instance.client.auth.signOut();
     return;
   }
 }

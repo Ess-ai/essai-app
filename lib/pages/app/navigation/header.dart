@@ -1,4 +1,5 @@
 import 'package:essai/models/user.dart';
+import 'package:essai/services/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +10,7 @@ import 'package:essai/pages/app/tools/tools.dart';
 import 'package:essai/services/services.dart';
 
 final service = Services();
+final UserModel user = Storage().storage.getItem('user');
 
 class Header extends StatefulWidget {
   const Header({Key? key}) : super(key: key);
@@ -18,27 +20,14 @@ class Header extends StatefulWidget {
 }
 
 class HeaderState extends State<Header> {
-  @override
-  void initState() {
-    super.initState();
-    service.userServices.getUser().then((user) {
-      setState(() {
-        usr = user;
-        items[0] = user.userName;
-        dropdownvalue = user.userName;
-      });
-    });
-  }
-
-  UserModel usr = UserModel(id: '', userName: '');
-
   // Initial Selected Value
-  String dropdownvalue = 'user';
+  String dropdownvalue = user.userName;
 
   // List of items in our dropdown menu
   final List menu = ['DashBoard', 'Essays', 'Tools'];
+
   final items = [
-    'user',
+    user.userName,
     'Profile',
     'Settings',
     'Log Out',
@@ -61,56 +50,84 @@ class HeaderState extends State<Header> {
   Widget bigDevice() {
     return Row(
       children: [
-        Row(children: [
-          //Logo
-          TextButton(
+        Row(
+          children: [
+            //Logo
+            TextButton(
               onPressed: () {},
-              child: const Text('essai',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Blanka',
-                      fontSize: 30))),
-          const SizedBox(width: 20),
+              child: const Text(
+                'essai',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Blanka',
+                  fontSize: 30,
+                ),
+              ),
+            ),
+            const SizedBox(width: 20),
 
-          //Menu Items
-          TextButton(
+            //Menu Items
+            TextButton(
               onPressed: () {
-                Get.to(const Dashboard());
+                Get.to(
+                  const Dashboard(),
+                );
               },
-              child: Text('Dashboard',
-                  style: GoogleFonts.ptSans(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold))),
-          const SizedBox(width: 15),
-          TextButton(
+              child: Text(
+                'Dashboard',
+                style: GoogleFonts.ptSans(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(width: 15),
+            TextButton(
               onPressed: () {
-                Get.to(const AllEssays());
+                Get.to(
+                  const AllEssays(),
+                );
               },
-              child: Text('Essays',
-                  style: GoogleFonts.ptSans(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold))),
-          const SizedBox(width: 15),
-          TextButton(
+              child: Text(
+                'Essays',
+                style: GoogleFonts.ptSans(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(width: 15),
+            TextButton(
               onPressed: () {
-                Get.to(const Tools());
+                Get.to(
+                  const Tools(),
+                );
               },
-              child: Text('Tools',
-                  style: GoogleFonts.ptSans(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold))),
-          const SizedBox(width: 15),
-          TextButton(
+              child: Text(
+                'Tools',
+                style: GoogleFonts.ptSans(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(width: 15),
+            TextButton(
               onPressed: () {},
-              child: Text('Support',
-                  style: GoogleFonts.ptSans(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold))),
-        ]),
+              child: Text(
+                'Support',
+                style: GoogleFonts.ptSans(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
         const Spacer(),
         Row(
           children: [
@@ -149,15 +166,16 @@ class HeaderState extends State<Header> {
               width: 12,
             ),
             ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue.shade900,
-                    foregroundColor: Colors.white),
-                child: Text(
-                  'Donate',
-                  style: GoogleFonts.ptSans(
-                      fontSize: 20, fontWeight: FontWeight.bold),
-                ))
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue.shade900,
+                  foregroundColor: Colors.white),
+              child: Text(
+                'Donate',
+                style: GoogleFonts.ptSans(
+                    fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
           ],
         )
       ],
@@ -170,12 +188,16 @@ class HeaderState extends State<Header> {
         Row(children: [
           //Logo
           TextButton(
-              onPressed: () {},
-              child: const Text('essai',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Blanka',
-                      fontSize: 30))),
+            onPressed: () {},
+            child: const Text(
+              'essai',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'Blanka',
+                fontSize: 30,
+              ),
+            ),
+          ),
         ]),
         const Spacer(),
         Row(

@@ -1,5 +1,5 @@
 library essay;
 
 abstract class UserRepository {
-  Future getUser();
+  Future getUser(id);
 }

@@ -1,18 +1,17 @@
 import 'package:essai/models/essay.dart';
-import 'package:essai/models/user.dart';
 import 'package:essai/repositories/essay_repository.dart';
+import 'package:essai/services/storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../models/essay_results.dart';
 
 class EssayOperations implements EssayOperationsRepository {
-  SupabaseClient supabaseClient = Supabase.instance.client;
-  UserModel user = UserModel(id: '', userName: 'userName');
+  final user = Storage().storage.getItem('user');
 
   @override
   Future addEssay(EssayModel essay) async {
     try {
-      final response = await supabaseClient.from('essays').insert({
+      final response = await Supabase.instance.client.from('essays').insert({
         'user_id': user.id,
         'essay_category': essay.essayCategory!.id,
         'essay_title': essay.essayTitle,
@@ -30,7 +29,7 @@ class EssayOperations implements EssayOperationsRepository {
   @override
   Future deleteEssay(EssayModel essay) async {
     try {
-      await supabaseClient
+      await Supabase.instance.client
           .from('essays')
           .delete()
           .eq('id', essay.id)
@@ -70,14 +69,17 @@ class EssayOperations implements EssayOperationsRepository {
   @override
   Future addEssaiResult(EssayResultsModel essay) async {
     try {
-      final response = await supabaseClient.rpc('create_marked_essay', params: {
-        'p_user_id': user.id,
-        'p_essay_id': essay.essayId!.id,
-        'p_score': essay.score,
-        'p_reasons': essay.reasons,
-        'p_improvements': essay.improvements,
-        'p_grade': essay.grade,
-      }).select();
+      final response = await Supabase.instance.client.rpc(
+        'create_marked_essay',
+        params: {
+          'p_user_id': user.id,
+          'p_essay_id': essay.essayId!.id,
+          'p_score': essay.score,
+          'p_reasons': essay.reasons,
+          'p_improvements': essay.improvements,
+          'p_grade': essay.grade,
+        },
+      ).select();
 
       //final essays = EssayModel.fromJson(response);
       return response;
