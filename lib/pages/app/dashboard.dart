@@ -5,7 +5,6 @@ import 'package:essai/pages/app/navigation/footer.dart';
 import 'package:essai/pages/app/navigation/header.dart';
 import 'package:essai/pages/app/widgets/popular_tools.dart';
 import 'package:essai/pages/app/widgets/recent_essays.dart';
-import 'package:essai/services/add_essay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

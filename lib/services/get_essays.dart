@@ -36,7 +36,6 @@ class GetEssays {
       final essay = EssayModel.fromJson(response);
       return essay;
     } on PostgrestException catch (e) {
-      print(e.message);
       return e;
     }
   }
