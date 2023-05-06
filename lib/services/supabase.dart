@@ -1,19 +1,20 @@
-import 'package:essai/constants.dart';
 import 'package:essai/pages/app/dashboard.dart';
 import 'package:essai/pages/auth/signin.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../controllers/secret_loader_controller.dart';
+import '../models/secret.dart';
+
 final supabase = Supabase.instance.client;
 
 class SupabaseService {
-  final String supabaseUrl = AppConstants().supabaseUrl;
-  final String supabaseAnonKey = AppConstants().supabaseAnonKey;
-
   Future<void> init() async {
+    Secret secret = await SecretLoader().load();
+
     await Supabase.initialize(
-      url: supabaseUrl,
-      anonKey: supabaseAnonKey,
+      url: secret.supabaseUrl,
+      anonKey: secret.supabaseAnonKey,
     );
   }
 
