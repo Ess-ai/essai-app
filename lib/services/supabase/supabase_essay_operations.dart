@@ -30,13 +30,13 @@ class EssayOperations implements EssayOperationsRepository {
   @override
   Future deleteEssay(EssayModel essay) async {
     try {
-      final response = await supabaseClient
+      await supabaseClient
           .from('essays')
           .delete()
           .eq('id', essay.id)
           .eq('user_id', user.id);
 
-      return response;
+      return 'Essay Deleted';
     } catch (e) {
       return e;
     }

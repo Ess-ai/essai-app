@@ -1,15 +1,8 @@
 import 'package:essai/controllers/new_essay_controller.dart';
-import 'package:essai/models/essay.dart';
-import 'package:essai/models/essay_category.dart';
-import 'package:essai/pages/app/essay/all_essays.dart';
-import 'package:essai/pages/app/essay/essay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-
-import '../widgets/snack_message.dart';
 
 class NewEssay extends StatefulWidget {
   const NewEssay({Key? key}) : super(key: key);
@@ -40,7 +33,9 @@ class NewEssayState extends State<NewEssay> {
           //Edit Essay Button
           OutlinedButton(
             onPressed: controller.submitEssay(context),
-            style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: Colors.blue,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -62,7 +57,9 @@ class NewEssayState extends State<NewEssay> {
             onPressed: () {
               Get.back();
             },
-            style: OutlinedButton.styleFrom(foregroundColor: Colors.black),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: Colors.black,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -88,10 +85,11 @@ class NewEssayState extends State<NewEssay> {
       padding: const EdgeInsets.all(24),
       decoration: const BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('assets/images/bg.jpg'),
-            fit: BoxFit.cover,
-            opacity: 0.3,
-            filterQuality: FilterQuality.high),
+          image: AssetImage('assets/images/bg.jpg'),
+          fit: BoxFit.cover,
+          opacity: 0.3,
+          filterQuality: FilterQuality.high,
+        ),
       ),
       child: SingleChildScrollView(
         child: Column(
