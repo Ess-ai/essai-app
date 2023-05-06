@@ -1,55 +1,29 @@
-import 'package:essai/controllers/edit_essay_controller.dart';
-import 'package:essai/models/essay.dart';
+import 'package:essai/controllers/new_essay_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
-class EditEssay extends StatefulWidget {
-  final EssayModel essay;
-  const EditEssay({Key? key, required this.essay}) : super(key: key);
+class NewEssay extends StatefulWidget {
+  const NewEssay({Key? key}) : super(key: key);
 
   @override
-  EditEssayState createState() => EditEssayState();
+  NewEssayState createState() => NewEssayState();
 }
 
 // ignore: must_be_immutable
-class EditEssayState extends State<EditEssay> {
-  final controller = EditEssayController();
+class NewEssayState extends State<NewEssay> {
+  final controller = NewEssayController();
 
   final Color primary = const Color.fromARGB(255, 0, 0, 77);
   final Color dark = const Color.fromARGB(156, 0, 0, 17);
 
-  String _essay = '';
-  String title = '';
-  String title2 = 'Expository Essay';
+  bool valuefirst = false;
+  bool valuesecond = false;
 
-  Future<bool> _onWillPop() async {
-    var dialog = await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Are you sure?',
-            style: Theme.of(context).textTheme.headlineLarge),
-        content: Text(
-            'Do you want to Delete this Essay?\nYou will lose this essay.',
-            style: Theme.of(context).textTheme.labelMedium),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false), //<-- SEE HERE
-            child: Text('No', style: Theme.of(context).textTheme.labelSmall),
-          ),
-          TextButton(
-            onPressed: controller.deleteEssay(
-              context,
-              widget.essay,
-            ), // <-- SEE HERE
-            child: Text('Yes', style: Theme.of(context).textTheme.labelSmall),
-          ),
-        ],
-      ),
-    );
-    return dialog ?? false;
-  }
+  String title = '';
+  final String title2 = 'Expository Essay';
+  String _essay = '';
 
   Widget essayActionButtons() {
     return SingleChildScrollView(
@@ -58,8 +32,10 @@ class EditEssayState extends State<EditEssay> {
         children: [
           //Edit Essay Button
           OutlinedButton(
-            onPressed: () => controller.saveEssay(context),
-            style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
+            onPressed: () => controller.submitEssay(context),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: Colors.blue,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -68,47 +44,7 @@ class EditEssayState extends State<EditEssay> {
                   width: 10,
                 ),
                 Icon(
-                  Iconsax.save_add,
-                  size: 20,
-                )
-              ],
-            ),
-          ),
-          const SizedBox(width: 10),
-
-          //Submit Essay Button
-          OutlinedButton(
-            onPressed: () => controller.submitEssay(context),
-            style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('Submit'),
-                SizedBox(
-                  width: 10,
-                ),
-                Icon(
-                  Iconsax.document_upload,
-                  size: 20,
-                )
-              ],
-            ),
-          ),
-          const SizedBox(width: 10),
-
-          //Delete Essay Button
-          OutlinedButton(
-            onPressed: _onWillPop,
-            style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('Delete'),
-                SizedBox(
-                  width: 10,
-                ),
-                Icon(
-                  Iconsax.trash,
+                  Iconsax.save_2,
                   size: 20,
                 )
               ],
@@ -121,7 +57,9 @@ class EditEssayState extends State<EditEssay> {
             onPressed: () {
               Get.back();
             },
-            style: OutlinedButton.styleFrom(foregroundColor: Colors.black),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: Colors.black,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -147,10 +85,11 @@ class EditEssayState extends State<EditEssay> {
       padding: const EdgeInsets.all(24),
       decoration: const BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('assets/images/bg.jpg'),
-            fit: BoxFit.cover,
-            opacity: 0.3,
-            filterQuality: FilterQuality.high),
+          image: AssetImage('assets/images/bg.jpg'),
+          fit: BoxFit.cover,
+          opacity: 0.3,
+          filterQuality: FilterQuality.high,
+        ),
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -176,7 +115,6 @@ class EditEssayState extends State<EditEssay> {
 
   Widget essayInputArea() {
     double width = MediaQuery.of(context).size.width;
-    var essay = widget.essay;
     return Expanded(
       flex: 5,
       child: SingleChildScrollView(
@@ -194,7 +132,9 @@ class EditEssayState extends State<EditEssay> {
                   Text(
                     title2,
                     style: GoogleFonts.ptSans(
-                        fontSize: 20, fontWeight: FontWeight.bold),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const Spacer(),
                   width >= 650 ? essayActionButtons() : Container(),
@@ -215,7 +155,9 @@ class EditEssayState extends State<EditEssay> {
                     '${_essay.split(' ').length} Words',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.ptSans(
-                        fontSize: 16, color: Colors.blueAccent),
+                      fontSize: 16,
+                      color: Colors.blueAccent,
+                    ),
                   ),
                   const SizedBox(
                     width: 5,
@@ -228,7 +170,9 @@ class EditEssayState extends State<EditEssay> {
                     '${_essay.characters.length} Characters',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.ptSans(
-                        fontSize: 16, color: Colors.blueAccent),
+                      fontSize: 16,
+                      color: Colors.blueAccent,
+                    ),
                   ),
                 ],
               ),
@@ -243,13 +187,13 @@ class EditEssayState extends State<EditEssay> {
                   children: [
                     //Essay Title
                     TextFormField(
-                      initialValue: essay.essayTitle,
-                      //controller: essayTitle,
+                      controller: controller.essayTitle,
                       onChanged: (value) => setState(() => title = value),
                       style: GoogleFonts.ptSans(
-                          color: primary,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
+                        color: primary,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
                       decoration: const InputDecoration(
                         labelText: 'Title',
                         hintText: 'Why Plastics Should be banned',
@@ -277,9 +221,8 @@ class EditEssayState extends State<EditEssay> {
 
                     //Essay Title
                     TextFormField(
-                      initialValue: essay.essayBody,
                       maxLines: 40,
-                      //controller: essayBody,
+                      controller: controller.essayBody,
                       onChanged: (value) => setState(() => _essay = value),
                       style: GoogleFonts.ptSans(color: primary, fontSize: 18),
                       decoration: const InputDecoration(
@@ -316,17 +259,15 @@ class EditEssayState extends State<EditEssay> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Row(
-        children: [
-          //Essay Display
-          width >= 840
-              ? Expanded(flex: 3, child: essayDisplayArea())
-              : Container(),
+      body: Row(children: [
+        //Essay Display
+        width >= 840
+            ? Expanded(flex: 3, child: essayDisplayArea())
+            : Container(),
 
-          //Essay Text Area
-          essayInputArea(),
-        ],
-      ),
+        //Essay Text Area
+        essayInputArea()
+      ]),
     );
   }
 }

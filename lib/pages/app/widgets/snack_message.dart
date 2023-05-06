@@ -1,34 +1,28 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'loader.dart';
 
-class SnackMessage {
-  final BuildContext context;
-  final String state;
-  final String? message;
-  final Color? color;
+class ShowErrorMessage {
+  static ScaffoldMessengerState showMessage(
+    BuildContext context,
+    ContentType content,
+    String message,
+    String title,
+  ) {
+    final snackBar = SnackBar(
+      /// need to set following properties for best effect of awesome_snackbar_content
+      elevation: 0,
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.transparent,
+      content: AwesomeSnackbarContent(
+        title: title,
+        message: message,
 
-  SnackMessage(
-      {required this.state, required this.context, this.message, this.color});
-
-  snackMessage() {
-    if (state == "Loading") {
-      return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: const Duration(milliseconds: 3000),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        content: Container(
-          padding: const EdgeInsets.all(36),
-          child: const Loader(),
-        ),
-      ));
-    } else {
-      return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          duration: const Duration(milliseconds: 3000),
-          backgroundColor: color,
-          content: Container(
-              color: color,
-              padding: const EdgeInsets.all(36),
-              child: Text(message!,
-                  style: const TextStyle(color: Colors.white)))));
-    }
+        /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+        contentType: content,
+      ),
+    );
+    return ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
   }
 }

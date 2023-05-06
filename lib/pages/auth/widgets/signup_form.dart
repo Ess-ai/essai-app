@@ -13,7 +13,7 @@ class SignupForm extends StatefulWidget {
 }
 
 class SignupFormState extends State<SignupForm> {
-  final controller = Get.put(SignUpController());
+  final controller = Get.put(SignupController());
 
   @override
   void dispose() {
@@ -139,8 +139,7 @@ class SignupFormState extends State<SignupForm> {
                               borderRadius: BorderRadius.circular(8)),
                           child: ElevatedButton(
                               onPressed: () {
-                                controller.register(controller.email.text,
-                                    controller.password.text, context);
+                                controller.signup(context);
                               },
                               child: Container(
                                   padding: const EdgeInsets.all(12),

@@ -22,14 +22,15 @@ class EssayResultsModel {
 
   static EssayResultsModel fromJson(Map<String, dynamic> json) =>
       EssayResultsModel(
-          id: json['id'],
-          userId: json['user_id'],
-          essayId: EssayModel.fromJson(json['essay_id']),
-          score: json['essay_score'],
-          reasons: json['reasons'],
-          grade: json['essay_grade'],
-          improvements: json['improvements'],
-          createdAt: json['created_at']);
+        id: json['id'],
+        userId: json['user_id'],
+        essayId: EssayModel.fromJson(json['essay_id']),
+        score: json['essay_score'],
+        reasons: json['reasons'],
+        grade: json['essay_grade'],
+        improvements: json['improvements'],
+        createdAt: json['created_at'],
+      );
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'id': id,

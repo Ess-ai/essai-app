@@ -1,3 +1,4 @@
+import 'package:essai/pages/app/widgets/loader.dart';
 import 'package:essai/pages/auth/splash.dart';
 import 'package:essai/services/services.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
     service.supabaseService.listentoHeaders();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      builder: LoadingScreen.init(),
       home: Splash(),
     );
   }
