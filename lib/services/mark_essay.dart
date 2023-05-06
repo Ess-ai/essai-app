@@ -24,7 +24,6 @@ class MarkEssay {
           'Imagine you are an English Teacher, Mark this ${input.essayCategory!.essayCategory} essay using the score algorithm below, Return score, reasons and improvement areas(improvements) in this example fomat {"score": 8,"reasons":"","improvements":""}: $alg Essay: ${input.essayBody}';
       final res = await AiMaker().aiMaker(prompt);
       if (res.runtimeType != AiResposeModel) {
-        print(res);
       } else {
         var essayResult = EssayResultsModel(
             essayId: input,

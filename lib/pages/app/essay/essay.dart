@@ -39,7 +39,6 @@ class EssayState extends State<Essay> {
     setState(() => _isMarking = true);
     final res = await markEssay.markEssay(essay);
     final ess = await getEssays.getEssay(res);
-    print(ess);
 
     setState(() {
       widget.essay = ess;

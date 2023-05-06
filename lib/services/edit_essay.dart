@@ -18,7 +18,7 @@ class EssayEdit {
 
       //final essays = EssayModel.fromJson(response);
       return response;
-    } on PostgrestException catch (e) {
+    } on PostgrestException {
       return;
     }
   }
