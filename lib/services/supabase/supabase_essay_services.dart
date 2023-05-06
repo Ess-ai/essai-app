@@ -50,13 +50,12 @@ class SupabaseEssayServices implements EssayRepository {
 
   @override
   Future getEssayResults(String id) async {
-    final user = UserModel.fromJson(usr);
     try {
       final response = await Supabase.instance.client
           .from('essay_results')
           .select(
-              'id, essay_id(id, essay_category(id)), essay_score, reasons, essay_grade, improvements, created_at')
-          .eq('user_id', user.id)
+            'id, essay_id(id, essay_category(id)), essay_score, reasons, essay_grade, improvements, created_at',
+          )
           .eq('essay_id', id)
           .single();
 
