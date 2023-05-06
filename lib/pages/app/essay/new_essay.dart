@@ -32,7 +32,7 @@ class NewEssayState extends State<NewEssay> {
         children: [
           //Edit Essay Button
           OutlinedButton(
-            onPressed: controller.submitEssay(context),
+            onPressed: () => controller.submitEssay(context),
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.blue,
             ),

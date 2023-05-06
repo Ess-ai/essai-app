@@ -1,3 +1,4 @@
+import 'package:essai/models/user.dart';
 import 'package:essai/services/storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:essai/repositories/essay_repository.dart';
@@ -6,10 +7,11 @@ import '../../models/essay.dart';
 import '../../models/essay_results.dart';
 
 class SupabaseEssayServices implements EssayRepository {
-  final user = Storage().storage.getItem('user');
+  final usr = Storage().storage.getItem('user');
 
   @override
   Future getEssays() async {
+    final user = UserModel.fromJson(usr);
     try {
       final response = await Supabase.instance.client
           .from('essays')
@@ -28,6 +30,7 @@ class SupabaseEssayServices implements EssayRepository {
 
   @override
   Future getEssay(String id) async {
+    final user = UserModel.fromJson(usr);
     try {
       final response = await Supabase.instance.client
           .from('essays')
@@ -47,6 +50,7 @@ class SupabaseEssayServices implements EssayRepository {
 
   @override
   Future getEssayResults(String id) async {
+    final user = UserModel.fromJson(usr);
     try {
       final response = await Supabase.instance.client
           .from('essay_results')

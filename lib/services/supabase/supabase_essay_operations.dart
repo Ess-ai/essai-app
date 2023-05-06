@@ -4,12 +4,14 @@ import 'package:essai/services/storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../models/essay_results.dart';
+import '../../models/user.dart';
 
 class EssayOperations implements EssayOperationsRepository {
-  final user = Storage().storage.getItem('user');
+  final usr = Storage().storage.getItem('user');
 
   @override
   Future addEssay(EssayModel essay) async {
+    final user = UserModel.fromJson(usr);
     try {
       final response = await Supabase.instance.client.from('essays').insert({
         'user_id': user.id,
@@ -28,6 +30,7 @@ class EssayOperations implements EssayOperationsRepository {
 
   @override
   Future deleteEssay(EssayModel essay) async {
+    final user = UserModel.fromJson(usr);
     try {
       await Supabase.instance.client
           .from('essays')
@@ -43,6 +46,7 @@ class EssayOperations implements EssayOperationsRepository {
 
   @override
   Future editEssay(EssayModel essay) async {
+    final user = UserModel.fromJson(usr);
     try {
       final response = await Supabase.instance.client
           .from('essays')
@@ -56,7 +60,7 @@ class EssayOperations implements EssayOperationsRepository {
 
       //final essays = EssayModel.fromJson(response);
       return response;
-    } on PostgrestException {
+    } catch (e) {
       return;
     }
   }
@@ -68,6 +72,7 @@ class EssayOperations implements EssayOperationsRepository {
 
   @override
   Future addEssaiResult(EssayResultsModel essay) async {
+    final user = UserModel.fromJson(usr);
     try {
       final response = await Supabase.instance.client.rpc(
         'create_marked_essay',

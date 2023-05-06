@@ -7,8 +7,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../controllers/secret_loader_controller.dart';
 import '../../models/secret.dart';
 
-final supabase = Supabase.instance.client;
-
 class SupabaseService {
   Future<void> init() async {
     Secret secret = await SecretLoader().load();

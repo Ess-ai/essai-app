@@ -10,7 +10,8 @@ import 'package:essai/pages/app/tools/tools.dart';
 import 'package:essai/services/services.dart';
 
 final service = Services();
-final UserModel user = Storage().storage.getItem('user');
+final usr = Storage().storage.getItem('user');
+final user = UserModel.fromJson(usr).userName;
 
 class Header extends StatefulWidget {
   const Header({Key? key}) : super(key: key);
@@ -21,13 +22,13 @@ class Header extends StatefulWidget {
 
 class HeaderState extends State<Header> {
   // Initial Selected Value
-  String dropdownvalue = user.userName;
+  String dropdownvalue = user;
 
   // List of items in our dropdown menu
   final List menu = ['DashBoard', 'Essays', 'Tools'];
 
   final items = [
-    user.userName,
+    user,
     'Profile',
     'Settings',
     'Log Out',
