@@ -1,18 +1,20 @@
 import 'dart:convert';
-import 'package:essai/constants.dart';
 import 'package:essai/models/airesponse.dart';
 import 'package:http/http.dart' as http;
 
+import '../controllers/secret_loader_controller.dart';
+import '../models/secret.dart';
+
 class AiMaker {
   Future aiMaker(String prompt) async {
-    final apiKey = AppConstants().openaiApiKey;
+    Secret secret = await SecretLoader().load();
     try {
       var url = Uri.https("api.openai.com", "/v1/completions");
       final response = await http.post(
         url,
         headers: {
           'Content-Type': 'application/json',
-          "Authorization": "Bearer $apiKey"
+          "Authorization": "Bearer ${secret.openaiApiKey}"
         },
         body: json.encode({
           "model": "text-davinci-003",
