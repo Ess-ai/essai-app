@@ -1,6 +1,7 @@
 #Environment Variables
 .env
 .env.local
+lib/secrets.json
 
 # Miscellaneous
 *.class
