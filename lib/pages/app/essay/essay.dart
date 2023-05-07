@@ -48,6 +48,7 @@ class EssayState extends State<Essay> {
     var essay = widget.essay;
     double width = MediaQuery.of(context).size.width;
     var padding = width * 0.05;
+    bool isSubmitted = essay.isSubmitted == null ? false : true;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -105,7 +106,9 @@ class EssayState extends State<Essay> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Check Your Performance',
+                            isSubmitted
+                                ? 'Check Your Performance'
+                                : 'Submit Essay',
                             style: GoogleFonts.ptSans(
                               fontSize: 17,
                               fontWeight: FontWeight.w600,
@@ -113,25 +116,29 @@ class EssayState extends State<Essay> {
                           ),
 
                           //Submit Essay Button
-                          OutlinedButton(
-                            onPressed: () =>
-                                buildShowModalBottomSheet(context, essay),
-                            style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.blue.shade900),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text('Results'),
-                                SizedBox(
-                                  width: 15,
-                                ),
-                                Icon(
-                                  Iconsax.activity,
-                                  size: 20,
+
+                          isSubmitted
+                              ? OutlinedButton(
+                                  onPressed: () =>
+                                      buildShowModalBottomSheet(context, essay),
+                                  style: OutlinedButton.styleFrom(
+                                      foregroundColor: Colors.blue.shade900),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: const [
+                                      Text('Results'),
+                                      SizedBox(
+                                        width: 15,
+                                      ),
+                                      Icon(
+                                        Iconsax.activity,
+                                        size: 20,
+                                      )
+                                    ],
+                                  ),
                                 )
-                              ],
-                            ),
-                          ),
+                              : const SizedBox(),
                         ],
                       ),
 
