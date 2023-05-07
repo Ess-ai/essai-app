@@ -183,7 +183,7 @@ class EssayState extends State<Essay> {
 
                                     //Essay Stats
                                     width >= 650
-                                        ? EssayStats(essay: widget.essay)
+                                        ? essayStats(widget.essay)
                                         : Container(),
                                   ],
                                 ),
