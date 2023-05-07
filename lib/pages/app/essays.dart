@@ -1,6 +1,5 @@
 import 'package:card_loading/card_loading.dart';
 import 'package:essai/mixins/handle_exception_mixin.dart';
-import 'package:essai/models/essay_results.dart';
 import 'package:essai/pages/app/navigation/footer.dart';
 import 'package:essai/pages/app/navigation/header.dart';
 import 'package:essai/services/services.dart';
