@@ -76,9 +76,10 @@ class RecentEssaysState extends State<RecentEssays> {
                       Container(
                         width: width >= 840 ? width * 0.2 : width * 0.4,
                         decoration: BoxDecoration(
-                            color: Colors.redAccent,
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(width: 0.5, color: Colors.grey)),
+                          color: Colors.redAccent,
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(width: 0.5, color: Colors.grey),
+                        ),
                         alignment: Alignment.topLeft,
                         child: Container(
                           padding: const EdgeInsets.all(8),
@@ -108,38 +109,42 @@ class RecentEssaysState extends State<RecentEssays> {
                                 height: 10,
                               ),
                               ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.white,
-                                      foregroundColor: Colors.black,
-                                      padding: const EdgeInsets.all(2)),
-                                  child: Text(
-                                    'Add Essay',
-                                    style: GoogleFonts.lora(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.redAccent,
-                                        fontSize: 14),
-                                  ))
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  foregroundColor: Colors.black,
+                                  padding: const EdgeInsets.all(2),
+                                ),
+                                child: Text(
+                                  'Add Essay',
+                                  style: GoogleFonts.lora(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.redAccent,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
                       ),
                     ],
-                    for (int x = 0; x < essays.length; x++) ...[
+                    for (var ess in essays) ...[
                       TextButton(
                         onPressed: () {
-                          Get.to(Essay(
-                            essay: essays[x],
-                          ));
+                          Get.to(Essay(essay: ess));
                         },
                         style: TextButton.styleFrom(
                             padding: const EdgeInsets.all(0)),
                         child: Container(
                           width: width >= 840 ? width * 0.2 : width * 0.4,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border:
-                                  Border.all(width: 0.5, color: Colors.grey)),
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              width: 0.5,
+                              color: Colors.grey,
+                            ),
+                          ),
                           alignment: Alignment.topLeft,
                           child: Container(
                             padding: const EdgeInsets.all(8),
@@ -149,7 +154,9 @@ class RecentEssaysState extends State<RecentEssays> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '${essays[x].essayTitle}',
+                                  ess.essayTitle.length <= 40
+                                      ? ess.essayTitle + '...'
+                                      : ess.essayTitle.substring(0, 40) + '...',
                                   textAlign: TextAlign.left,
                                   style: GoogleFonts.ptSans(
                                       color: Colors.black,
@@ -160,7 +167,9 @@ class RecentEssaysState extends State<RecentEssays> {
                                   height: 10,
                                 ),
                                 Text(
-                                  '${essays[x].essayBody!.substring(0, 197)}',
+                                  ess.essayBody.length < 190
+                                      ? ess.essayBody + '...'
+                                      : ess.essayBody.substring(0, 190) + '...',
                                   textAlign: TextAlign.left,
                                   style: GoogleFonts.ptSans(
                                       color: Colors.black, fontSize: 12),

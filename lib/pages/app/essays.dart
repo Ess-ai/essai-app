@@ -1,3 +1,4 @@
+import 'package:card_loading/card_loading.dart';
 import 'package:essai/mixins/handle_exception_mixin.dart';
 import 'package:essai/models/essay_results.dart';
 import 'package:essai/pages/app/navigation/footer.dart';
@@ -21,61 +22,20 @@ class EssaysState extends State<Essays> with HandleExceptions {
   final getEssays = Services().essayServices;
 
   bool isLoading = true;
-  int score = 0;
   List essays = [];
-  List colors = [
-    Colors.red,
-    Colors.pink,
-    Colors.orange,
-    Colors.lightGreen,
-    Colors.green,
-    Colors.blue
-  ];
+
+  void loadEssays() async {
+    var essay = await getEssays.getEssays();
+    setState(() {
+      essays = essay;
+      isLoading = false;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    getEssays.getEssays().then((essay) {
-      setState(() {
-        essays = essay;
-        isLoading = false;
-      });
-    });
-  }
-
-  getScores(id) async {
-    var res = await getEssays.getEssayResults(id);
-    if (res != EssayResultsModel) {
-      // ignore: use_build_context_synchronously
-      handleExceptions(context, res);
-    }
-    setState(() {
-      score = int.parse(res.score);
-    });
-  }
-
-  Text submittedResult(submitState, [id]) {
-    if (submitState != null) {
-      getScores(id);
-      return Text(
-        'Score: $score',
-        textAlign: TextAlign.left,
-        style: GoogleFonts.ptSans(
-          color: colors[score],
-          fontSize: 12,
-          fontWeight: FontWeight.bold,
-        ),
-      );
-    }
-    return Text(
-      'Draft',
-      textAlign: TextAlign.left,
-      style: GoogleFonts.ptSans(
-        color: Colors.yellow,
-        fontSize: 12,
-        fontWeight: FontWeight.bold,
-      ),
-    );
+    loadEssays();
   }
 
   @override
@@ -95,8 +55,11 @@ class EssaysState extends State<Essays> with HandleExceptions {
               child: SingleChildScrollView(
                 child: Container(
                   alignment: Alignment.topLeft,
-                  padding:
-                      EdgeInsets.only(top: 30, left: padding, right: padding),
+                  padding: EdgeInsets.only(
+                    top: 30,
+                    left: padding,
+                    right: padding,
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,67 +99,7 @@ class EssaysState extends State<Essays> with HandleExceptions {
                       ),
 
                       //All Essays List
-                      Wrap(
-                        spacing: MediaQuery.of(context).size.width * 0.03,
-                        runSpacing: MediaQuery.of(context).size.width * 0.02,
-                        children: [
-                          for (var i in essays) ...[
-                            TextButton(
-                              onPressed: () {
-                                Get.to(
-                                  Essay(
-                                    essay: i,
-                                  ),
-                                );
-                              },
-                              style: TextButton.styleFrom(
-                                  padding: const EdgeInsets.all(0)),
-                              child: Container(
-                                  width:
-                                      width >= 840 ? width * 0.2 : width * 0.4,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      border: Border.all(
-                                          width: 0.5, color: Colors.grey)),
-                                  alignment: Alignment.topLeft,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(8),
-                                    alignment: Alignment.topLeft,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '${i.essayTitle}',
-                                          textAlign: TextAlign.left,
-                                          style: GoogleFonts.ptSans(
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        submittedResult(i.isSubmitted, i.id),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          i.essayBody!.substring(0, 197),
-                                          textAlign: TextAlign.left,
-                                          style: GoogleFonts.ptSans(
-                                              color: Colors.black,
-                                              fontSize: 12),
-                                        ),
-                                      ],
-                                    ),
-                                  )),
-                            )
-                          ],
-                        ],
-                      ), //Spacing
+                      allEssays(),
 
                       const SizedBox(
                         height: 20,
@@ -217,5 +120,150 @@ class EssaysState extends State<Essays> with HandleExceptions {
         ),
       ),
     );
+  }
+
+  Widget allEssays() {
+    double width = MediaQuery.of(context).size.width;
+    return isLoading
+        ? Wrap(
+            spacing: width * 0.03,
+            runSpacing: width * 0.02,
+            children: [
+              for (int x = 0; x < 5; x++) ...[
+                Container(
+                    width: width >= 840 ? width * 0.2 : width * 0.4,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(width: 0.5, color: Colors.grey)),
+                    alignment: Alignment.topLeft,
+                    padding: const EdgeInsets.all(2),
+                    child: const CardLoading(
+                      height: 140,
+                      cardLoadingTheme: CardLoadingTheme(
+                          colorOne: Color.fromARGB(255, 240, 240, 240),
+                          colorTwo: Color.fromARGB(255, 236, 235, 235)),
+                    )),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.03,
+                ),
+              ],
+            ],
+          )
+        : Wrap(
+            spacing: width * 0.02,
+            runSpacing: width * 0.02,
+            children: [
+              if (essays.isEmpty) ...[
+                Container(
+                  width: width >= 840 ? width * 0.2 : width * 0.4,
+                  decoration: BoxDecoration(
+                    color: Colors.redAccent,
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(width: 0.5, color: Colors.grey),
+                  ),
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'NO ESSAY(S) FOUND',
+                          textAlign: TextAlign.left,
+                          style: GoogleFonts.ptSans(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'You Do Not Have Any Essays\nClick Dowm Here to Add a New Essay',
+                          textAlign: TextAlign.left,
+                          style: GoogleFonts.ptSans(
+                              color: Colors.white, fontSize: 12),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
+                            padding: const EdgeInsets.all(2),
+                          ),
+                          child: Text(
+                            'Add Essay',
+                            style: GoogleFonts.lora(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.redAccent,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+              for (var ess in essays) ...[
+                TextButton(
+                  onPressed: () {
+                    Get.to(Essay(essay: ess));
+                  },
+                  style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
+                  child: Container(
+                    width: width >= 840 ? width * 0.2 : width * 0.4,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                        width: 0.5,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            ess.essayTitle.length <= 40
+                                ? ess.essayTitle + '...'
+                                : ess.essayTitle.substring(0, 40) + '...',
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.ptSans(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            ess.essayBody.length < 190
+                                ? ess.essayBody + '...'
+                                : ess.essayBody.substring(0, 190) + '...',
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.ptSans(
+                                color: Colors.black, fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.03,
+                ),
+              ],
+            ],
+          );
   }
 }
