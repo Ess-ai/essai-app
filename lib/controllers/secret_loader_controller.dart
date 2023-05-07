@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import '../models/secret.dart';
 
 class SecretLoader {
-  final String secretPath = 'lib/secrets.json';
+  final String secretPath = 'lib/secrets-development.json';
 
   SecretLoader();
   Future<Secret> load() {

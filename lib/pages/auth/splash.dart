@@ -11,6 +11,7 @@ class Splash extends StatelessWidget {
   Widget build(BuildContext context) {
     splashController.loadScreen();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         color: Colors.white,
         child: Center(

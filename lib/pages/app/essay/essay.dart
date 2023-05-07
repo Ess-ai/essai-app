@@ -45,6 +45,7 @@ class EssayState extends State<Essay> {
     double width = MediaQuery.of(context).size.width;
     var padding = width * 0.05;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(

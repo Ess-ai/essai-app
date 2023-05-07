@@ -83,6 +83,7 @@ class EssaysState extends State<Essays> with HandleExceptions {
     double width = MediaQuery.of(context).size.width;
     var padding = width * 0.05;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
           children: [

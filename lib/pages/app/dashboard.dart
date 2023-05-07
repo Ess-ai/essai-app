@@ -29,6 +29,7 @@ class DashboardState extends State<Dashboard> with LoadingMixin {
     isLoading(false, context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
           children: [

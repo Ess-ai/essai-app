@@ -258,6 +258,7 @@ class NewEssayState extends State<NewEssay> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Row(children: [

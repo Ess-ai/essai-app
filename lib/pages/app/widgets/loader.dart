@@ -46,6 +46,7 @@ class LoadingOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: ChangeNotifierProvider<LoadingProvider>(
         create: (context) => LoadingProvider(),
         builder: (context, _) {

@@ -18,6 +18,7 @@ class ToolsState extends State<Tools> {
     double width = MediaQuery.of(context).size.width;
     var padding = width * 0.05;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
           children: [
