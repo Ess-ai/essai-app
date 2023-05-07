@@ -1,5 +1,3 @@
-import 'package:essai/models/essay_category.dart';
-
 class EssayModel {
   String? id;
   String? userId;

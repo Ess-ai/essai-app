@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../mixins/handle_exception_mixin.dart';
 import '../mixins/loading_mixin.dart';
 import '../models/essay.dart';
-import '../models/essay_category.dart';
 import '../pages/app/essay/essay.dart';
 
 class NewEssayController extends GetxController

@@ -1,6 +1,6 @@
 import 'package:essai/models/essay.dart';
+import 'package:essai/pages/app/essay/widgets/essay_body.dart';
 import 'package:essai/pages/app/essay/widgets/essay_buttons.dart';
-import 'package:essai/pages/app/essay/widgets/essay_stats.dart';
 import 'package:essai/pages/app/navigation/footer.dart';
 import 'package:essai/pages/app/navigation/header.dart';
 import 'package:essai/services/services.dart';
@@ -72,6 +72,7 @@ class EssayState extends State<Essay> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Flexible(
+                            fit: FlexFit.loose,
                             child: Text(
                               essay.essayTitle.toString(),
                               style: GoogleFonts.ptSans(
@@ -103,92 +104,7 @@ class EssayState extends State<Essay> {
                       ),
 
                       //Essay Body
-                      _isMarking
-                          ? Column(
-                              children: [
-                                Center(
-                                  child: Lottie.asset(
-                                    'assets/resources/downloading.json',
-                                  ),
-                                ),
-                                Center(
-                                  child: Text(
-                                    'Your essay is being marked\nYou will get your results Shortly',
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.ptSans(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          : Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    //Essay Content
-                                    Expanded(
-                                      flex: 4,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            5,
-                                          ),
-                                          border: Border.all(
-                                            width: 0.5,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                        alignment: Alignment.topLeft,
-                                        child: Container(
-                                          padding: const EdgeInsets.all(8),
-                                          alignment: Alignment.topLeft,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              //Essay Title
-                                              Text(
-                                                '${essay.essayTitle}',
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.ptSans(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-
-                                              //Essay Body
-                                              Text(
-                                                '${essay.essayBody}',
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.ptSans(
-                                                    color: Colors.black,
-                                                    fontSize: 14),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                    //Essay Stats
-                                    width >= 650
-                                        ? essayStats(widget.essay)
-                                        : Container(),
-                                  ],
-                                ),
-                              ],
-                            ),
+                      _isMarking ? marking() : EssayDisplay(essay: essay),
 
                       const Divider(),
                       const SizedBox(
@@ -208,6 +124,29 @@ class EssayState extends State<Essay> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget marking() {
+    return Column(
+      children: [
+        Center(
+          child: Lottie.asset(
+            'assets/resources/downloading.json',
+          ),
+        ),
+        Center(
+          child: Text(
+            'Your essay is being marked\nYou will get your results Shortly',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.ptSans(
+              color: Colors.black,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
