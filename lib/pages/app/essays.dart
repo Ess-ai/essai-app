@@ -83,131 +83,137 @@ class EssaysState extends State<Essays> with HandleExceptions {
     double width = MediaQuery.of(context).size.width;
     var padding = width * 0.05;
     return Scaffold(
-      body: Column(
-        children: [
-          //Header
-          const Header(),
+      body: SafeArea(
+        child: Column(
+          children: [
+            //Header
+            const Header(),
 
-          //Body
-          Expanded(
-            child: SingleChildScrollView(
-              child: Container(
-                alignment: Alignment.topLeft,
-                padding:
-                    EdgeInsets.only(top: 30, left: padding, right: padding),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //All Essays Title
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'All Essays',
-                          style: GoogleFonts.ptSans(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        OutlinedButton(
-                            onPressed: () {},
-                            style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.black),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text('Search Essay'),
-                                SizedBox(
-                                  width: 15,
-                                ),
-                                Icon(
-                                  Iconsax.search_status,
-                                  size: 20,
-                                )
-                              ],
-                            ))
-                      ],
-                    ),
-                    const Divider(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-
-                    //All Essays List
-                    Wrap(
-                      spacing: MediaQuery.of(context).size.width * 0.03,
-                      runSpacing: MediaQuery.of(context).size.width * 0.02,
-                      children: [
-                        for (var i in essays) ...[
-                          TextButton(
-                            onPressed: () {
-                              Get.to(
-                                Essay(
-                                  essay: i,
-                                ),
-                              );
-                            },
-                            style: TextButton.styleFrom(
-                                padding: const EdgeInsets.all(0)),
-                            child: Container(
-                                width: width >= 840 ? width * 0.2 : width * 0.4,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    border: Border.all(
-                                        width: 0.5, color: Colors.grey)),
-                                alignment: Alignment.topLeft,
-                                child: Container(
-                                  padding: const EdgeInsets.all(8),
-                                  alignment: Alignment.topLeft,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '${i.essayTitle}',
-                                        textAlign: TextAlign.left,
-                                        style: GoogleFonts.ptSans(
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      submittedResult(i.isSubmitted, i.id),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        i.essayBody!.substring(0, 197),
-                                        textAlign: TextAlign.left,
-                                        style: GoogleFonts.ptSans(
-                                            color: Colors.black, fontSize: 12),
-                                      ),
-                                    ],
+            //Body
+            Expanded(
+              child: SingleChildScrollView(
+                child: Container(
+                  alignment: Alignment.topLeft,
+                  padding:
+                      EdgeInsets.only(top: 30, left: padding, right: padding),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //All Essays Title
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'All Essays',
+                            style: GoogleFonts.ptSans(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          OutlinedButton(
+                              onPressed: () {},
+                              style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.black),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text('Search Essay'),
+                                  SizedBox(
+                                    width: 15,
                                   ),
-                                )),
-                          )
+                                  Icon(
+                                    Iconsax.search_status,
+                                    size: 20,
+                                  )
+                                ],
+                              ))
                         ],
-                      ],
-                    ), //Spacing
+                      ),
+                      const Divider(),
+                      const SizedBox(
+                        height: 20,
+                      ),
 
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Divider(),
+                      //All Essays List
+                      Wrap(
+                        spacing: MediaQuery.of(context).size.width * 0.03,
+                        runSpacing: MediaQuery.of(context).size.width * 0.02,
+                        children: [
+                          for (var i in essays) ...[
+                            TextButton(
+                              onPressed: () {
+                                Get.to(
+                                  Essay(
+                                    essay: i,
+                                  ),
+                                );
+                              },
+                              style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.all(0)),
+                              child: Container(
+                                  width:
+                                      width >= 840 ? width * 0.2 : width * 0.4,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                          width: 0.5, color: Colors.grey)),
+                                  alignment: Alignment.topLeft,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(8),
+                                    alignment: Alignment.topLeft,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${i.essayTitle}',
+                                          textAlign: TextAlign.left,
+                                          style: GoogleFonts.ptSans(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        submittedResult(i.isSubmitted, i.id),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          i.essayBody!.substring(0, 197),
+                                          textAlign: TextAlign.left,
+                                          style: GoogleFonts.ptSans(
+                                              color: Colors.black,
+                                              fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                            )
+                          ],
+                        ],
+                      ), //Spacing
 
-                    //Footer
-                    const Footer(),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Divider(),
+
+                      //Footer
+                      const Footer(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
