@@ -15,17 +15,14 @@ class NewEssayController extends GetxController
   final services = Services();
 
   final formKey = GlobalKey<FormState>();
-  final essayCategory = TextEditingController();
   final essayTitle = TextEditingController();
   final essayBody = TextEditingController();
 
-  submitEssay(context) async {
+  submitEssay(context, essayCategory) async {
     if (formKey.currentState!.validate()) {
       isLoading(true, context);
       EssayModel essay = EssayModel(
-        essayCategory: EssayCategoryModel(
-          id: essayCategory.value.text,
-        ),
+        essayCategory: essayCategory,
         essayBody: essayBody.text,
         essayTitle: essayTitle.text,
       );

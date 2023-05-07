@@ -16,7 +16,7 @@ class SupabaseEssayServices implements EssayRepository {
       final response = await Supabase.instance.client
           .from('essays')
           .select(
-            'id, essay_category(id, essay_category_name), essay_title, essay_body, created_at, is_submitted',
+            'id, essay_category, essay_title, essay_body, created_at, is_submitted',
           )
           .eq('user_id', user.id);
 
@@ -35,7 +35,7 @@ class SupabaseEssayServices implements EssayRepository {
       final response = await Supabase.instance.client
           .from('essays')
           .select(
-            'id, essay_category(id, essay_category_name), essay_title, essay_body, created_at, is_submitted',
+            'id, essay_category, essay_title, essay_body, created_at, is_submitted',
           )
           .eq('user_id', user.id)
           .eq('id', id)
@@ -54,7 +54,7 @@ class SupabaseEssayServices implements EssayRepository {
       final response = await Supabase.instance.client
           .from('essay_results')
           .select(
-            'id, essay_id(id, essay_category(id)), essay_score, reasons, essay_grade, improvements, created_at',
+            'id, essay_id(id, essay_category)), essay_score, reasons, essay_grade, improvements, created_at',
           )
           .eq('essay_id', id)
           .single();

@@ -23,9 +23,7 @@ class EditEssayController extends GetxController
     if (formKey.currentState!.validate()) {
       isLoading(true, context);
       EssayModel essay = EssayModel(
-        essayCategory: EssayCategoryModel(
-          id: essayCategory.value.text,
-        ),
+        essayCategory: essayCategory.value.text,
         essayBody: essayBody.text,
         essayTitle: essayTitle.text,
       );
@@ -44,9 +42,7 @@ class EditEssayController extends GetxController
     if (formKey.currentState!.validate()) {
       isLoading(true, context);
       EssayModel essay = EssayModel(
-        essayCategory: EssayCategoryModel(
-          id: essayCategory.value.text,
-        ),
+        essayCategory: essayCategory.value.text,
         essayBody: essayBody.text,
         essayTitle: essayTitle.text,
       );

@@ -35,7 +35,7 @@ class EssayResultsModel {
   Map<String, dynamic> toJson() => <String, dynamic>{
         'id': id,
         'user_id': userId,
-        'essay_category': essayId,
+        'essay_id': essayId,
         'score': score,
         'reasons': reasons,
         'grade': grade,

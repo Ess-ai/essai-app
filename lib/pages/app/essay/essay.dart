@@ -29,7 +29,7 @@ class EssayState extends State<Essay> {
     setState(() => _isMarking = true);
     final res = await services.aiService.markEssay(
       essay,
-      'General Essay Rubric',
+      'High School Essay Rubric',
     );
     final ess = await services.essayServices.getEssay(res);
 

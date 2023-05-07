@@ -15,7 +15,7 @@ class EssayOperations implements EssayOperationsRepository {
     try {
       final response = await Supabase.instance.client.from('essays').insert({
         'user_id': user.id,
-        'essay_category': essay.essayCategory!.id,
+        'essay_category': essay.essayCategory,
         'essay_title': essay.essayTitle,
         'essay_body': essay.essayBody,
         'is_submitted': essay.isSubmitted
