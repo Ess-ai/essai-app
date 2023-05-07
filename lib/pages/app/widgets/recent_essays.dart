@@ -63,7 +63,7 @@ class RecentEssaysState extends State<RecentEssays> {
                                 colorTwo: Color.fromARGB(255, 236, 235, 235)),
                           )),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.03,
+                        width: MediaQuery.of(context).size.width * 0.04,
                       ),
                     ],
                   ],

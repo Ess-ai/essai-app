@@ -126,23 +126,29 @@ class EssaysState extends State<Essays> with HandleExceptions {
     double width = MediaQuery.of(context).size.width;
     return isLoading
         ? Wrap(
-            spacing: width * 0.03,
-            runSpacing: width * 0.02,
+            spacing: width * 0.01,
+            runSpacing: width * 0.04,
             children: [
               for (int x = 0; x < 5; x++) ...[
                 Container(
-                    width: width >= 840 ? width * 0.2 : width * 0.4,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(width: 0.5, color: Colors.grey)),
-                    alignment: Alignment.topLeft,
-                    padding: const EdgeInsets.all(2),
-                    child: const CardLoading(
-                      height: 140,
-                      cardLoadingTheme: CardLoadingTheme(
-                          colorOne: Color.fromARGB(255, 240, 240, 240),
-                          colorTwo: Color.fromARGB(255, 236, 235, 235)),
-                    )),
+                  width: width >= 840 ? width * 0.2 : width * 0.4,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(
+                      width: 0.5,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  alignment: Alignment.topLeft,
+                  padding: const EdgeInsets.all(2),
+                  child: const CardLoading(
+                    height: 140,
+                    cardLoadingTheme: CardLoadingTheme(
+                      colorOne: Color.fromARGB(255, 240, 240, 240),
+                      colorTwo: Color.fromARGB(255, 236, 235, 235),
+                    ),
+                  ),
+                ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.03,
                 ),
@@ -150,8 +156,8 @@ class EssaysState extends State<Essays> with HandleExceptions {
             ],
           )
         : Wrap(
-            spacing: width * 0.02,
-            runSpacing: width * 0.02,
+            spacing: width * 0.01,
+            runSpacing: width * 0.04,
             children: [
               if (essays.isEmpty) ...[
                 Container(
