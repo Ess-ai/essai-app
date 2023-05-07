@@ -1,5 +1,6 @@
 import 'package:essai/controllers/essay_buttons_controller.dart';
 import 'package:essai/models/essay.dart';
+import 'package:essai/models/essay_results.dart';
 import 'package:essai/pages/app/essay/widgets/essay_body.dart';
 import 'package:essai/pages/app/navigation/footer.dart';
 import 'package:essai/pages/app/navigation/header.dart';
@@ -10,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
 
+import '../widgets/loader.dart';
 import 'essay_edit.dart';
 
 // ignore: must_be_immutable
@@ -112,7 +114,8 @@ class EssayState extends State<Essay> {
 
                           //Submit Essay Button
                           OutlinedButton(
-                            onPressed: () => buildShowModalBottomSheet(context),
+                            onPressed: () =>
+                                buildShowModalBottomSheet(context, essay),
                             style: OutlinedButton.styleFrom(
                                 foregroundColor: Colors.blue.shade900),
                             child: Row(
@@ -181,19 +184,143 @@ class EssayState extends State<Essay> {
     );
   }
 
-  Future<dynamic> buildShowModalBottomSheet(BuildContext context) {
+  Future<dynamic> buildShowModalBottomSheet(BuildContext context, essay) {
     return showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       builder: (context) => Container(
         padding: const EdgeInsets.all(18),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text('Results'),
-            ],
-          ),
+        child: FutureBuilder(
+          future: services.essayServices.getEssayResults(essay.id.toString()),
+          builder: ((context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Loading();
+            } else {
+              if (snapshot.hasData) {
+                if (snapshot.data.runtimeType == EssayResultsModel) {
+                  EssayResultsModel results = snapshot.data;
+                  return Container(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Column(
+                      children: [
+                        Container(
+                          alignment: Alignment.topLeft,
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              width: 0.5,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Score:',
+                                style: GoogleFonts.ptSans(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                results.score.toString(),
+                                style: GoogleFonts.ptSans(
+                                  fontSize: 18,
+                                  color: Colors.lightBlue,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              width: 0.5,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            alignment: Alignment.topLeft,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Reasons:',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.ptSans(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  results.reasons.toString(),
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.ptSans(
+                                      color: Colors.black, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              width: 0.5,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            alignment: Alignment.topLeft,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Where you should Improve on:',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.ptSans(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  results.improvements.toString(),
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.ptSans(
+                                      color: Colors.black, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  return const Text('There was an Error Reaching the server');
+                }
+              } else {
+                return const Text('No Data Found');
+              }
+            }
+          }),
         ),
       ),
     );

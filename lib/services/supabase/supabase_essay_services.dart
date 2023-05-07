@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:essai/models/user.dart';
 import 'package:essai/services/storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -54,7 +56,7 @@ class SupabaseEssayServices implements EssayRepository {
       final response = await Supabase.instance.client
           .from('essay_results')
           .select(
-            'id, essay_id(id, essay_category)), essay_score, reasons, essay_grade, improvements, created_at',
+            'id, essay_score, reasons, essay_grade, improvements,essay_id(id, essay_category))',
           )
           .eq('essay_id', id)
           .single();
