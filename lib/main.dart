@@ -10,7 +10,10 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await service.supabaseService.init();
 
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: [SystemUiOverlay.top],
+  );
 
   runApp(const MyApp());
 }

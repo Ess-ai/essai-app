@@ -1,3 +1,4 @@
+import 'package:essai/mixins/loading_mixin.dart';
 import 'package:essai/pages/app/essay/new_essay.dart';
 import 'package:essai/pages/app/essay/all_essays.dart';
 import 'package:essai/pages/app/essays.dart';
@@ -17,13 +18,16 @@ class Dashboard extends StatefulWidget {
   DashboardState createState() => DashboardState();
 }
 
-class DashboardState extends State<Dashboard> {
+class DashboardState extends State<Dashboard> with LoadingMixin {
   final String user = 'Joe';
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     var padding = width * 0.05;
+
+    isLoading(false, context);
+
     return Scaffold(
       body: Column(
         children: [
