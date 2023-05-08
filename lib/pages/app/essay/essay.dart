@@ -1,4 +1,5 @@
 import 'package:essai/controllers/essay_buttons_controller.dart';
+import 'package:essai/mixins/handle_exception_mixin.dart';
 import 'package:essai/models/essay.dart';
 import 'package:essai/models/essay_results.dart';
 import 'package:essai/pages/app/essay/widgets/essay_body.dart';
@@ -23,7 +24,7 @@ class Essay extends StatefulWidget {
   EssayState createState() => EssayState();
 }
 
-class EssayState extends State<Essay> {
+class EssayState extends State<Essay> with HandleExceptions {
   final services = Services();
 
   bool _isMarking = false;
@@ -35,12 +36,20 @@ class EssayState extends State<Essay> {
       essay,
       'High School Essay Rubric',
     );
-    final ess = await services.essayServices.getEssay(res);
+    if (res.runtimeType != String) {
+      // ignore: use_build_context_synchronously
+      handleExceptions(context, 'Out of Quotas');
+      setState(() {
+        _isMarking = false;
+      });
+    } else {
+      final ess = await services.essayServices.getEssay(res);
 
-    setState(() {
-      widget.essay = ess;
-      _isMarking = false;
-    });
+      setState(() {
+        widget.essay = ess;
+        _isMarking = false;
+      });
+    }
   }
 
   @override
