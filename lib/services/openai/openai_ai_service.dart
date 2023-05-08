@@ -26,8 +26,8 @@ class OpenAiService implements AiRepository {
           improvements: res.improvements,
           score: res.score.toString(),
         );
-        final essres = await essayOperations.addEssaiResult(essayResult);
-        return essres;
+        await essayOperations.addEssaiResult(essayResult);
+        return essay.id;
       } else {}
     } catch (e) {
       return e;

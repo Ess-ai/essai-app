@@ -13,16 +13,16 @@ class EssayOperations implements EssayOperationsRepository {
   Future addEssay(EssayModel essay) async {
     final user = UserModel.fromJson(usr);
     try {
-      final response = await Supabase.instance.client.from('essays').insert({
+      await Supabase.instance.client.from('essays').insert({
         'user_id': user.id,
-        'essay_category': essay.essayCategory!.id,
+        'essay_category': essay.essayCategory,
         'essay_title': essay.essayTitle,
         'essay_body': essay.essayBody,
         'is_submitted': essay.isSubmitted
-      }).select();
+      });
 
       //final essays = EssayModel.fromJson(response);
-      return response;
+      return 'Essay Submitted';
     } catch (e) {
       return e;
     }

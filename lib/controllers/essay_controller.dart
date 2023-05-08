@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../mixins/handle_exception_mixin.dart';
 import '../mixins/loading_mixin.dart';
 import '../models/essay.dart';
-import '../models/essay_category.dart';
 import '../pages/app/essay/essay.dart';
 
 class EssayController extends GetxController
@@ -23,9 +22,7 @@ class EssayController extends GetxController
     if (formKey.currentState!.validate()) {
       isLoading(true, context);
       EssayModel essay = EssayModel(
-        essayCategory: EssayCategoryModel(
-          id: essayCategory.value.text,
-        ),
+        essayCategory: essayCategory.value.text,
         essayBody: essayBody.text,
         essayTitle: essayTitle.text,
       );

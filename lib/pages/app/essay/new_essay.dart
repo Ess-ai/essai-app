@@ -25,6 +25,34 @@ class NewEssayState extends State<NewEssay> {
   final String title2 = 'Expository Essay';
   String _essay = '';
 
+  // Initial Selected Value
+  String dropdownvalue = 'General Essay';
+
+  final categories = [
+    'General Essay',
+    'College Essay',
+    'High School Essay',
+    'Ielts Essay',
+    'Toefl Essay'
+  ];
+
+  itemFunctions() {
+    switch (dropdownvalue) {
+      case 'General Essay':
+        break;
+      case 'College Essay':
+        break;
+      case 'High School Essay':
+        break;
+      case 'Ielts Essay':
+        break;
+      case 'Toefl Essay':
+        break;
+
+      default:
+    }
+  }
+
   Widget essayActionButtons() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -32,7 +60,7 @@ class NewEssayState extends State<NewEssay> {
         children: [
           //Edit Essay Button
           OutlinedButton(
-            onPressed: () => controller.submitEssay(context),
+            onPressed: () => controller.submitEssay(context, dropdownvalue),
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.blue,
             ),
@@ -99,9 +127,10 @@ class NewEssayState extends State<NewEssay> {
             Text(
               title,
               style: GoogleFonts.lora(
-                  color: Colors.white,
-                  fontSize: 19,
-                  fontWeight: FontWeight.w700),
+                color: Colors.white,
+                fontSize: 19,
+                fontWeight: FontWeight.w700,
+              ),
             ),
             Text(
               _essay,
@@ -129,12 +158,25 @@ class NewEssayState extends State<NewEssay> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    title2,
+                  DropdownButton(
+                    underline: Container(),
                     style: GoogleFonts.ptSans(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                    value: dropdownvalue,
+                    icon: const Icon(Iconsax.arrow_down_1),
+                    items: categories.map((String category) {
+                      return DropdownMenuItem(
+                        value: category,
+                        child: Text(category),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownvalue = newValue!;
+                      });
+                    },
                   ),
                   const Spacer(),
                   width >= 650 ? essayActionButtons() : Container(),
