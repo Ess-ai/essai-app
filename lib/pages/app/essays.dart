@@ -76,10 +76,10 @@ class EssaysState extends State<Essays> with HandleExceptions {
                               onPressed: () {},
                               style: OutlinedButton.styleFrom(
                                   foregroundColor: Colors.black),
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: const [
+                                children: [
                                   Text('Search Essay'),
                                   SizedBox(
                                     width: 15,

@@ -102,3 +102,4 @@ backup/
 lib/secrets.json
 lib/secrets.json
 lib/secrets-development.json
+assets/resources/google-services.json

@@ -64,9 +64,9 @@ class NewEssayState extends State<NewEssay> {
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.blue,
             ),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text('Save'),
                 SizedBox(
                   width: 10,
@@ -88,9 +88,9 @@ class NewEssayState extends State<NewEssay> {
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.black,
             ),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text('Exit'),
                 SizedBox(
                   width: 15,

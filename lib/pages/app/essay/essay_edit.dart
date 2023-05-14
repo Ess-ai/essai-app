@@ -60,9 +60,9 @@ class EditEssayState extends State<EditEssay> {
           OutlinedButton(
             onPressed: () => controller.saveEssay(context),
             style: OutlinedButton.styleFrom(foregroundColor: Colors.blue),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text('Save'),
                 SizedBox(
                   width: 10,
@@ -80,9 +80,9 @@ class EditEssayState extends State<EditEssay> {
           OutlinedButton(
             onPressed: () => controller.submitEssay(context),
             style: OutlinedButton.styleFrom(foregroundColor: Colors.green),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text('Submit'),
                 SizedBox(
                   width: 10,
@@ -100,9 +100,9 @@ class EditEssayState extends State<EditEssay> {
           OutlinedButton(
             onPressed: _onWillPop,
             style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text('Delete'),
                 SizedBox(
                   width: 10,
@@ -122,9 +122,9 @@ class EditEssayState extends State<EditEssay> {
               Get.back();
             },
             style: OutlinedButton.styleFrom(foregroundColor: Colors.black),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text('Exit'),
                 SizedBox(
                   width: 15,
