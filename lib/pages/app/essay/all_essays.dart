@@ -132,9 +132,9 @@ class AllEssaysState extends State<AllEssays> {
                             style: OutlinedButton.styleFrom(
                               foregroundColor: Colors.black,
                             ),
-                            child: Row(
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Text('View All'),
                                 SizedBox(
                                   width: 15,
@@ -175,9 +175,9 @@ class AllEssaysState extends State<AllEssays> {
                             },
                             style: OutlinedButton.styleFrom(
                                 foregroundColor: Colors.black),
-                            child: Row(
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Text('Search'),
                                 SizedBox(
                                   width: 15,

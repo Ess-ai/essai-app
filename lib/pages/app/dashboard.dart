@@ -134,9 +134,9 @@ class DashboardState extends State<Dashboard> with LoadingMixin {
                             },
                             style: OutlinedButton.styleFrom(
                                 foregroundColor: Colors.black),
-                            child: Row(
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Text('View All'),
                                 SizedBox(
                                   width: 15,
@@ -180,9 +180,9 @@ class DashboardState extends State<Dashboard> with LoadingMixin {
                             onPressed: () {},
                             style: OutlinedButton.styleFrom(
                                 foregroundColor: Colors.black),
-                            child: Row(
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Text('View All'),
                                 SizedBox(
                                   width: 15,
