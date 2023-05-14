@@ -25,9 +25,7 @@ mixin HandleExceptions {
       ShowErrorMessage.showMessage(
         context,
         ContentType.failure,
-        err.runtimeType == Object
-            ? 'Connection Error, Please Connect to the Internet'
-            : err,
+        err.toString(),
         'Error',
       );
     }

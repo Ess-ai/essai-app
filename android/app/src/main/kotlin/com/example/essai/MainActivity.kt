@@ -1,4 +1,4 @@
-package com.inspai.essai
+package com.braintraq.essai
 
 import io.flutter.embedding.android.FlutterActivity
 
