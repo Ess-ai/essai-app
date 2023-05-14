@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.inspai.essai">
+    package="com.braintraq.essai">
    <application
         android:label="essai"
         android:name="${applicationName}"
