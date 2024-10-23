@@ -61,4 +61,4 @@ We are grateful to the developers and contributors of these platforms for their 
 
 ## Contact
 
-If you have any questions or need further assistance, please feel free to contact the project maintainer at [leroyroentgen@gmail.com](mailto:leroyroentgen@gmail.com).
+If you have any questions or need further assistance, please feel free to contact the project maintainer at [info@neurollect.africa](mailto:info@neurollect.africa).
